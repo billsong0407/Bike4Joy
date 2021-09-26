@@ -342,6 +342,14 @@ header
   color: #8d99af;
 }
 
+.header-area .nav .register-button {
+  background-color: #58D68D;
+}
+
+.header-area .nav .register-button:hover {
+  background-color: #16A085 ;
+}
+
 @media (max-width: 1200px) {
   .header-area .main-nav .nav li {
     padding-left: 12px;
