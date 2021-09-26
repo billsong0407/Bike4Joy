@@ -105,3 +105,4 @@ dist
 assets/._.DS_Store
 .vscode/settings.json
 vendor/._.DS_Store
+*.pem
