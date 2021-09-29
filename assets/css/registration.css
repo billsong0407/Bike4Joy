@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: url(../images/b1.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.registration-page{
+    margin-top: 10px;
+}
+
+.registration-container{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.login-page{
+    width: 360px;
+    padding: 10% 0 0;
+    margin: auto;
+}
+
+.form{
+    position: relative;
+    z-index: 1;
+    
+    margin: 0;
+    padding: 45px;
+    text-align: center;
+}
