@@ -1,84 +1,90 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        <title>Bike4Joy</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
-        <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>Bike4Joy</title>
 
-        <!-- Additional CSS Files -->
-        <!-- <link rel="stylesheet" href="assets/css/fontawesome.css"> -->
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="assets/css/global.css">
-        <link rel="stylesheet" href="assets/css/home.css">
-        <link rel="stylesheet" href="assets/css/search.css">
-    </head>
+    <!-- Additional CSS Files -->
+    <!-- <link rel="stylesheet" href="assets/css/fontawesome.css"> -->
 
-    <body>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/search.css">
+</head>
+
+<body>
     <!-- ***** Header Area Start ***** -->
-        <header class="header-area header-sticky wow slideInDown">
-            <div class="container">
+    <header class="header-area header-sticky wow slideInDown">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <span>
-                        <a href="index.html" class="logo"></a>
-                    </span>
-                    
-                    
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="index.html#search-form">Search</a></li>
-                    <li><a href="submission.html">Review</a></li> 
-                    <li>
-                        <!-- <div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Log In / Register</a></div> -->
-                        <a type="button" class="btn btn-success register-button" href="registration.html">Log In / Register</a>
-                    </li> 
-                    </ul>        
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <span>
+                            <a href="index.html" class="logo"></a>
+                        </span>
+
+
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="index.html" class="active">Home</a></li>
+                            <li><a href="index.html#search-form">Search</a></li>
+                            <li><a href="submission.html">Review</a></li>
+                            <li>
+                                <!-- <div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Log In / Register</a></div> -->
+                                <a type="button" class="btn btn-success register-button" href="registration.html">Log In
+                                    / Register</a>
+                            </li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
                 </div>
             </div>
-            </div>
-        </header>
-        <!-- ***** Header Area End ***** -->
-        <div class="main-banner">
-            <div class="container">
-                <h1 class="title">Bike4Joy</h1>
-                <!-- <hr class="horizontal-line"> -->
-                <h3 class="subtitle">Find or review an outdoor bike parking place in Toronto</h3>
-                <a href="#search-form" class="btn btn-success btn-lg active try-button" role="button" aria-pressed="true">TRY IT NOW!</a>
-            </div>
-               
         </div>
-        <div class="search-page">
-            <div class="container">
+    </header>
+    <!-- ***** Header Area End ***** -->
+    <div class="main-banner">
+        <div class="container">
+            <h1 class="title">Bike4Joy</h1>
+            <!-- <hr class="horizontal-line"> -->
+            <h3 class="subtitle">Find or review an outdoor bike parking place in Toronto</h3>
+            <a href="#search-form" class="btn btn-success btn-lg active try-button" role="button"
+                aria-pressed="true">TRY IT NOW!</a>
+        </div>
+
+    </div>
+    <div class="search-page">
+        <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-12">
-                <!-- <div class="top-text header-text"> -->
+                    <!-- <div class="top-text header-text"> -->
                     <h4 class="tag-line">Over 200+ Bike Parking Places in Toronto City</h4>
                     <h2 class="title">Find a Bike Parking Place</h2>
-                <!-- </div> -->
+                    <!-- </div> -->
                 </div>
                 <div class="col-lg-9">
                     <form id="search-form" name="gs" method="submit" role="search" action="#">
                         <div class="row">
                             <div class="col-lg-3 align-self-center">
                                 <fieldset>
-                                    <select name="area" class="form-select" aria-label="Area" id="chooseCategory" onchange="this.form.click()">
+                                    <select name="area" class="form-select" aria-label="Area" id="chooseCategory"
+                                        onchange="this.form.click()">
                                         <option selected value="Postal Code">Postal Code</option>
                                         <option value="Address">Address</option>
                                     </select>
@@ -86,10 +92,11 @@
                             </div>
                             <div class="col-lg-6 align-self-center">
                                 <fieldset>
-                                    <input type="address" name="address" class="searchText" placeholder="" autocomplete="on" required>
+                                    <input type="address" name="address" class="searchText" placeholder=""
+                                        autocomplete="on" required>
                                 </fieldset>
                             </div>
-                            <div class="col-lg-3">                        
+                            <div class="col-lg-3">
                                 <fieldset>
                                     <button class="btn btn-success btn-lg active">Search Now</button>
                                 </fieldset>
@@ -103,5 +110,22 @@
             </div>
         </div>
     </div>
-    </body>
+    <footer>
+        <ul class="footer-links">
+          <li>
+            <a class="footer-content" href="#">About</a>
+          </li>
+          <li>
+            <a class="footer-content" href="#">Privacy Policy</a>
+          </li>
+          <li>
+            <a class="footer-content" href="#">Social Media</a>
+          </li>
+          <li>
+            <a class="footer-content" href="#">Help</a>
+          </li>
+       </ul>
+      </footer>
+</body>
+
 </html>

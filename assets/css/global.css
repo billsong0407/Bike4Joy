@@ -685,3 +685,33 @@ header
   }
 }
 
+.footer-links {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #196F3D;
+  color: white;
+  text-align: center;
+  padding: 1%;
+  margin-top: auto;
+  
+  
+}
+
+.footer-content:link, .footer-content:visited {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media(min-width: 767px){
+  .footer-links li {
+    display: inline;
+    
+  }
+} 
+
