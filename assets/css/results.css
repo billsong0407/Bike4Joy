@@ -9,6 +9,9 @@
 .result-card{
     display: flex;
     box-sizing: border-box;
+    width: auto;
+    border: 2px solid black;
+    background-color: gainsboro;
 }
 
 .result-card .result-image{
@@ -22,10 +25,12 @@
     padding: 15px;
     width: 100%;
     height: 100%;
+    
 }
 
-.result-description p{
+.result-description table{
     line-height: 200%;
     font-size: 25px;
-    
+    background-color: gainsboro;
+    height: 100%;
 }
