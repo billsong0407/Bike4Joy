@@ -1,8 +1,8 @@
 .results-page{
     margin-top: 150px;
-    /* display: table; */
-    /* justify-content: center; */
-    /* align-items: center; */
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
     /* text-align: center; */
 }
 
@@ -11,12 +11,14 @@
     box-sizing: border-box;
     width: auto;
     border: 2px solid black;
+    margin-top: 15px;
     background-color: gainsboro;
 }
 
-.result-card .result-image{
+.result-card .result-image img{
     padding: 15px;
-    width: 500px;
+    width: 400px;
+    height: 350px;
     /* height: 200px; */
     /* flex: 10%; */
 }
