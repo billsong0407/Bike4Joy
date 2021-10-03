@@ -1,0 +1,36 @@
+.single-result-page{
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    width: 1000px;
+    /* text-align: center; */
+}
+
+.single-result-page .image-container::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.street-image, .street-location {
+    width: 50%;
+    padding: 5px;
+    float: left;
+}
+
+.street-image img, .street-location img {
+    height: 350px;
+}
+
+.info table{
+    font-size: 20px;
+}
+
+.info table td{
+    word-break: break-all;
+}
+
+.info table td:first-child{
+    font-weight: bold;
+}
