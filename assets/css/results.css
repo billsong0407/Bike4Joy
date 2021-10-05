@@ -1,39 +1,30 @@
 .results-page{
     margin-top: 150px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 300px;
+    margin-right: 300px;
     margin-bottom: 100px;
-    width: 1000px;
+    width: auto;
     /* text-align: center; */
 }
 
-.result-card{
-    display: flex;
-    box-sizing: border-box;
-    width: auto;
-    border: 2px solid black;
-    margin-top: 15px;
-    background-color: gainsboro;
-}
-
-.result-card .result-image img{
-    padding: 15px;
-    width: 400px;
-    height: 350px;
+.result-image{
+    /* padding: 15px; */
+    width: 450px;
+    height: 250px;
     /* height: 200px; */
     /* flex: 10%; */
 }
 
-.result-card .result-description{
-    padding: 15px;
-    width: 100%;
-    height: 100%;
-    
+.results-page .btn{
+    float: right;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.result-description table{
-    line-height: 200%;
-    font-size: 25px;
-    background-color: gainsboro;
-    height: 100%;
+.results-page .table{
+    font-size: 20px;
+}
+
+.results-page table > *:first-child:not(thead) td:first-child {
+  font-weight: bold;
 }

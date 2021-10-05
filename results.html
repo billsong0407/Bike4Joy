@@ -11,7 +11,8 @@
         <title>Bike4Joy</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!-- Additional CSS Files -->
         <!-- <link rel="stylesheet" href="assets/css/fontawesome.css"> -->
@@ -19,6 +20,17 @@
         <link rel="stylesheet" href="assets/css/global.css">
         <!-- <link rel="stylesheet" href="assets/css/home.css"> -->
         <link rel="stylesheet" href="assets/css/results.css">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+
     </head>
     <body>
         <header class="header-area header-sticky wow slideInDown">
@@ -52,16 +64,14 @@
             </div>
             </div>
         </header>
-        <div class="container results-page">
+        <div class="list-group results-page container-fluid">
             <h3 style="color: green; font-weight: bold;">3 results found for M5J 0C7</h3>
-            <div class="col-12 result-card">
-                <span class="result-image">
-                    <img src="assets/images/p1.jpg">
-                </span>
-                <span class="result-description">
-                    <table>
+            <a href="single-result.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex">
+                    <img class="result-image" src="assets/images/p1.jpg">
+                    <table class="table">
                     <tr>
-                        <td style="width:50%">Address:</td>
+                        <td style="width:40%">Address:</td>
                         <td>35 York St</td>
                     </tr>
                     <tr>
@@ -69,31 +79,23 @@
                         <td>M5J 0C7</td>
                     </tr>
                     <tr>
-                        <td><br></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><br></td>
-                        <td></td>
-                    </tr>
-                    <tr>
                         <td>Reviews:</td>
                         <td>★★★☆☆ (3 reviews)</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td><a href="single-result.html"><button class="btn btn-success btn-lg active">Details</button></a></td>
                     </tr>
-                    </table>
-                </span>
-            </div>
-            <div class="col-12 result-card">
-                <span class="result-image">
-                    <img src="assets/images/p2.jpg">
-                </span>
-                <span class="result-description">
-                    <table>
+                </table>
+                </div>
+                
+            </a>
+            <a href="single-result.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex">
+                    <img class="result-image" src="assets/images/p2.jpg">
+                    <table class="table">
                     <tr>
-                        <td style="width:50%">Address:</td>
+                        <td style="width:40%">Address:</td>
                         <td>46 York St</td>
                     </tr>
                     <tr>
@@ -101,31 +103,23 @@
                         <td>M5J 1E5</td>
                     </tr>
                     <tr>
-                        <td><br></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><br></td>
-                        <td></td>
-                    </tr>
-                    <tr>
                         <td>Reviews:</td>
                         <td>★★★★★ (2 reviews)</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td><a href="single-result.html"><button class="btn btn-success btn-lg active">Details</button></a></td>
                     </tr>
-                    </table>
-                </span>
-            </div>
-            <div class="col-12 result-card">
-                <span class="result-image">
-                    <img src="assets/images/p3.jpg">
-                </span>
-                <span class="result-description">
-                    <table>
+                </table>
+                </div>
+                
+            </a>
+            <a href="single-result.html" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex">
+                    <img class="result-image" src="assets/images/p3.jpg">
+                    <table class="table">
                     <tr>
-                        <td style="width:50%">Address:</td>
+                        <td style="width:40%">Address:</td>
                         <td>61 Front St W</td>
                     </tr>
                     <tr>
@@ -133,24 +127,34 @@
                         <td>M5J 1E5</td>
                     </tr>
                     <tr>
-                        <td><br></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><br></td>
-                        <td></td>
-                    </tr>
-                    <tr>
                         <td>Reviews:</td>
                         <td>★★★★☆ (7 reviews)</td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href="single-result.html"><button class="btn btn-success btn-lg active">Details</button></a></td>
+                    </tr>
+                </table>
+                </div>
+                
+            </a>
+            </div>
+        <!-- <div class="container results-page">
+            
+            <div class="col-12 result-card">
+                <span class="result-image">
+                    <img src="assets/images/p3.jpg">
+                </span>
+                <span class="result-description">
+                    <table>
+                    
                     <tr>
                         <td><a href="single-result.html"><button class="btn btn-success btn-lg active">Details</button></a></td>
                     </tr>
                     </table>
                 </span>
             </div>
-        </div>
+        </div> -->
         <footer>
             <ul class="footer-links">
                 <li>
