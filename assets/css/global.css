@@ -624,9 +624,9 @@ header
   .header-area .main-nav .nav li:first-child {
     border-top: 1px solid #eee;
   }
-  .header-area.header-sticky .nav {
+  /* .header-area.header-sticky .nav {
     margin-top: 100px;
-  }
+  } */
   .header-area .main-nav .nav li {
     width: 100%;
     background: #fff;
