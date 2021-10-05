@@ -3,6 +3,10 @@
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
+    min-height: 400px;
+    margin-bottom: 100px;
+    padding-bottom: 20px;
+    clear: both;
 }
 
 .image-container{
@@ -23,7 +27,7 @@
 
 .review {
     margin-top: 20px;
-    margin-bottom: 150px;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 767px) {
@@ -36,7 +40,7 @@
     }
 
     .review{
-        margin-bottom: 170px;
+        margin-bottom: 50px;
     }
 
     .single-result-page .title{
@@ -47,4 +51,11 @@
         width: 300px !important;
         height: 250px;
     }
+
+    
+}
+
+.video-container{
+    margin-top: 20px;
+    
 }
