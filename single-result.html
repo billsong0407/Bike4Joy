@@ -11,13 +11,15 @@
         <title>Bike4Joy</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!-- Additional CSS Files -->
-        <!-- <link rel="stylesheet" href="assets/css/fontawesome.css"> -->
-
         <link rel="stylesheet" href="assets/css/global.css">
         <link rel="stylesheet" href="assets/css/single-result.css">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
         <header class="header-area header-sticky wow slideInDown">
@@ -50,44 +52,46 @@
             </div>
             </div>
         </header>
-        <div class="container single-result-page">
-            <h1>35 York Street | M5J0C7</h1>
+        <div class="container-fluid single-result-page">
+            <h1 class="title">35 York Street | M5J0C7</h1>
             <div class="row image-container">
-                <div class="street-image">
+                <div class="col-xs-6 street-image">
                     <img src="assets/images/p1.jpg" style="width:100%">
                 </div>
-                <div class="street-location">
+                <div class="col-xs-6 street-location">
                     <img src="assets/images/p1-loc.png" style="width:100%">
                 </div>
             </div>
             <div class="info row">
-                <table>
+                <table class="table table-hover">
                     <tr>
                         <td>Parking Type:</td>
                         <td>Angled Bike Rack</td>
-                        <td style="font-weight: bold;">Reviews:</td>
                     </tr>
                     <tr>
                         <td>Bicycle Capacity:</td>
                         <td>30</td>
-                        <td>★★★★☆ Racks are in good quality</td>
                     </tr>
                     <tr>
                         <td>Size:</td>
                         <td>2.9</td>
-                        <td>★★☆☆☆ Many abandoned bikes are taking the spots</td>
                     </tr>
                     <tr>
                         <td>Year Installed:</td>
                         <td>2015</td>
-                        <td>★★★★☆ Parking spots are clean and safe</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td style="float: right;"><button class="btn btn-success btn-lg active">Make Reviews</button></td>
                     </tr>
                 </table>
+            </div>
+            <div class="container-fluid review">
+                <p style="font-weight: bold;">Reviews:</p>
+                <p>★★★★☆ Racks are in good quality</p>
+                <p>★★☆☆☆ Many abandoned bikes are taking the spots</p>
+                <p>★★★★☆ Parking spots are clean and safe</p>
+                <p style="float: right;"><button class="btn btn-success btn-lg active">Make A Review</button></p>
             </div>
         </div>
         <footer>
