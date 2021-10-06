@@ -14,15 +14,12 @@ Search Page Style
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
+    padding-top: 90px;
+    padding-bottom: 60px;
 }
 
 .search-page .title{
     font-size: 65px;
-}
-
-.search-page .tag-line{
-    margin-top: 130px;
 }
 
 form#search-form {
@@ -97,6 +94,11 @@ form#search-form button i {
 }
 
 @media (max-width: 767px) {
+
+    .search-page{
+      padding-top: 40px;
+    }
+
     .search-page .title{
         margin-top: 5px;
         font-size: 35px;
