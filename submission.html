@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
@@ -20,43 +20,37 @@
     <!-- Additional CSS Files -->
     <!-- <link rel="stylesheet" href="assets/css/fontawesome.css"> -->
 
-    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="./assets/css/all-pages.css">
     <!-- <link rel="stylesheet" href="assets/css/home.css"> -->
     <link rel="stylesheet" href="assets/css/submission.css">
 </head>
 
 <body>
-    <header class="header-area header-sticky wow slideInDown">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <span>
-                            <a href="index.html" class="logo"></a>
-                        </span>
-
-
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="category.html">Search</a></li>
-                            <li><a href="submission.html">Review</a></li>
-                            <li>
-                                <!-- <div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Log In / Register</a></div> -->
-                                <a type="button" class="btn btn-success register-button" href="registration.html">Log In
-                                    / Register</a>
-                            </li>
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
+   <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light page-navbar py-4">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./assets/images/white-logo.png" height="50" alt="logo" loading="lazy" style="margin-top: -1px;"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-center" id="navbarText">
+                <ul class="navbar-nav ml-5 mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html#search-form">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./submission.html">Review</a>
+                    </li>
+                    </ul>
+                <span class="navbar-text">
+                    <a type="button" class="btn btn-success register-button" href="./registration.html">Log In / Register</a>
+                </span>
             </div>
-        </div>
+        </nav>
     </header>
 
     <div class="container submission-page">
@@ -119,22 +113,17 @@
 
     </div>
 
-    <footer>
-        <ul class="footer-links">
-            <li>
-                <a class="footer-content" href="#">About</a>
-            </li>
-            <li>
-                <a class="footer-content" href="#">Privacy Policy</a>
-            </li>
-            <li>
-                <a class="footer-content" href="#">Social Media</a>
-            </li>
-            <li>
-                <a class="footer-content" href="#">Help</a>
-            </li>
-        </ul>
-    </footer>
+    <div class="container-fluid page-footer fixed-bottom">
+        <footer class="pt-4">
+            <ul class="nav justify-content-center border-bottom pb-4">
+                <li class="nav-item"><a href="#" class="nav-link px-3">About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-3">Privacy Policy</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-3">Social Media</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-3">Help</a></li>
+                <li class="nav-item"><a class="nav-link px-2"> | &copy; 2021 Bike4Joy</a></li>
+            </ul>
+        </footer>
+    </div>
     <script>
         if($('.menu-trigger').length){
             $(".menu-trigger").on('click', function() { 
