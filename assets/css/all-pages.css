@@ -3,6 +3,32 @@ html, body {
   min-height: 100%;
 }
 
+.page-navbar {
+  font-size: 25px !important;
+  background-color: green !important;
+  padding-left: 200px !important;
+  padding-right: 200px !important;
+}
+
+.navbar-text .register-button{
+  color: white !important;
+  font-size: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.navbar-nav .nav-item .nav-link{
+  color:white;
+}
+
+.navbar-nav .nav-item .nav-link:hover{
+  color:lightgreen;
+}
+
+.navbar-nav .nav-item{
+  padding-left: 30px;
+}
+
 .page-footer {
   background-color: green;
 }
@@ -11,4 +37,31 @@ html, body {
   font-size: 24px;
   color: white !important;
   height: 60px;
+}
+
+@media (max-width: 767px) {
+  .page-navbar {
+    font-size: 15px !important;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+
+  .page-navbar .navbar-nav {
+    margin-left: 0px !important;
+  }
+
+  .navbar-nav .nav-item{
+    padding-left: 0px;
+  }
+
+  .navbar-text .register-button{
+    font-size: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .page-footer footer .nav-link{
+    font-size: 15px;
+    height: 40px;
+  }
 }
