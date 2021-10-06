@@ -21,7 +21,6 @@
         <!-- <link rel="stylesheet" href="assets/css/fontawesome.css"> -->
 
         <link rel="stylesheet" href="assets/css/global.css">
-        <!-- <link rel="stylesheet" href="assets/css/home.css"> -->
         <link rel="stylesheet" href="assets/css/results.css">
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -36,7 +35,7 @@
 
     </head>
     <body>
-        <header class="header-area header-sticky wow slideInDown">
+        <header class="header-area header-sticky slideInDown">
             <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -149,22 +148,17 @@
                 
             </a>
         </div>
-        <footer>
-            <ul class="footer-links">
-                <li>
-                <a class="footer-content" href="#">About</a>
-                </li>
-                <li>
-                <a class="footer-content" href="#">Privacy Policy</a>
-                </li>
-                <li>
-                <a class="footer-content" href="#">Social Media</a>
-                </li>
-                <li>
-                <a class="footer-content" href="#">Help</a>
-                </li>
-            </ul>
-        </footer>
+        <div class="container-fluid page-footer">
+            <footer class="pt-4">
+                <ul class="nav justify-content-center border-bottom pb-4">
+                    <li class="nav-item"><a href="#" class="nav-link px-3">About</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-3">Privacy Policy</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-3">Social Media</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-3">Help</a></li>
+                    <li class="nav-item"><a class="nav-link px-2"> | &copy; 2021 Bike4Joy</a></li>
+                </ul>
+            </footer>
+        </div>
         <script>
         if($('.menu-trigger').length){
             $(".menu-trigger").on('click', function() { 
