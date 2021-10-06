@@ -32,3 +32,4 @@ ii.
 ```
 iii.
 By using img element, you have the option to use srcset and sizes attributes. These provide information to the browser so that it casn make a smart decision on which image is appropriate for the certain situation. This is not possible in the picture element and source elements. In most situations nowadays, img element is used instead of picture.
+=======
