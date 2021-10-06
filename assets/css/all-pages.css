@@ -6,4 +6,5 @@
 .page-footer footer .nav-link{
   font-size: 24px;
   color: white !important;
+  bottom: 0;
 }
