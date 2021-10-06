@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+
+    <title>Bike4Joy</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <!-- <link rel="stylesheet" href="assets/css/fontawesome.css"> -->
+
+    <link rel="stylesheet" href="assets/css/global.css">
+    <!-- <link rel="stylesheet" href="assets/css/home.css"> -->
+    <link rel="stylesheet" href="assets/css/submission.css">
+</head>
+
+<body>
+    <header class="header-area header-sticky wow slideInDown">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <span>
+                            <a href="index.html" class="logo"></a>
+                        </span>
+
+
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="category.html">Search</a></li>
+                            <li><a href="submission.html">Review</a></li>
+                            <li>
+                                <!-- <div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Log In / Register</a></div> -->
+                                <a type="button" class="btn btn-success register-button" href="registration.html">Log In
+                                    / Register</a>
+                            </li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container submission-page">
+        <div class="row">
+            <div class="submission-container">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Name of Bike Parking Spot</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Ex. Parking East below CN Tower">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Description of Bike Parking Spot (Optional)</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                            placeholder="Ex. Very clean with lots of shades, very nice for a summer cycling break."
+                            rows="3"></textarea>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Latitude</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Ex. 43.641867413067914">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Longitude</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Ex. -79.3873116119053">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="submission-container">
+                    <label class="form-label" for="customFile">Upload image (Optional)</label>
+                    <input type="file" class="form-control" id="img" name="img" accept="image/*" />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="submission-container">
+                    <label class="form-label" for="customFile">Upload video (Optional)</label>
+                    <input type="file" class="form-control" id="video" name="video" accept="video/*" />
+                </div>
+            </div>
+        </div>
+
+
+        <input class="btn btn-primary" type="submit" value="Submit">
+
+
+    </div>
+
+    <footer>
+        <ul class="footer-links">
+            <li>
+                <a class="footer-content" href="#">About</a>
+            </li>
+            <li>
+                <a class="footer-content" href="#">Privacy Policy</a>
+            </li>
+            <li>
+                <a class="footer-content" href="#">Social Media</a>
+            </li>
+            <li>
+                <a class="footer-content" href="#">Help</a>
+            </li>
+        </ul>
+    </footer>
+    <script>
+        if($('.menu-trigger').length){
+            $(".menu-trigger").on('click', function() { 
+                $(this).toggleClass('active');
+                $('.header-area .nav').slideToggle(200);
+            });
+        }
+    </script>
+</body>
+
+</html>
