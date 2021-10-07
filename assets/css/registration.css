@@ -1,3 +1,4 @@
+/* registration page global styling*/
 .registration-page{
     padding: 200px 0px 230px 0px;
     background-repeat: no-repeat;
@@ -10,17 +11,14 @@
     min-height: 400px;
 }
 
-.registration-container{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
+/* registration page sign in and registration container styling*/
 .login-page{
     width: 360px;
     padding: 7% 0 0;
     margin: auto;
 }
 
+/*inner container styling for sign in and registration*/
 .form{
     position: relative;
     z-index: 1;
@@ -30,6 +28,7 @@
     text-align: center;
 }
 
+/*registration page reponsive styling*/
 @media (max-width: 767px) {
     .registration-page{
         padding-top: 30px;
@@ -37,6 +36,7 @@
     }
 }
 
+/* registration page button styling*/
 .signin-register-button{
     padding-top: 20px;
 }

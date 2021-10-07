@@ -1,3 +1,4 @@
+/*submission page global styling*/
 .submission-page{
     margin-top: 150px;
     margin-bottom: 90px;
@@ -6,6 +7,7 @@
     padding-right: 70px;
 }
 
+/*submission page responsive styling*/
 @media (max-width: 767px) {
     .submission-page{
         margin-top: 70px;
@@ -13,6 +15,7 @@
     }
 }
 
+/*submission page submit button styling*/
 .submission-sub-button{
     padding-top: 20px;
     padding-right: 20px;
