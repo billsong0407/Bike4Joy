@@ -12,6 +12,11 @@
     font-weight: bold;
 }
 
+.results-page .map img{
+    width: 100%;
+    border: 2px solid black;
+}
+
 .result-image{
     width: 350px;
     height: 250px;
