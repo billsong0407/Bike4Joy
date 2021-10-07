@@ -9,6 +9,10 @@
     clear: both;
 }
 
+.single-result-page .title{
+    font-size: 45px;
+}
+
 .image-container{
     margin-top: 20px;
 }
