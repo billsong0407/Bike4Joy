@@ -104,12 +104,35 @@
                 </tr>
             </table>
         </div>
-        <div class="container-fluid review">
+        <!-- <div class="container-fluid review">
             <p style="font-weight: bold;">Reviews:</p>
-            <p>★★★★☆ Racks are in good quality</p>
+            <p itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" itemprop="worstRating" content = "1">★★★★☆ Racks are in good quality</p>
             <p>★★☆☆☆ Many abandoned bikes are taking the spots</p>
             <p>★★★★☆ Parking spots are clean and safe</p>
 
+        </div> -->
+        <div class="container-fluid review" itemprop="review" itemscope itemtype="https://schema.org/Review">
+            <p style="font-weight: bold;">Reviews: </p>
+            <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+            <meta itemprop="worstRating" content = "1">
+            <span itemprop="ratingValue" content="4" >★★★★☆</span>
+            <meta itemprop="bestRating" content="5"></meta>
+            </span>
+            <span itemprop="reviewBody">Racks are in good quality</span>
+            <br>
+            <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+            <meta itemprop="worstRating" content = "1">
+            <span itemprop="ratingValue" content="2" >★★☆☆☆</span>
+            <meta itemprop="bestRating" content="5"></meta>
+            </span>
+            <span itemprop="reviewBody">Many abandoned bikes are taking the spots</span>
+            <br>
+            <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+            <meta itemprop="worstRating" content = "1">
+            <span itemprop="ratingValue" content="4" >★★★★☆</span>
+            <meta itemprop="bestRating" content="5"></meta>
+            </span>
+            <span itemprop="reviewBody">Parking spots are clean and safe</span>
         </div>
         <div class="row">
             <div class="video-container">
