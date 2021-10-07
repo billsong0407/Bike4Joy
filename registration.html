@@ -14,57 +14,64 @@
         <title>Bike4Joy</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href="./assets/css/all-pages.css">
-        <!-- <link rel="stylesheet" href="assets/css/home.css"> -->
         <link rel="stylesheet" href="assets/css/registration.css">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
     </head>
     <body>
         <header class="sticky-top">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light page-navbar py-4">
-                <a class="navbar-brand" href="./index.html">
-                    <img src="./assets/images/white-logo.png" height="50" alt="logo" loading="lazy" style="margin-top: -1px;"/>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse text-center" id="navbarText">
-                    <ul class="navbar-nav ml-5 mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./index.html#search-form">Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./submission.html">Review</a>
-                        </li>
-                        </ul>
-                    <span class="navbar-text">
-                        <a type="button" class="btn btn-success register-button" href="./registration.html">Log In / Register</a>
-                    </span>
-                </div>
-            </nav>
-        </header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light page-navbar py-4">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./assets/images/white-logo.png" height="50" alt="logo" loading="lazy" style="margin-top: -1px;"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-center" id="navbarText">
+                <ul class="navbar-nav ml-5 mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html#search-form">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./submission.html">Review</a>
+                    </li>
+                    </ul>
+                <span class="navbar-text">
+                    <a type="button" class="btn btn-success register-button" href="./registration.html">Log In / Register</a>
+                </span>
+            </div>
+        </nav>
+    </header>
         
-        <div class="container registration-page">
+        <div class="container-fluid registration-page">
             <div class="row">
                 <div class="col-lg-6">
-                    
                     <div class="login-page">
                         <div class="form">
                             <form>
                                 <p>Sign In</p>
                                 <input type="text" placeholder="User Name">
-                                <input type="text" placeholder="Password">
+                                <input type="text" placeholder="Password"><br>
                                 <input class="btn btn-primary" type="submit" value="Sign In">
                             </form>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="col-lg-6">
                     <div class="login-page">
@@ -72,7 +79,7 @@
                             <form>
                                 <p>Registration</p>
                                 <input type="text" placeholder="User Name">
-                                <input type="text" placeholder="Password">
+                                <input type="text" placeholder="Password"><br>
                                 <input class="btn btn-primary" type="submit" value="Register">
                             </form>
                         </div>
