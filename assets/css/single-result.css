@@ -13,6 +13,14 @@
     font-size: 45px;
 }
 
+.single-result-page .pic-loc{
+    width: 100%;
+}
+
+.single-result-page .pic-loc img{
+    height: 400px;
+}
+
 .image-container{
     margin-top: 20px;
 }
@@ -34,11 +42,20 @@
     margin-bottom: 20px;
 }
 
+.video-container{
+    margin-top: 20px;
+    
+}
+
 @media (max-width: 767px) {
     .single-result-page{
         width: auto;
         margin-top: 30px;
         margin-bottom: 30px;
+    }
+
+    .single-result-page .pic-loc img{
+        height: 150px;
     }
 
     .image-container{
@@ -58,10 +75,5 @@
         height: 250px;
     }
 
-    
-}
-
-.video-container{
-    margin-top: 20px;
     
 }
