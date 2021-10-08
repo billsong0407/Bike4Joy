@@ -4,8 +4,18 @@ A web-based application that searches and reviews outdoor bicycle parkings in Ci
 ## Information
 Course name: Web computing and Web Systems <br />Group name: Bike4Joy <br />Member 1: Bill Song <br /> Member 2: Franklin Tian <br />
 
+### Live URL
+http://18.118.57.245/Bike4Joy/
+
 ### Dataset
 City of Toronto Outdoor Bike Parking Places: https://open.toronto.ca/dataset/bicycle-parking-high-capacity-outdoor/
+
+### Notes
+Search form: index.html <br />
+Sample results page: results.html -> http://18.118.57.245/Bike4Joy/results.html <br />
+Sample individual object page: single-result.html <br />
+Object submission page: submission.html <br />
+User registration page: registration.html <br />
 
 ### Add on task 2 
 d. 
