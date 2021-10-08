@@ -16,10 +16,12 @@ Banner Style
   margin-top: -80px;
 }
 
+/* Banner button */
 .main-banner .try-button {
     margin-top:15px;
 }
 
+/* Banner title */
 .main-banner .top-text h2 {
   color: #fff;
   font-size: 45px;
@@ -33,6 +35,7 @@ Banner Style
   font-size: 125px;
 }
 
+/* Banner sub title */
 .main-banner .subtitle{
   background: rgba(248, 249, 249,  0.3);
   width: -webkit-fit-content;
