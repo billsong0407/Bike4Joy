@@ -26,20 +26,28 @@ COMMON SELECTORS:
 
 universal selector: The css rules applied for this selector will apply effects on all HTML element on that page.
 
-element selector: The css rules applied for this selector will apply effects on HTML elements based on that specific element name. Ex. p{...}
+element selector: The css rules applied for this selector will apply effects on HTML elements based on that specific element name. 
+```
+Ex. p{...}
+```
 
 class selector: 
 ```
 <div class="center">...</div>
 ``` 
-The css rules applied for this selector will apply effects on HTML elements with that specific class attribute. Ex. .center{...}
+The css rules applied for this selector will apply effects on HTML elements with that specific class attribute. 
+```
+Ex. .center{...}
+```
 
 id selector: 
 ```
 <div id="unique">...</div>
 ``` 
-The css rules applied for this selector will use the id attribute of a HTML element to select a specific element. This is usually used to style unique elements since id of an element is unique within a page. Ex. #unique{...}
-
+The css rules applied for this selector will use the id attribute of a HTML element to select a specific element. This is usually used to style unique elements since id of an element is unique within a page. 
+```
+Ex. #unique{...}
+```
 
 ii.
 
