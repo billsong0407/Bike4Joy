@@ -1,8 +1,20 @@
+/*
+---------------------------------------------
+Global Style
+--------------------------------------------- 
+*/
+
 html, body {
   position: relative;
   min-height: 100%;
 }
 
+
+/*
+---------------------------------------------
+Navbar Style
+--------------------------------------------- 
+*/
 .page-navbar {
   font-size: 25px !important;
   background-color: green !important;
@@ -10,6 +22,7 @@ html, body {
   padding-right: 200px !important;
 }
 
+/* Navbar button */
 .navbar-text .register-button{
   color: white !important;
   font-size: 20px;
@@ -17,6 +30,7 @@ html, body {
   padding-right: 25px;
 }
 
+/* Navbar links */
 .navbar-nav .nav-item .nav-link{
   color:white;
 }
@@ -25,10 +39,16 @@ html, body {
   color:lightgreen;
 }
 
+/* Navbar items */
 .navbar-nav .nav-item{
   padding-left: 30px;
 }
 
+/*
+---------------------------------------------
+Footer Style
+--------------------------------------------- 
+*/
 .page-footer {
   background-color: green;
 }
@@ -39,6 +59,11 @@ html, body {
   height: 60px;
 }
 
+/*
+---------------------------------------------
+Page Style For Mobile
+--------------------------------------------- 
+*/
 @media (max-width: 767px) {
   .page-navbar {
     font-size: 15px !important;

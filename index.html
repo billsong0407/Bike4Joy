@@ -9,18 +9,23 @@
     <meta name="description" content="A web-based application that searches and reviews outdoor bicycle parkings in City of Toronto">
     <meta name="author" content="Bill Song & Franklin Tian">
 
+    <!-- Configuration for IOS mobile -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="apple-touch-startup-image" href="./assets/images/logo-startup.jpg" />
 
+    <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
 
+    <!-- metadata for Twitter cards -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@Bike4Joy" />
     <meta name="twitter:creator" content="@Bike4Joy" />
+
+    <!-- metadata for Facebook -->
     <meta property="og:title" content="Bike4Joy" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="A web-based application that searches and reviews outdoor bicycle parkings in City of Toronto." />
@@ -46,6 +51,8 @@
     <link rel="stylesheet" href="./assets/css/all-pages.css">
     <link rel="stylesheet" href="./assets/css/banner.css">
     <link rel="stylesheet" href="./assets/css/search.css">
+
+    <!-- External vendor Javascript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
@@ -58,19 +65,23 @@
 </head>
 
 <body>
-    <!-- ***** Header Area Start ***** -->
+    <!-- Header -->
     <header class="sticky-top">
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light page-navbar py-4">
             <a class="navbar-brand" href="./index.html">
+                <!-- Logo -->
                 <picture>
                     <source media="(min-width:900px)" srcset="./assets/images/logo-large.png">
                     <img src="./assets/images/white-logo.png" height="50" alt="logo" loading="lazy" style="margin-top: -1px;"/>
                 </picture>
                 
             </a>
+            <!-- Hamburger Menu Button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- Dropdown Menu -->
             <div class="collapse navbar-collapse text-center" id="navbarText">
                 <ul class="navbar-nav ml-5 mr-auto">
                     <li class="nav-item">
@@ -82,51 +93,57 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./submission.html">Review</a>
                     </li>
-                    </ul>
+                </ul>
+                <!-- Log In / Register Button -->
                 <span class="navbar-text">
                     <a class="btn btn-success register-button" href="./registration.html">Log In / Register</a>
                 </span>
             </div>
         </nav>
     </header>
-    <!-- ***** Header Area End ***** -->
+    
+    <!-- Banner -->
     <div class="main-banner">
         <div class="container">
             <h1 class="title">Bike4Joy</h1>
-            <!-- <hr class="horizontal-line"> -->
             <h3 class="subtitle">Find or review an outdoor bike parking place in Toronto</h3>
             <a href="#search-form" class="btn btn-success btn-lg active try-button" role="button"
                 aria-pressed="true">TRY IT NOW!</a>
         </div>
 
     </div>
+    <!-- Search Section -->
     <div class="search-page container-fluid">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <!-- <div class="top-text header-text"> -->
                     <h4 class="tag-line">Over 200+ Bike Parking Places in Toronto City</h4>
                     <h2 class="title">Find a Bike Parking Place</h2>
-                    <!-- </div> -->
                 </div>
                 <div class="col-lg-9">
+                    <!-- Search Form -->
                     <div class="input-group" id="search-form">
                         <div class="input-group-btn search-panel">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span id="search_address"> Address</span>
+                                <!-- Default to street Address -->
+                                <span id="search_address"> Address</span>
                             </button>
+                            <!-- Dropdown menu -->
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#address"> <span class="text-info"></span> Address</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#postalcode"> <span class="text-info"></span> Postal Code</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#postalcode"> <span class="text-info"></span> Postal Code</a></li>
                             </ul>
                         </div>
-                        <input type="hidden" name="search_param" value="all" id="search_param">         
+                        <input type="hidden" name="search_param" value="all" id="search_param">     
+                        <!-- Textfield for entering street address or postal code -->
                         <input type="text" class="form-control" name="x" placeholder="35 Front Street West">
                         <div class="input-group-btn search-panel">
+                            <!-- Rating Dropdowns -->
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span id="search_concept"></span><span>Any Ratings</span>
+                                <span id="search_concept"></span><span>Any Ratings</span>
                             </button>
+                            <!-- Star Ratings in decending order -->
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#5star"> <span class="text-info"></span>★★★★★</a></li> 
                                 <li><a href="#4star"> <span class="text-info"></span>★★★★</a></li>
@@ -135,17 +152,19 @@
                                 <li><a href="#1star"> <span class="text-info"></span>★</a></li>                            
                             </ul>
                         </div>
+                        <!-- final search button -->
                         <span class="input-group-btn">
                             <a href="./results.html" class="btn btn-success search-button">Search</a>
                         </span>
                     </div>
                 </div>
+                <!-- sample map -->
                 <div class="col-lg-12 map">
-
                 </div>
             </div>
         </div>
     </div>
+    <!-- Footer Area -->
     <div class="container-fluid page-footer">
         <footer class="pt-4">
             <ul class="nav justify-content-center border-bottom pb-4">
