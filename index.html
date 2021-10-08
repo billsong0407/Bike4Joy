@@ -110,10 +110,10 @@
                     <!-- </div> -->
                 </div>
                 <div class="col-lg-9">
-                    <div class="input-group">
+                    <div class="input-group" id="search-form">
                         <div class="input-group-btn search-panel">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span id="search_concept"> Address</span>
+                            <span id="search_address"> Address</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#address"> <span class="text-info"></span> Address</a></li>
@@ -136,7 +136,7 @@
                             </ul>
                         </div>
                         <span class="input-group-btn">
-                            <button class="btn btn-success" type="button">Search</button>
+                            <a href="./results.html" class="btn btn-success search-button" type="button">Search</a>
                         </span>
                     </div>
                 </div>
@@ -157,17 +157,6 @@
             </ul>
         </footer>
     </div>
-    <script>
-        $(document).ready(function(e){
-            $('.search-panel .dropdown-menu').find('a').click(function(e) {
-                e.preventDefault();
-                var param = $(this).attr("href").replace("#","");
-                var concept = $(this).html();
-                $('.search-panel span#search_concept').html(concept);
-                $('.input-group #search_param').val(param);
-            });
-        });
-    </script>
 </body>
 
 </html>

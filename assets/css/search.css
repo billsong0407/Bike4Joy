@@ -22,64 +22,43 @@ Search Page Style
     font-size: 65px;
 }
 
-form#search-form {
-  background-color: #fff;
-  padding: 5px 30px 5px 30px;
-  width: 100%;
-  border-radius: 7px;
-  display: inline-block;
+#search-form .form-control {
+  padding: 10px;
+  border: 2px solid green;
+  border-left: none;
+  border-right: none;
+  background-color: white;
+}
+
+#search-form .dropdown-menu{
   text-align: center;
-  margin-top: 50px;
+  text-decoration: none;
+  margin-top: -1px;
+  border: 2px solid green;
+  border-top: none;
 }
 
-form#search-form select,
-form#search-form input {
-  width: 100%;
-  height: 36px;
-  background-color: transparent;
-  border: none;
-  color: #2a2a2a;
-  font-size: 15px;
-  outline: none;
-}
-
-.form-select:focus {
-  box-shadow: none;
-}
-
-form#search-form input.searchText {
-  border-left: 1px solid #8d99af;
-  border-right: 1px solid #8d99af;
-  padding: 0px 30px;
-}
-
-form#search-form input::placeholder {
-  color: #2a2a2a;
-  font-size: 15px;
-}
-
-form#search-form button {
-  width: 100%;
-  height: 100%;
-  background-color: #8d99af;
-  border: none;
-  padding: 15px;
-  color: #fff;
-  font-size: 15px;
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
-}
-
-form#search-form button i {
-  width: 40px;
-  height: 40px;
-  background-color: #fff;
-  border-radius: 50%;
-  color: #8d99af;
-  display: inline-block;
+#search-form .dropdown-menu a{
   text-align: center;
-  line-height: 38px;
-  margin-right: 10px;
+  color: green;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#search-form input::placeholder {
+  color: grey;
+  font-size: 15px;
+}
+
+.input-group button {
+  border: 2px solid green;
+  background-color: white;
+  padding: 10px;
+}
+
+#search-form .search-button{
+  width: 150px;
+  padding: 11px 20px 11px 20px;
 }
 
 .search-page .map {
@@ -100,15 +79,20 @@ form#search-form button i {
     }
 
     .search-page .title{
-        margin-top: 5px;
-        font-size: 35px;
+      margin-top: 5px;
+      font-size: 35px;
     }
     .search-page .tag-line{
-        margin-top: 30px;
-        font-size: 15px;
+      margin-top: 30px;
+      font-size: 15px;
     }
-    form#search-form {
-        margin-top: 20px;
+    
+    #search-form #search-address{
+      width: 30%;
     }
 
+    #search-form .form-control{
+      border: 2px solid green;
+      width: 70%;
+    }
 }
