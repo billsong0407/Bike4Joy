@@ -12,10 +12,12 @@ City of Toronto Outdoor Bike Parking Places: https://open.toronto.ca/dataset/bic
 
 ### Notes
 Search form: index.html <br />
-Sample results page: results.html -> http://18.118.57.245/Bike4Joy/results.html <br />
+Sample results page: results.html <br />
 Sample individual object page: single-result.html <br />
 Object submission page: submission.html <br />
 User registration page: registration.html <br />
+
+**Completed all add-on tasks for part 1**
 
 ### Add on task 2 
 **d.** 
