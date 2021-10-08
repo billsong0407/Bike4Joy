@@ -1,26 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Bike4Joy</title>
     <meta name="description" content="A web-based application that searches and reviews outdoor bicycle parkings in City of Toronto">
     <meta name="author" content="Bill Song & Franklin Tian">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-startup-image" href="./assets/images/logo-startup.jpg" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
 
-    <title>Bike4Joy</title>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Bike4Joy" />
+    <meta name="twitter:creator" content="@Bike4Joy" />
+    <meta property="og:title" content="Bike4Joy" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="A web-based application that searches and reviews outdoor bicycle parkings in City of Toronto." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="http://18.118.57.245/Bike4Joy/" />
+    <meta property="og:image" content="http://18.118.57.245/Bike4Joy/assets/images/logo-large.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:width" content="630" />
+    <meta property="fb:app_id" content="966242223397117" />
+    <script type="application/ld+json">{"@context":"http://schema.org",
+        "@type":"WebPage",
+        "name":"Bike4Joy",
+        "url":"http://18.118.57.245/Bike4Joy/",
+        "description":"A web-based application that searches and reviews outdoor bicycle parkings in City of Toronto.",
+        "image":"http://18.118.57.245/Bike4Joy/assets/images/logo-large.png"}
+    </script>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Additional CSS Files -->
-    <!-- <link rel="stylesheet" href="assets/css/fontawesome.css"> -->
-
     <link rel="stylesheet" href="./assets/css/all-pages.css">
     <link rel="stylesheet" href="./assets/css/banner.css">
     <link rel="stylesheet" href="./assets/css/search.css">
@@ -40,7 +62,11 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-light page-navbar py-4">
             <a class="navbar-brand" href="./index.html">
-                <img src="./assets/images/white-logo.png" height="50" alt="logo" loading="lazy" style="margin-top: -1px;"/>
+                <picture>
+                    <source media="(min-width:900px)" srcset="./assets/images/logo-large.png">
+                    <img src="./assets/images/white-logo.png" height="50" alt="logo" loading="lazy" style="margin-top: -1px;"/>
+                </picture>
+                
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -58,7 +84,7 @@
                     </li>
                     </ul>
                 <span class="navbar-text">
-                    <a type="button" class="btn btn-success register-button" href="./registration.html">Log In / Register</a>
+                    <a class="btn btn-success register-button" href="./registration.html">Log In / Register</a>
                 </span>
             </div>
         </nav>
@@ -74,9 +100,9 @@
         </div>
 
     </div>
-    <div class="search-page">
+    <div class="search-page container-fluid">
         <div class="container">
-            <div class="row d-flex justify-content-center">
+            <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <!-- <div class="top-text header-text"> -->
                     <h4 class="tag-line">Over 200+ Bike Parking Places in Toronto City</h4>
@@ -84,31 +110,35 @@
                     <!-- </div> -->
                 </div>
                 <div class="col-lg-9">
-                    <form id="search-form" name="gs" method="submit" role="search" action="results.html">
-                        <div class="row">
-                            <div class="col-lg-3 align-self-center">
-                                <fieldset>
-                                    <!-- <select name="area" class="form-select" aria-label="Area" id="chooseCategory"
-                                        onchange="this.form.click()"> -->
-                                    <select name="area" class="form-select" aria-label="Area" id="chooseCategory">
-                                        <option selected value="Postal Code">Postal Code</option>
-                                        <option value="Address">Address</option>
-                                    </select>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-6 align-self-center">
-                                <fieldset>
-                                    <input type="address" name="address" class="searchText" placeholder=""
-                                        autocomplete="on" required>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-3">
-                                <fieldset>
-                                    <a href="results.html"><button class="btn btn-success btn-lg active">Search Now</button></a>
-                                </fieldset>
-                            </div>
+                    <div class="input-group" id="search-form">
+                        <div class="input-group-btn search-panel">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_address"> Address</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#address"> <span class="text-info"></span> Address</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#postalcode"> <span class="text-info"></span> Postal Code</a></li>
+                            </ul>
                         </div>
-                    </form>
+                        <input type="hidden" name="search_param" value="all" id="search_param">         
+                        <input type="text" class="form-control" name="x" placeholder="35 Front Street West">
+                        <div class="input-group-btn search-panel">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_concept"></span><span>Any Ratings</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#5star"> <span class="text-info"></span>★★★★★</a></li> 
+                                <li><a href="#4star"> <span class="text-info"></span>★★★★</a></li>
+                                <li><a href="#3star"> <span class="text-info"></span>★★★</a></li>
+                                <li><a href="#2star"> <span class="text-info"></span>★★</a></li>
+                                <li><a href="#1star"> <span class="text-info"></span>★</a></li>                            
+                            </ul>
+                        </div>
+                        <span class="input-group-btn">
+                            <a href="./results.html" class="btn btn-success search-button">Search</a>
+                        </span>
+                    </div>
                 </div>
                 <div class="col-lg-12 map">
 

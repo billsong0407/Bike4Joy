@@ -1,15 +1,22 @@
-body {
-    min-height: 400px;
-    margin-bottom: 100px;
-    padding-bottom: 20px;
-    clear: both;
- }
-
+/*submission page global styling*/
 .submission-page{
     margin-top: 150px;
+    margin-bottom: 90px;
+    min-height: 400px;
+    padding-left: 70px;
+    padding-right: 70px;
 }
 
-.submission-container{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+/*submission page responsive styling*/
+@media (max-width: 767px) {
+    .submission-page{
+        margin-top: 70px;
+        margin-bottom: 70px;
+    }
+}
+
+/*submission page submit button styling*/
+.submission-sub-button{
+    padding-top: 20px;
+    padding-right: 20px;
 }
