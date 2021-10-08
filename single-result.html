@@ -84,60 +84,46 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid single-result-page" itemprop="address" itemtype="https://schema.org/PostalAddress">
-        <span class="title" itemprop="streetAddress">35 York Street,</span>
-        <span class="title" itemprop="addressLocality"> Toronto, </span>
-        <span class="title" itemprop="addressRegion"> ON </span>
-        <span class="title"> - </span>
-        <span class="title" itemprop="postalCode">M5J0C7</span>
-        <br>
-        <div class="pic-loc">
-            <picture>
-                <source media="(min-width:767px)" srcset="./assets/images/p1.jpg">
-                <img src="./assets/images/p1-1.jpg" alt="bikes">
-            </picture>
-            <img src="./assets/images/p1-loc.png" alt="sample-result-location" style="width:50%">
-        </div> 
-        <!---
-        <div class="row image-container">
-            <div class="col-xs-6 street-image">
-                <img src="assets/images/p1.jpg" style="width:100%">
+    <div class="container-fluid single-result-page">
+        <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span class="title" itemprop="streetAddress">35 York Street</span>,
+            <span class="title" itemprop="addressLocality"> Toronto</span>,
+            <span class="title" itemprop="addressRegion"> ON </span>
+            <span class="title"> - </span>
+            <span class="title" itemprop="postalCode">M5J0C7</span>
+            <br>
+            <div class="pic-loc">
+                <picture>
+                    <source media="(min-width:767px)" srcset="./assets/images/p1.jpg">
+                    <img src="./assets/images/p1-1.jpg" alt="bikes">
+                </picture>
+                <img src="./assets/images/p1-loc.png" alt="sample-result-location" style="width:50%">
+            </div> 
+            <div class="info">
+                <table class="table table-hover">
+                    <tr>
+                        <td>Parking Type:</td>
+                        <td>Angled Bike Rack</td>
+                    </tr>
+                    <tr>
+                        <td>Bicycle Capacity:</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td>Size:</td>
+                        <td>29 Inch</td>
+                    </tr>
+                    <tr>
+                        <td>Year Installed:</td>
+                        <td>2015</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
-            <div class="col-xs-6 street-location">
-                <img src="assets/images/p1-loc.png" style="width:100%">
-            </div>
-        </div>-->
-        <div class="info">
-            <table class="table table-hover">
-                <tr>
-                    <td>Parking Type:</td>
-                    <td>Angled Bike Rack</td>
-                </tr>
-                <tr>
-                    <td>Bicycle Capacity:</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>Size:</td>
-                    <td>29 Inch</td>
-                </tr>
-                <tr>
-                    <td>Year Installed:</td>
-                    <td>2015</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
         </div>
-        <!-- <div class="container-fluid review">
-            <p style="font-weight: bold;">Reviews:</p>
-            <p itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" itemprop="worstRating" content = "1">★★★★☆ Racks are in good quality</p>
-            <p>★★☆☆☆ Many abandoned bikes are taking the spots</p>
-            <p>★★★★☆ Parking spots are clean and safe</p>
-
-        </div> -->
         <div class="container-fluid review" itemprop="review" itemscope itemtype="https://schema.org/Review">
             <p style="font-weight: bold;">Reviews: </p>
             <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
@@ -174,7 +160,6 @@
                 <button class="btn btn-success btn-lg active">Make A Review</button>
             </div>
         </div>
-
     </div>
 
 
