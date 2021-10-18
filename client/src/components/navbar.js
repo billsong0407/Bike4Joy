@@ -21,7 +21,7 @@ const Navigation = () => {
                     // style={{ maxHeight: '100px' }}
                     navbarScroll
                 >
-                    <Nav.Link href="" className="text-link">Search</Nav.Link>
+                    <Nav.Link href="#search-form" className="text-link">Search</Nav.Link>
                 </Nav>
                 <Button variant="success">
                     Log In / Register
