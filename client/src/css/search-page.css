@@ -1,0 +1,109 @@
+/*
+---------------------------------------------
+Banner Style
+--------------------------------------------- 
+*/
+
+.main-banner {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: url(../images/b1.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin-top: -110px;
+}
+
+/* Banner button */
+.main-banner .try-button {
+    margin-top:15px;
+}
+
+/* Banner title */
+.main-banner .top-text h2 {
+  color: #fff;
+  font-size: 45px;
+  font-weight: 800;
+  text-transform: capitalize;
+  margin-top: 15px;
+  margin-bottom: 45px;
+}
+
+.main-banner .title {
+  font-size: 125px;
+}
+
+/* Banner sub title */
+.main-banner .subtitle{
+  background: rgba(248, 249, 249,  0.3);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-weight: bold;
+  color: #21618C;
+}
+
+/*
+---------------------------------------------
+Search Page Style
+--------------------------------------------- 
+*/
+
+.search-page {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: #85FFBD;
+    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* padding-top: 90px; */
+    /* padding-bottom: 60px; */
+    height: 600px;
+}
+
+.search-page .title{
+    font-size: 65px;
+}
+
+.floating-label{
+    width: 150px;
+}
+
+.form-control, .floating-label {
+    border: 2px solid green !important;
+}
+
+#search-form .search-button{
+  width: 120px;
+}
+
+@media (max-width: 767px) {
+
+    .main-banner .title {
+    font-size: 65px;
+  }
+
+    .search-page{
+      padding-top: 40px;
+    }
+
+    .search-page .title{
+      margin-top: 5px;
+      font-size: 35px;
+    }
+    .search-page .tag-line{
+      margin-top: 30px;
+      font-size: 15px;
+    }
+    
+    #search-form .form-control{
+      border: 2px solid green;
+      height: 60px;
+      width: 70%;
+    }
+}
