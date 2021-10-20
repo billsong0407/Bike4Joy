@@ -45,7 +45,7 @@ class SearchPage extends Component {
                                 {/* <!-- Rating Dropdowns --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select>
-                                    <option value="any">Any</option>
+                                    <option value="any">Any Rating</option>
                                     <option value="5">★★★★★</option>
                                     <option value="4">★★★★</option>
                                     <option value="3">★★★</option>

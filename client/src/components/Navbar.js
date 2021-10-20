@@ -1,5 +1,6 @@
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
-import '../App.css'
+import { Link } from "react-router-dom";
+import '../App.css';
 
 const Navigation = () => {
     return(
@@ -23,12 +24,14 @@ const Navigation = () => {
                 >
                     <Nav.Link href="#search-form" className="text-link">Search</Nav.Link>
                 </Nav>
-                <Button variant="success">
-                    Log In / Register
-                </Button>
+                <Link to="/registration">
+                    <Button variant="success">
+                        Log In / Register
+                    </Button>
+                </Link>
                 </Navbar.Collapse>
             </Container>
-            </Navbar>
+        </Navbar>
     )
 }
 
