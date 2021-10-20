@@ -8,6 +8,8 @@ Navbar Style
   padding-left: 150px;
   padding-right: 150px;
   background-color: green;
+  min-height: 100px;
+  text-align: center;
 }
 
 .page-links {
@@ -33,9 +35,13 @@ Footer Style
 
 .page-footer {
   /* position: fixed; */
-  bottom: 0;
+  bottom: 0; 
   left: 0;
   background-color: green;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .page-footer li{

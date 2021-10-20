@@ -1,8 +1,8 @@
 const Footer = () => {
     return (
         <div className="container-fluid page-footer">
-            <footer className="pt-4">
-                <ul class="nav justify-content-center border-bottom pb-4">
+            <footer>
+                <ul className="nav py-auto">
                     <li clasNames="nav-item">About</li>
                     <li className="nav-item">Privacy Policy</li>
                     <li className="nav-item">Social Media</li>
