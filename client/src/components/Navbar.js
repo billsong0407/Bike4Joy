@@ -19,12 +19,11 @@ const Navigation = () => {
                 </Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                <Nav
-                    className="me-auto page-links"
-                    // style={{ maxHeight: '100px' }}
-                    navbarScroll
-                >
-                    <Nav.Link href="#search-form" className="text-link">Search</Nav.Link>
+                <Nav className="page-links" navbarScroll>
+                    <Nav.Link href="/#search-form" className="text-link">Search</Nav.Link>
+                </Nav>
+                <Nav className="mx-5 me-auto" navbarScroll>
+                    <Nav.Link href="/submission" className="text-link">Review</Nav.Link>
                 </Nav>
                 <Link to="/registration">
                     <Button variant="success">
