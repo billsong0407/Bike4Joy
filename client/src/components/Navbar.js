@@ -6,7 +6,8 @@ const Navigation = () => {
     return(
         <Navbar expand="lg" sticky="top" className="page-nav">
             <Container fluid>
-                <Navbar.Brand href="#">
+                <Link to="/">
+                <Navbar.Brand>
                     <img
                         src="./images/white-logo.png"
                         width="160"
@@ -15,6 +16,7 @@ const Navigation = () => {
                         alt="React Bootstrap logo"
                     />
                 </Navbar.Brand>
+                </Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav
