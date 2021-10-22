@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { Form, FloatingLabel, Button } from 'react-bootstrap'
+import { Form, FloatingLabel, Button } from 'react-bootstrap';
 
 import Navigation from '../components/navbar';
 import Footer from '../components/footer'
+import CityMap from '../components/map';
 import '../css/search-page.css';
 
 
@@ -21,7 +22,8 @@ class SearchPage extends Component {
                 </div>
 
             </div>
-            <div className="search-page container-fluid">
+            <div className="search-wrapper">
+            <div className="search-section container-fluid">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-12">
@@ -62,7 +64,17 @@ class SearchPage extends Component {
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
+            <div className="map-section">
+                <CityMap 
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                    loadingElement={<div style={{ height: `100%` }} />}
+                    containerElement={<div style={{ height: `100%` }} />}
+                    mapElement={<div style={{ height: `100%` }} />}
+                >
+                </CityMap>
+            </div>
+            </div>
+            <Footer />
         </>
     );
   }

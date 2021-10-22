@@ -50,23 +50,24 @@ Banner Style
 Search Page Style
 --------------------------------------------- 
 */
-
-.search-page {
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-color: #85FFBD;
-    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /* padding-top: 90px; */
-    /* padding-bottom: 60px; */
-    height: 600px;
+.search-wrapper {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-color: #85FFBD;
+  background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+}
+.search-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 90px;
+  /* padding-bottom: 60px; */
+  /* height: 600px; */
 }
 
-.search-page .title{
+.search-section .title{
     font-size: 65px;
 }
 
@@ -82,21 +83,29 @@ Search Page Style
   width: 120px;
 }
 
+.map-section {
+  text-align: center;
+  height: 600px;
+  padding: 0px 250px;
+  padding-top: 50px;
+  padding-bottom: 90px;
+}
+
 @media (max-width: 767px) {
 
     .main-banner .title {
     font-size: 65px;
   }
 
-    .search-page{
+    .search-section{
       padding-top: 40px;
     }
 
-    .search-page .title{
+    .search-section .title{
       margin-top: 5px;
       font-size: 35px;
     }
-    .search-page .tag-line{
+    .search-section .tag-line{
       margin-top: 30px;
       font-size: 15px;
     }
