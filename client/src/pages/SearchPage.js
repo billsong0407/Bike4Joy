@@ -5,9 +5,10 @@ import Navigation from '../components/navbar';
 import Footer from '../components/footer'
 import CityMap from '../components/map';
 import '../css/search-page.css';
-
+const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 
 class SearchPage extends Component {
+    
   render() {
     return (
         <>
@@ -23,7 +24,7 @@ class SearchPage extends Component {
 
             </div>
             <div className="search-wrapper">
-            <div className="search-section container-fluid">
+            <div className="search-section container-fluid" id="search-form">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-12">
@@ -32,7 +33,7 @@ class SearchPage extends Component {
                         </div>
                         <div className="col-lg-9">
                             {/* <!-- Search Form --> */}
-                            <Form className="input-group" id="search-form">
+                            <Form className="input-group">
                                
                                 {/* <!-- Dropdown menu --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
@@ -66,7 +67,7 @@ class SearchPage extends Component {
             </div>
             <div className="map-section">
                 <CityMap 
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `100%` }} />}
                     mapElement={<div style={{ height: `100%` }} />}

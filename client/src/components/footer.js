@@ -3,7 +3,7 @@ const Footer = () => {
         <div className="container-fluid page-footer">
             <footer>
                 <ul className="nav py-auto">
-                    <li clasNames="nav-item">About</li>
+                    <li className="nav-item">About</li>
                     <li className="nav-item">Privacy Policy</li>
                     <li className="nav-item">Social Media</li>
                     <li className="nav-item">Help</li>
