@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import Navigation from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navigation from '../components/navbar';
+import Footer from '../components/footer';
 import '../css/registration-page.css';
 
 class RegistrationPage extends Component {

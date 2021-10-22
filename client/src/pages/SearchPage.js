@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { Form, FloatingLabel, Button } from 'react-bootstrap'
 
-import Navigation from '../components/Navbar';
-import Footer from '../components/Footer'
+import Navigation from '../components/navbar';
+import Footer from '../components/footer'
 import '../css/search-page.css';
 
 
