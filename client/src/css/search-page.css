@@ -83,6 +83,10 @@ Search Page Style
   width: 120px;
 }
 
+.loc-button {
+  width: 200px !important;
+}
+
 .map-section {
   text-align: center;
   height: 600px;

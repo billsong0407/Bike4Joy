@@ -62,6 +62,10 @@ class SearchPage extends Component {
                                 </Button>
                             </Form>
                         </div>
+                        
+                    </div>
+                    <div className="row justify-content-center">
+                        <Button className="mt-1 loc-button"variant="outline-info" >Use current location</Button>
                     </div>
                 </div>
             </div>
