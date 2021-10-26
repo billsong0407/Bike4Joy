@@ -3,12 +3,22 @@ import { Form, FloatingLabel, Button } from 'react-bootstrap';
 
 import Navigation from '../components/navbar';
 import Footer from '../components/footer'
-import CityMap from '../components/map';
+import Map from '../components/map';
 import '../css/search-page.css';
+import * as parkingData from '../data/bike_parking.json';
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 
 class SearchPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: parkingData,
+        }
+    }
+
     
+
   render() {
     return (
         <>
@@ -70,13 +80,15 @@ class SearchPage extends Component {
                 </div>
             </div>
             <div className="map-section">
-                <CityMap 
+                
+                <Map
+                    mapData={this.state.data}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `100%` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
                 >
-                </CityMap>
+                </Map>
             </div>
             </div>
             <Footer />
