@@ -31,3 +31,24 @@
     width: 350px;
     height: 250px;
 }
+
+/*
+---------------------------------------------
+Results Page Mobile Style
+--------------------------------------------- 
+*/
+@media (max-width: 767px) {
+    .result-card {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 15px;
+        /* border: 1px solid black; */
+    }
+
+    .street-image {
+        width: 310px;
+    }
+
+}
