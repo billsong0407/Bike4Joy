@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps';
-import * as data from '../data/bike_parking.json';
 
 const Map = withScriptjs(withGoogleMap((props) =>
-    <GoogleMap defaultZoom={12} defaultCenter={{ lat: props.lat, lng: props.lng}}>
+    <GoogleMap defaultZoom={props.zoom} defaultCenter={{ lat: props.lat, lng: props.lng}}>
         {props.mapData.map(parking => (
             <Marker 
                 key={parking.properties._id}
