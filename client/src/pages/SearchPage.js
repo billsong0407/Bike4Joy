@@ -5,21 +5,23 @@ import Navigation from '../components/navbar';
 import Footer from '../components/footer'
 import Map from '../components/map';
 import '../css/search-page.css';
-import * as parkingData from '../data/bike_parking.json';
+
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
+const { parkingData } = require("../data/bike_parking.json")
 
 class SearchPage extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: parkingData,
-        }
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         data: parkingData,
+    //     }
+    // }
 
     
 
   render() {
+      console.log(parkingData)
     return (
         <>
             <Navigation></Navigation>
@@ -82,7 +84,9 @@ class SearchPage extends Component {
             <div className="map-section">
                 
                 <Map
-                    mapData={this.state.data}
+                    lat={43.6532}
+                    lng={-79.3832}
+                    mapData={parkingData}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `100%` }} />}
