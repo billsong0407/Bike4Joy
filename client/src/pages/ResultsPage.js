@@ -16,6 +16,7 @@ function ResultCard(props) {
             </Col>
             <Col>
                 <Table striped hover responsive>
+                    <tbody>
                     <tr>
                         <td className="first-column">Address:</td>
                         <td>{props.address}</td>
@@ -33,6 +34,7 @@ function ResultCard(props) {
                         <td><a href="#search-form" className="btn btn-success btn-lg active try-button" role="button"
                         aria-pressed="true">Details</a></td>
                     </tr>
+                    </tbody>
                 </Table>
             </Col>
         </Row>

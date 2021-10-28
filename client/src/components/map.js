@@ -14,20 +14,5 @@ const Map = withScriptjs(withGoogleMap((props) =>
         ))} 
     </GoogleMap>
 ));
-       
-    // <GoogleMap defaultZoom={12} defaultCenter={{ lat: 43.6532, lng: -79.3832}}>
-    //     {props.data.features.map(parking => (
-    //         <Marker 
-    //             key={parking.properties._id}
-    //             position={{
-    //                 lat: parking.geometry.coordinates[1],
-    //                 lng: parking.geometry.coordinates[0],
-    //             }}
-    //         />
-    //     ))}    
-    // </GoogleMap>
-
-
-//  = withScriptjs(withGoogleMap(Map));
 
 export default Map;
