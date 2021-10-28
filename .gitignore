@@ -121,3 +121,4 @@ assets/._.DS_Store
 vendor/._.DS_Store
 *.pem
 client/src/config.json
+client/build
