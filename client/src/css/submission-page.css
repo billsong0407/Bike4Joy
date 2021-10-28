@@ -1,0 +1,27 @@
+.submission-form {
+    min-height: calc(100vh - 200px);
+    /* background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-image: url(../images/submission.jpg); */
+    font-weight: bold;
+    font-size: 24px;
+    padding: 50px 200px;
+    /* padding-top: 30px; */
+}
+
+.overlay{
+    background-color: #FDFEFE;
+}
+
+/* .submission-form::after{
+    background: rgba(255,255,255,.9);
+} */
+
+@media (max-width: 767px) {
+    .submission-form {
+        font-size: 20px;
+        padding: 0px 50px;
+        padding-top: 30px;
+    }
+}

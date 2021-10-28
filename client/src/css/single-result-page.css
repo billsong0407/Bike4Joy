@@ -1,0 +1,25 @@
+.single-result-page {
+    min-height: calc(100vh - 200px);
+}
+
+.single-map-section {
+    border: 3px solid black;
+    height: 400px;
+}
+
+.single-info {
+    width: 50% !important;
+    height: 400px !important;
+}
+
+.first-column {
+    text-align: left;
+    font-weight: bold
+}
+
+@media (max-width: 767px) {
+    .single-info {
+        width: 100% !important;
+        height: 400px !important;
+    }
+}

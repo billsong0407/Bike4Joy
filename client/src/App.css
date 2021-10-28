@@ -1,0 +1,64 @@
+/*
+---------------------------------------------
+Navbar Style
+--------------------------------------------- 
+*/
+
+.page-nav {
+  padding-left: 150px;
+  padding-right: 150px;
+  background-color: green;
+  min-height: 100px;
+  text-align: center;
+}
+
+.page-links {
+  margin-left: 100px;
+  margin-right: 0px !important;
+  max-height: 100px;
+}
+
+.nav-link {
+  font-weight: bold !important;
+  color: white !important;
+  font-size: large;
+}
+
+.nav-link:hover {
+  color: lightgreen !important;
+}
+
+/*
+---------------------------------------------
+Footer Style
+--------------------------------------------- 
+*/
+
+.page-footer {
+  /* position: fixed; */
+  bottom: 0; 
+  left: 0;
+  background-color: green;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-footer li{
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  color: white !important;
+}
+
+@media (max-width: 767px) {
+  .page-nav{
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .page-links {
+    margin-left: 0px;
+  }
+}
