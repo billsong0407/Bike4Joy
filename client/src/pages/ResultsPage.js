@@ -63,6 +63,7 @@ class ResultsPage extends Component {
                             lat={this.state.data[0].geometry.coordinates[1]}
                             lng={this.state.data[0].geometry.coordinates[0]}
                             zoom={14}
+                            showLink={true}
                             mapData={this.state.data}
                             googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                             loadingElement={<div style={{ height: `100%` }} />}

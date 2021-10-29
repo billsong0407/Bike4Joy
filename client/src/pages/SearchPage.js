@@ -88,6 +88,7 @@ class SearchPage extends Component {
                     lng={-79.3832}
                     zoom={12}
                     mapData={parkingData}
+                    showLink={false}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `100%` }} />}
