@@ -77,10 +77,9 @@ class SingleResultPage extends Component {
                             <Card>
                                 <Card.Img variant="top" src="/images/p1.jpg" className="review-card-visual" />
                                 <Card.Body>
-                                <Card.Title>Card title</Card.Title>
                                 <Card.Text>
-                                    This is a longer card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.
+                                    <p>Ratings: ★★★★☆</p>
+                                    <p>Racks are in good quality - Bob Leung</p>
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -93,10 +92,9 @@ class SingleResultPage extends Component {
                                     </video>
                                 </div>
                                 <Card.Body>
-                                <Card.Title>Card title</Card.Title>
                                 <Card.Text>
-                                    This is a longer card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.
+                                    <p>Ratings: ★★☆☆☆</p>
+                                    <p>Many abandoned bikes are taking the spots - Jasper Percy</p>
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -105,26 +103,24 @@ class SingleResultPage extends Component {
                             <Card>
                                 <Card.Img variant="top" src="/images/p2.jpg" className="review-card-visual" />
                                 <Card.Body>
-                                <Card.Title>Card title</Card.Title>
                                 <Card.Text>
-                                    This is a longer card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.
+                                    <p>Ratings: ★★★★☆</p>
+                                    <p>Parking spots are clean and safe - Pradeep Kumar</p>
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
                             </Col>
-                            <Col>
+                            {/* <Col>
                             <Card>
                                 <Card.Img variant="top" src="/images/p3.jpg" className="review-card-visual" />
                                 <Card.Body>
-                                <Card.Title>Card title</Card.Title>
                                 <Card.Text>
-                                    This is a longer card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.
+                                    <p>Ratings: ★★★★☆</p>
+                                    <p>Racks are in good quality - Bob Leung</p>
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
-                            </Col>
+                            </Col> */}
                             
                         </Row>
                         {/* <Row xs={1} md={2} className="g-4">
