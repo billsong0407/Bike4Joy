@@ -40,10 +40,10 @@ function CustomMap(props) {
                         setSelectedPlace(null);
                     }}
                 >
-                    <div>
+                    <div style={{fontWeight: 'bold', color: 'blue'}}>
                         <p>{selectedPlace.properties.ADDRESS_FULL}</p>
                         <p>{selectedPlace.properties.POSTAL_CODE}</p>
-                        <p>Type: {selectedPlace.properties.PARKING_TYPE}</p>
+                        <p>{selectedPlace.properties.PARKING_TYPE}</p>
                         <p>Capacity: {selectedPlace.properties.BICYCLE_CAPACITY}</p>
                         {props.showLink && (
                             <p><a href="./single">More Details</a></p>

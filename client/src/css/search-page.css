@@ -119,4 +119,14 @@ Search Page Style
       height: 60px;
       width: 70%;
     }
+
+    .map-section {
+      height: 400px;
+      padding: 0px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      /* padding: 0px 250px;
+      padding-top: 50px;
+      padding-bottom: 90px; */
+    }
 }
