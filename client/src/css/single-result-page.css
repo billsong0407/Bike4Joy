@@ -17,6 +17,17 @@
     font-weight: bold
 }
 
+.review-card-visual {
+    width: 400px;
+    height: 300px;
+}
+
+.video-wrapper {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
 @media (max-width: 767px) {
     .single-info {
         width: 100% !important;

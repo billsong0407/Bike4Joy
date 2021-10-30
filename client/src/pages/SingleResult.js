@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import Map from '../components/map';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import { Container, Row, Col, Table, Card } from 'react-bootstrap';
 
 import "../css/single-result-page.css";
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
@@ -69,8 +69,80 @@ class SingleResultPage extends Component {
                             </Table>
                         </Col>
                     </Row>
-                    <div className="pt-5">
+                    <div className="py-5">
                         <h1>Reviews:</h1>
+                        <Row xs={1} md={3} className="g-4">
+                            
+                            <Col>
+                            <Card>
+                                <Card.Img variant="top" src="/images/p1.jpg" className="review-card-visual" />
+                                <Card.Body>
+                                <Card.Title>Card title</Card.Title>
+                                <Card.Text>
+                                    This is a longer card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.
+                                </Card.Text>
+                                </Card.Body>
+                            </Card>
+                            </Col>
+                            <Col>
+                            <Card>
+                                <div className="video-wrapper">
+                                    <video className="review-card-visual" controls>
+                                        <source src="/videos/samplevideo.mp4" type="video/mp4" />
+                                    </video>
+                                </div>
+                                <Card.Body>
+                                <Card.Title>Card title</Card.Title>
+                                <Card.Text>
+                                    This is a longer card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.
+                                </Card.Text>
+                                </Card.Body>
+                            </Card>
+                            </Col>
+                            <Col>
+                            <Card>
+                                <Card.Img variant="top" src="/images/p2.jpg" className="review-card-visual" />
+                                <Card.Body>
+                                <Card.Title>Card title</Card.Title>
+                                <Card.Text>
+                                    This is a longer card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.
+                                </Card.Text>
+                                </Card.Body>
+                            </Card>
+                            </Col>
+                            <Col>
+                            <Card>
+                                <Card.Img variant="top" src="/images/p3.jpg" className="review-card-visual" />
+                                <Card.Body>
+                                <Card.Title>Card title</Card.Title>
+                                <Card.Text>
+                                    This is a longer card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.
+                                </Card.Text>
+                                </Card.Body>
+                            </Card>
+                            </Col>
+                            
+                        </Row>
+                        {/* <Row xs={1} md={2} className="g-4">
+                            {Array.from({ length: 4 }).map((_, idx) => (
+                                <Col>
+                                <Card>
+                                    <Card.Img variant="top" src="holder.js/100px160" />
+                                    <Card.Body>
+                                    <Card.Title>Card title</Card.Title>
+                                    <Card.Text>
+                                        This is a longer card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.
+                                    </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                                </Col>
+                            ))}
+                            </Row> */}
                     </div>
                 </Container>
                 <Footer />
