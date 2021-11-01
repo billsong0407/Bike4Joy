@@ -6,22 +6,39 @@ import Footer from '../components/footer'
 import Map from '../components/map';
 import '../css/search-page.css';
 
+import { render } from "react-dom";
+
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 const { parkingData } = require("../data/bike_parking.json")
 
 class SearchPage extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         data: parkingData,
-    //     }
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            latitude: null,
+            longitutde: null,
+            
+        };
+        this.getLocation = this.getLocation.bind(this);
+        this.getCoordinates = this.getCoordinates.bind(this);
+      }
 
-    
+      getLocation(){
+        navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
+      }
+
+      getCoordinates(position){
+        this.setState({ 
+            latitude: position.coords.latitude, 
+            longitude: position.coords.longitude
+          })
+      }
+      
 
   render() {
-      console.log(parkingData)
+      console.log(this.state.longitutde)
+ 
     return (
         <>
             <Navigation></Navigation>
@@ -77,7 +94,9 @@ class SearchPage extends Component {
                         
                     </div>
                     <div className="row justify-content-center">
-                        <Button className="mt-1 loc-button"variant="outline-info" >Use current location</Button>
+                        <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>
+                        <p>Latitude: {this.state.latitude}</p>
+                        <p>Longitude: {this.state.longitutde}</p>
                     </div>
                 </div>
             </div>
@@ -102,5 +121,6 @@ class SearchPage extends Component {
     );
   }
 }
+
 
 export default SearchPage;
