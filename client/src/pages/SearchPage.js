@@ -6,8 +6,6 @@ import Footer from '../components/footer'
 import Map from '../components/map';
 import '../css/search-page.css';
 
-import { render } from "react-dom";
-
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 const { parkingData } = require("../data/bike_parking.json")
 
@@ -18,27 +16,48 @@ class SearchPage extends Component {
         this.state = {
             latitude: null,
             longitutde: null,
-            
+            userLat: null,
+            userLong: null,
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
       }
+    
 
-      getLocation(){
-        navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
-      }
+    getLocation(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
+        }else {
+            alert("Geolocation is not supported")
+        }
+    }
 
-      getCoordinates(position){
+    getCoordinates(position){
         this.setState({ 
-            latitude: position.coords.latitude, 
-            longitude: position.coords.longitude
-          })
-      }
+            userLat: position.coords.latitude, 
+            userLong: position.coords.longitude
+        })
+    }
+
+    handleLocationError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.")
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.")
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.")
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.")
+                break;
+        }
+    }
       
 
   render() {
-      console.log(this.state.longitutde)
- 
     return (
         <>
             <Navigation></Navigation>
@@ -95,8 +114,8 @@ class SearchPage extends Component {
                     </div>
                     <div className="row justify-content-center">
                         <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>
-                        <p>Latitude: {this.state.latitude}</p>
-                        <p>Longitude: {this.state.longitutde}</p>
+                        <p>Latitude: {this.state.userLat}</p>
+                        <p>Longitude: {this.state.userLong}</p>
                     </div>
                 </div>
             </div>
