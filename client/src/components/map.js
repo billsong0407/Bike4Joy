@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
+import "../css/map.css";
+
 function CustomMap(props) {
     const [selectedPlace, setSelectedPlace] = useState(null)
 
@@ -40,7 +42,7 @@ function CustomMap(props) {
                         setSelectedPlace(null);
                     }}
                 >
-                    <div style={{fontWeight: 'bold', color: 'blue'}}>
+                    <div className="infoWindow" style={{fontWeight: 'bold', color: 'blue'}}>
                         <p>{selectedPlace.properties.ADDRESS_FULL}</p>
                         <p>{selectedPlace.properties.POSTAL_CODE}</p>
                         <p>{selectedPlace.properties.PARKING_TYPE}</p>
