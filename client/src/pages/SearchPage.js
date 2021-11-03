@@ -18,9 +18,12 @@ class SearchPage extends Component {
             longitutde: null,
             userLat: null,
             userLong: null,
+            userAddress: null,
+
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
+        this.reverseGeocodeCoordinates = this.reverseGeocodeCoordinates.bind(this);
       }
     
 
@@ -37,6 +40,17 @@ class SearchPage extends Component {
             userLat: position.coords.latitude, 
             userLong: position.coords.longitude
         })
+        this.reverseGeocodeCoordinates();
+    }
+
+    reverseGeocodeCoordinates(){
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.userLat},${this.state.userLong}&sensor=false&key=${GOOGLE_MAPS_API_KEY}`)
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .then(data => this.setState({
+            userAddress: data.results[0].formatted_address
+        }))
+        .catch(error => alert(error))
     }
 
     handleLocationError(error) {
@@ -116,6 +130,7 @@ class SearchPage extends Component {
                         <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>
                         <p>Latitude: {this.state.userLat}</p>
                         <p>Longitude: {this.state.userLong}</p>
+                        <p>Your Address: {this.state.userAddress}</p>
                     </div>
                 </div>
             </div>

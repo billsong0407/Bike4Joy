@@ -11,6 +11,8 @@ class SubmissionPage extends Component {
         this.state = {
             latitude: null,
             longitude: null,
+            userLat: null,
+            userLong: null,
             address: '',
             type:'',
             description:''
@@ -18,6 +20,38 @@ class SubmissionPage extends Component {
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
       }
+
+      getLocation(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
+        }else {
+            alert("Geolocation is not supported")
+        }
+    }
+
+    getCoordinates(position){
+        this.setState({ 
+            userLat: position.coords.latitude, 
+            userLong: position.coords.longitude
+        })
+    }
+
+    handleLocationError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.")
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.")
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.")
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.")
+                break;
+        }
+    }
 
       //------------------Form handling start------------------------------------------------
       handleAddressChange= (event) =>{
@@ -39,37 +73,23 @@ class SubmissionPage extends Component {
       }
 
       handleSubmit = event =>{
-          alert(`${this.state.address} ${this.state.type} ${this.state.description}`)
+          
+          alert(`${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
           event.preventDefault()//To prevent data loss written after submitting
       }
       //------------------Form handling end------------------------------------------------
 
       
-      getLocation() {
-          if (navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(this.getCoordinates);
-          }else{
-              alert("Geolocation is not supported by this browser.");
-          }
-      }
-
-      getCoordinates(position){
-          console.log(position);
-          this.setState({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude
-          })
-      }
-
 
     
     render() {
+        this.getLocation();
         return (
             <>
                 <Navigation />
                 <div className="overlay">
                 <Form className="submission-form" onSubmit={this.handleSubmit}>
-                    <p>Long: {this.state.longitude}</p>
+                        
                     <Form.Group className="mb-3" controlId="address">
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
                         <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange}/>
@@ -85,10 +105,14 @@ class SubmissionPage extends Component {
                     <Row className="mb-3">
                         <Form.Group as={Col} md="6" controlId="longitude">
                             <Form.Label>Longitude</Form.Label>
+                            
+                            
                             <Form.Control placeholder="Ex: 43.641867413067914"/>
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="latitude">
                             <Form.Label>Latitude</Form.Label>
+                            
+                        
                             <Form.Control placeholder="Ex: -79.3873116119053"/>
                         </Form.Group>
                     </Row>
