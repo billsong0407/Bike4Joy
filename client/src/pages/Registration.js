@@ -10,10 +10,6 @@ const initialState={
     emailError: "",
     passwordError: "",
 
-    loginEmail: "",
-    loginPassword: "",
-    loginEmailError: "",
-    loginPasswordError: "",
 };
 
 class RegistrationPage extends Component {
@@ -32,17 +28,6 @@ class RegistrationPage extends Component {
         })
       };
 
-      handleLoginEmailChange = event => {
-        this.setState({
-            loginEmail: event.target.value
-        })
-      };
-
-      handleLoginPasswordChange = event => {
-        this.setState({
-            loginPassword: event.target.value
-        })
-      };
 
       validate = () => {
         let emailError = "";
@@ -63,23 +48,6 @@ class RegistrationPage extends Component {
             return false;
           }
 
-          let loginEmailError="";
-          let loginPasswordError="";
-        
-          if (!this.state.loginEmail.includes("@")) {
-            loginEmailError = "invalid email";
-          }
-          if (loginEmailError ) {
-            this.setState({ loginEmailError});
-            return false;
-          }
-          if (!this.state.loginPassword.includes("1") && !this.state.loginPassword.includes("2") && !this.state.loginPassword.includes("3") && !this.state.loginPassword.includes("4") && !this.state.loginPassword.includes("5") && !this.state.loginPassword.includes("6") && !this.state.loginPassword.includes("7") && !this.state.loginPassword.includes("8") && !this.state.loginPassword.includes("9") && !this.state.loginPassword.includes("0")){
-              loginPasswordError = "password must have a number";
-          }
-          if (loginPasswordError) {
-              this.setState({ loginPasswordError});
-              return false;
-            }
     
         return true;
       };
@@ -94,15 +62,6 @@ class RegistrationPage extends Component {
         }
       };
 
-      handleSubmitLogin = event => {
-        event.preventDefault();
-        const isValid = this.validate();
-        if (isValid) {
-          console.log(this.state);
-          // clear form
-          this.setState(initialState);
-        }
-      };
 
     render() {
         return (
@@ -143,39 +102,7 @@ class RegistrationPage extends Component {
                             </Button>
                         </Form>
                     </Col>
-                    <Col className="login-section">
-                        <Form onSubmit={this.handleSubmitLogin}>
-                            <Form.Label className="title">Log In</Form.Label>
-                            <Form.Group size="lg" controlId="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                autoFocus
-                                type="name"
-                                placeholder="name@email.com"
-                                value={this.state.loginEmail}
-                                onChange={this.handleLoginEmailChange}
-                            />
-                            <div style={{ fontSize: 13, color: "red" }}>
-                                {this.state.loginEmailError}
-                            </div>
-                            </Form.Group>
-                            <Form.Group size="lg" controlId="password" className="mt-4">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="password"
-                                value={this.state.loginPassword}
-                                onChange={this.handleLoginPasswordChange}
-                            />
-                            <div style={{ fontSize: 13, color: "red" }}>
-                                {this.state.loginPasswordError}
-                            </div>
-                            </Form.Group>
-                            <Button block size="lg" type="submit" className="mt-4">
-                                Login
-                            </Button>
-                        </Form>
-                    </Col>
+                    
                 </Row>
                 </Container>
                 <Footer />

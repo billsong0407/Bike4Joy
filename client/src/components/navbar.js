@@ -27,7 +27,7 @@ const Navigation = () => {
                 </Nav>
                 <Link to="/registration">
                     <Button variant="success">
-                        Log In / Register
+                     Register
                     </Button>
                 </Link>
                 </Navbar.Collapse>

@@ -18,8 +18,8 @@
 
 .register-section, .login-section {
     background: rgba(255,255,255,.5);
-    padding-left: 90px !important;
-    padding-right: 90px !important; 
+    padding-left: 25% !important;
+    padding-right: 25% !important; 
 }
 
 .register-section .title, .login-section .title{
