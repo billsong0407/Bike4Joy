@@ -4,7 +4,17 @@ import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/submission-page.css';
 
+const initialState={
+    address: "",
+    type:"",
+    description:"",
+    addressError: "",
+    typeError:"",
+    descriptionError:"",   
+}
 class SubmissionPage extends Component {
+    
+    state = initialState;
 
     constructor(props) {
         super(props);
@@ -13,9 +23,7 @@ class SubmissionPage extends Component {
             longitude: null,
             userLat: null,
             userLong: null,
-            address: '',
-            type:'',
-            description:''
+            
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -72,10 +80,47 @@ class SubmissionPage extends Component {
           })
       }
 
+      validate = () => {
+        let addressError = "";
+        let typeError = "";
+        let descriptionError = "";
+        let regExp = /[a-zA-Z]/g;
+
+        if (!regExp.test(this.state.address)){
+          addressError = "Please include an address";
+        }
+        if (!regExp.test(this.state.type)){
+          typeError = "Please make sure this is not blank";
+        }
+        if (!regExp.test(this.state.description)){
+            descriptionError = "Please include a description";
+        }
+        
+        if (addressError) {
+          this.setState({ addressError});
+          return false;
+        }
+        if (typeError) {
+            this.setState({typeError});
+            return false;
+          }
+        if (descriptionError) {
+            this.setState({descriptionError});
+            return false;
+          }
+        return true;
+      };
+
       handleSubmit = event =>{
           
-          alert(`${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
+          alert(`Note: Not submitted anywhere, this is just to make sure geolocation is working. ${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
           event.preventDefault()//To prevent data loss written after submitting
+          const isValid = this.validate();
+        if (isValid) {
+          console.log(this.state);
+          // clear form
+          this.setState(initialState);
+        }
       }
       //------------------Form handling end------------------------------------------------
 
@@ -93,14 +138,23 @@ class SubmissionPage extends Component {
                     <Form.Group className="mb-3" controlId="address">
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
                         <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange}/>
+                        <div style={{ fontSize: 13, color: "red" }}>
+                                {this.state.addressError}
+                            </div>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="parkingType">
                         <Form.Label>Bike Parking Type</Form.Label>
                         <Form.Control placeholder="Bike Rack, Indoor Bike Shelter, etc" value={this.state.type} onChange={this.handleTypeChange}/>
+                        <div style={{ fontSize: 13, color: "red" }}>
+                                {this.state.typeError}
+                            </div>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control as="textarea" rows={5} placeholder="Ex. Very clean with lots of shades, very nice for a summer cycling break." value={this.state.description} onChange={this.handleDescriptionChange}/>
+                        <div style={{ fontSize: 13, color: "red" }}>
+                                {this.state.descriptionError}
+                            </div>
                     </Form.Group>
                     <Row className="mb-3">
                         <Form.Group as={Col} md="6" controlId="longitude">
