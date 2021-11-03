@@ -32,16 +32,23 @@ class RegistrationPage extends Component {
       validate = () => {
         let emailError = "";
         let passwordError = "";
+        let regExp = /[a-zA-Z]/g;
 
         if (!this.state.email.includes("@")) {
-          emailError = "invalid email";
+          emailError = "invalid email, please include @ symbol";
         }
         if (emailError ) {
           this.setState({ emailError});
           return false;
         }
         if (!this.state.password.includes("1") && !this.state.password.includes("2") && !this.state.password.includes("3") && !this.state.password.includes("4") && !this.state.password.includes("5") && !this.state.password.includes("6") && !this.state.password.includes("7") && !this.state.password.includes("8") && !this.state.password.includes("9") && !this.state.password.includes("0")){
-            passwordError = "password must have a number";
+            passwordError = "password must at least a number";
+        }
+        if (this.state.password.length <= 6){
+            passwordError = "password must be longer than 6 characters";
+        }
+        if (!regExp.test(this.state.password)){
+            passwordError = "password must contain a letter";
         }
         if (passwordError) {
             this.setState({ passwordError});
