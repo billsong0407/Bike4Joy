@@ -3,6 +3,9 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/registration-page.css';
+import ParticleBackground from '../ParticleBackground';
+
+
 
 const initialState={
     email: "",
@@ -73,7 +76,9 @@ class RegistrationPage extends Component {
     render() {
         return (
             <>
+            
                 <Navigation />
+                <ParticleBackground className="particleStyle" />
                 <Container fluid>
                 <Row className="animate__animated animate__slideInDown register-page">
                     <Col className="register-section">
@@ -112,6 +117,7 @@ class RegistrationPage extends Component {
                     
                 </Row>
                 </Container>
+                
                 <Footer />
             </>
         )
