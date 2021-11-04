@@ -78,7 +78,9 @@ class RegistrationPage extends Component {
             <>
             
                 <Navigation />
-                <ParticleBackground className="particleStyle" />
+                {/* <!--  
+                 <ParticleBackground className="particleStyle" /> 
+                 --> */}
                 <Container fluid>
                 <Row className="animate__animated animate__slideInDown register-page">
                     <Col className="register-section">
