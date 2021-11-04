@@ -1,3 +1,10 @@
+/*
+---------------------------------------------
+Results Page Style
+--------------------------------------------- 
+*/
+
+/* minimum page height */
 .single-result-page {
     min-height: calc(100vh - 200px);
 }
@@ -12,22 +19,26 @@
     height: 400px !important;
 }
 
+/* first column of the table */
 .first-column {
     text-align: left;
     font-weight: bold
 }
 
+/* review visual includes image and video */
 .review-card-visual {
     width: 400px;
     height: 300px;
 }
 
+/* wrapper for videos in the reviews */
 .video-wrapper {
     width: auto;
     height: auto;
     position: relative;
 }
 
+/* mobile version */
 @media (max-width: 767px) {
     .single-info {
         width: 100% !important;
