@@ -135,28 +135,28 @@ class SubmissionPage extends Component {
                 <div className="overlay">
                 <Form className="submission-form" onSubmit={this.handleSubmit}>
                         
-                    <Form.Group className="mb-3" controlId="address">
+                    <Form.Group className="animate__animated animate__fadeInLeft mb-3" controlId="address">
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
                         <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.addressError}
                             </div>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="parkingType">
+                    <Form.Group className="animate__animated animate__fadeInRight mb-3" controlId="parkingType">
                         <Form.Label>Bike Parking Type</Form.Label>
                         <Form.Control placeholder="Bike Rack, Indoor Bike Shelter, etc" value={this.state.type} onChange={this.handleTypeChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.typeError}
                             </div>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="description">
+                    <Form.Group className="animate__animated animate__fadeInLeft mb-3" controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control as="textarea" rows={5} placeholder="Ex. Very clean with lots of shades, very nice for a summer cycling break." value={this.state.description} onChange={this.handleDescriptionChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.descriptionError}
                             </div>
                     </Form.Group>
-                    <Row className="mb-3">
+                    <Row className="animate__animated animate__fadeInRight mb-3">
                         <Form.Group as={Col} md="6" controlId="longitude">
                             <Form.Label>Longitude</Form.Label>
                             
@@ -170,7 +170,7 @@ class SubmissionPage extends Component {
                             <Form.Control placeholder="Ex: -79.3873116119053"/>
                         </Form.Group>
                     </Row>
-                    <Row className="mb-3">
+                    <Row className="animate__animated animate__fadeInLeft mb-3">
                         <Form.Group as={Col} md="6" controlId="image" className="mb-3" >
                             <Form.Label>Upload Image (Optional)</Form.Label>
                             <Form.Control type="file" accept="image/*" />
@@ -179,7 +179,7 @@ class SubmissionPage extends Component {
                             <Form.Label>Upload Video (Optional)</Form.Label>
                             <Form.Control type="file" accept="video/*" />
                         </Form.Group>
-                        <Button block size="lg" type="submit" className="mt-4">
+                        <Button block size="lg" type="submit" className="animate__animated animate__fadeInRight mt-4">
                                 Submit
                             </Button>
                     </Row>

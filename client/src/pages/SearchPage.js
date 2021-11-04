@@ -6,6 +6,8 @@ import Footer from '../components/footer'
 import Map from '../components/map';
 import '../css/search-page.css';
 
+import 'animate.css';
+
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 const { parkingData } = require("../data/bike_parking.json")
 
@@ -78,9 +80,9 @@ class SearchPage extends Component {
             {/* <!-- Banner --> */}
             <div className="main-banner">
                 <div className="container">
-                    <h1 className="title">Bike4Joy</h1>
-                    <h3 className="subtitle">Find or review an outdoor bike parking place in Toronto</h3>
-                    <a href="#search-form" className="btn btn-success btn-lg active try-button" role="button"
+                    <h1 className="animate__animated animate__backInLeft title">Bike4Joy</h1>
+                    <h3 className="animate__animated animate__backInRight subtitle">Find or review an outdoor bike parking place in Toronto</h3>
+                    <a href="#search-form" className="animate__animated animate__bounce btn btn-success btn-lg active try-button" role="button"
                         aria-pressed="true">TRY IT NOW!</a>
                 </div>
 
@@ -90,8 +92,8 @@ class SearchPage extends Component {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-12">
-                            <h4 className="tag-line">Over 200+ Bike Parking Places in Toronto City</h4>
-                            <h2 className="title">Find a Bike Parking Place</h2>
+                            <h4 className="animate__animated animate__bounce tag-line">Over 200+ Bike Parking Places in Toronto City</h4>
+                            <h2 className="animate__animated animate__bounce title">Find a Bike Parking Place</h2>
                         </div>
                         <div className="col-lg-9">
                             {/* <!-- Search Form --> */}

@@ -75,7 +75,7 @@ class RegistrationPage extends Component {
             <>
                 <Navigation />
                 <Container fluid>
-                <Row className="register-page">
+                <Row className="animate__animated animate__slideInDown register-page">
                     <Col className="register-section">
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Label className="title">Registration</Form.Label>

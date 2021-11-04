@@ -25,8 +25,9 @@ class SingleResultPage extends Component {
                 <Navigation />
                 <Container className="single-result-page pt-5">
                     <Row className="d-flex align-items-center justify-content-center">
-                        <Col className="single-map-section">
+                        <Col className="animate__animated animate__slideInLeft single-map-section">
                             <Map
+                                
                                 lat={this.state.data[0].geometry.coordinates[1]}
                                 lng={this.state.data[0].geometry.coordinates[0]}
                                 zoom={14}
@@ -37,7 +38,7 @@ class SingleResultPage extends Component {
                                 mapElement={<div style={{ height: `100%` }} />}
                             ></Map>
                         </Col>
-                        <Col className="col-auto single-info">
+                        <Col className="animate__animated animate__slideInRight col-auto single-info">
                             <h2>Information</h2>
                             <Table hover responsive>
                                 <tbody>
