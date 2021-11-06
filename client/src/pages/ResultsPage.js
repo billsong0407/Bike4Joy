@@ -14,7 +14,7 @@ function ResultCard(props) {
         <Row className="no-gutters result-card">
             <Col className="col-auto">
                 {/* Street Image */}
-                <img className="street-image" src={props.imgURL} alt="location-image"></img>
+                <img className="street-image" src={props.imgURL} alt="location"></img>
             </Col>
             <Col>
                 {/* location tabular information */}
