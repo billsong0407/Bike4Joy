@@ -109,7 +109,7 @@ class SearchPage extends Component {
                                     <option value="Postal Code">Postal Code</option>
                                 </Form.Select>
                                 </FloatingLabel>
-                               <Form.Control placeholder="35 Front Street West" className="input-text"/> 
+                               <Form.Control placeholder={this.state.userAddress} className="input-text"/> 
                                 {/* <!-- Rating Dropdowns --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select>
@@ -134,7 +134,6 @@ class SearchPage extends Component {
                         <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>
                         <p>Latitude: {this.state.userLat}</p>
                         <p>Longitude: {this.state.userLong}</p>
-                        <p>Your Address: {this.state.userAddress}</p>
                     </div>
                 </div>
             </div>
