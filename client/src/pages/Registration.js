@@ -38,13 +38,17 @@ class RegistrationPage extends Component {
         let passwordError = "";
         let regExp = /[a-zA-Z]/g;
 
+        //Checks and sets error messages for email 
         if (!this.state.email.includes("@")) {
           emailError = "invalid email, please include @ symbol";
         }
+        //Return false if email does not match requirements
         if (emailError ) {
           this.setState({ emailError});
           return false;
         }
+
+        //Checks and sets error messages for password
         if (!this.state.password.includes("1") && !this.state.password.includes("2") && !this.state.password.includes("3") && !this.state.password.includes("4") && !this.state.password.includes("5") && !this.state.password.includes("6") && !this.state.password.includes("7") && !this.state.password.includes("8") && !this.state.password.includes("9") && !this.state.password.includes("0")){
             passwordError = "password must at least a number";
         }
@@ -54,6 +58,7 @@ class RegistrationPage extends Component {
         if (!regExp.test(this.state.password)){
             passwordError = "password must contain a letter";
         }
+        //Return false if password does not match requirements
         if (passwordError) {
             this.setState({ passwordError});
             return false;
@@ -115,6 +120,7 @@ class RegistrationPage extends Component {
                                 {this.state.passwordError}
                             </div>
                             </Form.Group>
+                            {/* <!-- register button --> */}
                             <Button block size="lg" type="submit" className="mt-4">
                                 Register
                             </Button>
@@ -123,7 +129,7 @@ class RegistrationPage extends Component {
                     
                 </Row>
                 </Container>
-                
+                {/* Footer */}
                 <Footer />
             </>
         )

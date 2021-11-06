@@ -33,6 +33,7 @@ class SubmissionPage extends Component {
 
       //Check and get current location of user
       getLocation(){
+          // if location is supported
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
         }else {
@@ -48,7 +49,7 @@ class SubmissionPage extends Component {
         })
     }
 
-    //checks for various location errors
+    //checks for various location errors and alert the corresponding error
     handleLocationError(error) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
@@ -67,18 +68,21 @@ class SubmissionPage extends Component {
     }
 
       //------------------Form handling start------------------------------------------------
+     //Sets state for address
       handleAddressChange= (event) =>{
         this.setState({
             address: event.target.value
         })
       }
 
+    //Sets state for type of bike parking
       handleTypeChange = (event) =>{
         this.setState({
             type: event.target.value
         })
       }
-      
+
+      //Sets state for description
       handleDescriptionChange = (event) =>{
           this.setState({
               description: event.target.value
@@ -92,6 +96,7 @@ class SubmissionPage extends Component {
         let descriptionError = "";
         let regExp = /[a-zA-Z]/g;
 
+        //Checks and sets error messages for address, type and description
         if (!regExp.test(this.state.address)){
           addressError = "Please include an address";
         }
@@ -102,6 +107,7 @@ class SubmissionPage extends Component {
             descriptionError = "Please include a description";
         }
         
+        //Return false if any of the form inputs does not match with the above requirements
         if (addressError) {
           this.setState({ addressError});
           return false;
@@ -202,6 +208,7 @@ class SubmissionPage extends Component {
                     
                 </Form>
                 </div>
+                {/* Footer */}
                 <Footer />
             </>
         )
