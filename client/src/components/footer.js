@@ -1,5 +1,6 @@
 const Footer = () => {
     return (
+        // Footer section
         <div className="container-fluid page-footer">
             <footer>
                 <ul className="nav py-auto">

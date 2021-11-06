@@ -81,6 +81,9 @@ Search Page Style
 
 #search-form .search-button{
   width: 120px;
+  height: auto;
+  vertical-align: middle;
+  padding-top: 15px;
 }
 
 .loc-button {
@@ -118,5 +121,15 @@ Search Page Style
       border: 2px solid green;
       height: 60px;
       width: 70%;
+    }
+
+    .map-section {
+      height: 400px;
+      padding: 0px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      /* padding: 0px 250px;
+      padding-top: 50px;
+      padding-bottom: 90px; */
     }
 }
