@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/submission-page.css';
@@ -64,6 +64,8 @@ class SubmissionPage extends Component {
             case error.UNKNOWN_ERROR:
                 alert("An unknown error occurred.")
                 break;
+            default:
+            alert("An unknown error occurred.")
         }
     }
 

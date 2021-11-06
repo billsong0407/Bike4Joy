@@ -3,7 +3,6 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/registration-page.css';
-import ParticleBackground from '../ParticleBackground';
 
 
 //Setting initial state of few input boxes for form validation
