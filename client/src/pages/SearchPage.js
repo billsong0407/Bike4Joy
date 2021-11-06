@@ -20,7 +20,7 @@ class SearchPage extends Component {
             longitutde: null,
             userLat: null,
             userLong: null,
-            userAddress: null,
+            userAddress: "35 Front Street West",
 
         };
         this.getLocation = this.getLocation.bind(this);
@@ -131,9 +131,9 @@ class SearchPage extends Component {
                     </div>
                     <div className="row justify-content-center">
                         {/* Button to get current location */}
-                        <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>
-                        <p>Latitude: {this.state.userLat}</p>
-                        <p>Longitude: {this.state.userLong}</p>
+                        <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>                      
+                        <span>Latitude: {this.state.userLat}</span>
+                        <span>Longitude: {this.state.userLong}</span>
                     </div>
                 </div>
             </div>
