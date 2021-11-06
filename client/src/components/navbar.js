@@ -4,10 +4,12 @@ import '../App.css';
 
 const Navigation = () => {
     return(
+        // Naviagtion bar on top of every page
         <Navbar expand="lg" sticky="top" className="page-nav">
             <Container fluid>
                 <Link to="/">
                 <Navbar.Brand>
+                    {/*  Website logo */}
                     <img
                         src="./images/white-logo.png"
                         width="160"
@@ -25,6 +27,7 @@ const Navigation = () => {
                 <Nav className="mx-5 me-auto" navbarScroll>
                     <Nav.Link href="/submission" className="animate__animated animate__fadeIn text-link">Review</Nav.Link>
                 </Nav>
+                {/* Button to register account */}
                 <Link to="/registration">
                     <Button variant="success" className="animate__animated animate__fadeIn">
                      Register

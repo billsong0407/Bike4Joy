@@ -28,7 +28,7 @@ class SearchPage extends Component {
         this.reverseGeocodeCoordinates = this.reverseGeocodeCoordinates.bind(this);
       }
     
-
+    // Get user location through browser
     getLocation(){
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
@@ -37,6 +37,7 @@ class SearchPage extends Component {
         }
     }
 
+    // get user current coordinates
     getCoordinates(position){
         this.setState({ 
             userLat: position.coords.latitude, 
@@ -55,6 +56,7 @@ class SearchPage extends Component {
         .catch(error => alert(error))
     }
 
+    // Error exception handling for getting user geolocation
     handleLocationError(error) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
@@ -94,7 +96,8 @@ class SearchPage extends Component {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-12">
-                            <h4 className="animate__animated animate__bounce tag-line">Over 200+ Bike Parking Places in Toronto City</h4>
+                            {/* Information */}
+                            <h4 className="animate__animated animate__bounce tag-line">Over 100+ Bike Parking Places in Toronto City</h4>
                             <h2 className="animate__animated animate__bounce title">Find a Bike Parking Place</h2>
                         </div>
                         <div className="col-lg-9">
@@ -131,6 +134,7 @@ class SearchPage extends Component {
                         
                     </div>
                     <div className="row justify-content-center">
+                        {/* Button to get current location */}
                         <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>
                         <p>Latitude: {this.state.userLat}</p>
                         <p>Longitude: {this.state.userLong}</p>
@@ -139,7 +143,7 @@ class SearchPage extends Component {
                 </div>
             </div>
             <div className="map-section">
-                
+                {/* Display Google Maps */}
                 <Map
                     lat={43.6532}
                     lng={-79.3832}

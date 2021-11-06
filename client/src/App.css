@@ -12,12 +12,14 @@ Navbar Style
   text-align: center;
 }
 
+/* link wrapper */
 .page-links {
   margin-left: 100px;
   margin-right: 0px !important;
   max-height: 100px;
 }
 
+/* navigation link style */
 .nav-link {
   font-weight: bold !important;
   color: white !important;
@@ -45,6 +47,7 @@ Footer Style
   align-items: center;
 }
 
+/* List item style */
 .page-footer li{
   margin-left: 20px;
   margin-right: 20px;
@@ -52,6 +55,7 @@ Footer Style
   color: white !important;
 }
 
+/* Mobile Version */
 @media (max-width: 767px) {
   .page-nav{
     padding-left: 50px;
