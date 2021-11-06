@@ -22,4 +22,6 @@ Object submission page: https://bike4joy.web.app/submission <br />
 User registration page: https://bike4joy.web.app/registration <br />
 
 Others: <br />
-To install the SSL certificate with Certbot, it requires a valid domain name instead of IP address. So, we found a domain name and redirected to http://18.118.57.245/
+- To install the SSL certificate with Certbot, it requires a valid domain name instead of IP address. So, we found a domain name and installed the SSL certificate, then redirected to AWS EC2 IP address. <br />
+
+- We implemented 10 animations for the addon task
