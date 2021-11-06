@@ -103,7 +103,6 @@ class SearchPage extends Component {
                         <div className="col-lg-9">
                             {/* <!-- Search Form --> */}
                             <Form className="input-group">
-                               
                                 {/* <!-- Dropdown menu --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select aria-label="Search Location">
@@ -111,9 +110,7 @@ class SearchPage extends Component {
                                     <option value="Postal Code">Postal Code</option>
                                 </Form.Select>
                                 </FloatingLabel>
-                              
                                <Form.Control placeholder="35 Front Street West" className="input-text"/> 
-                                
                                 {/* <!-- Rating Dropdowns --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select>
@@ -124,9 +121,9 @@ class SearchPage extends Component {
                                     <option value="2">★★</option>
                                     <option value="1">★</option>
                                 </Form.Select>
-                                </FloatingLabel>                    
-                                {/* <!-- final search button --> */}
-                                <Button variant="success" type="submit" className="search-button">
+                                </FloatingLabel>         
+                                {/* <!-- final search button --> */}     
+                                <Button href="/results" variant="success" type="submit" className="search-button">
                                     Search
                                 </Button>
                             </Form>
