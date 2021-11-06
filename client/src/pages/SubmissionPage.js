@@ -4,6 +4,7 @@ import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/submission-page.css';
 
+//Setting initial state of few input boxes for form validation
 const initialState={
     address: "",
     type:"",
@@ -16,6 +17,7 @@ class SubmissionPage extends Component {
     
     state = initialState;
 
+    //required contructor for coordinates in react js
     constructor(props) {
         super(props);
         this.state = {
@@ -29,6 +31,7 @@ class SubmissionPage extends Component {
         this.getCoordinates = this.getCoordinates.bind(this);
       }
 
+      //Check and get current location of user
       getLocation(){
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
@@ -37,6 +40,7 @@ class SubmissionPage extends Component {
         }
     }
 
+    //Sets the state of coordinates to current coordinates
     getCoordinates(position){
         this.setState({ 
             userLat: position.coords.latitude, 
@@ -44,6 +48,7 @@ class SubmissionPage extends Component {
         })
     }
 
+    //checks for various location errors
     handleLocationError(error) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
@@ -80,6 +85,7 @@ class SubmissionPage extends Component {
           })
       }
 
+      //Validates the input for the forms to see if it matches requirements
       validate = () => {
         let addressError = "";
         let typeError = "";
@@ -111,8 +117,9 @@ class SubmissionPage extends Component {
         return true;
       };
 
+      //Handles the submission of form
       handleSubmit = event =>{
-          
+          //Alert shows that location is obtained but not submitted anywhere.
           alert(`Note: Not submitted anywhere, this is just to make sure geolocation is working. ${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
           event.preventDefault()//To prevent data loss written after submitting
           const isValid = this.validate();
@@ -131,10 +138,11 @@ class SubmissionPage extends Component {
         this.getLocation();
         return (
             <>
+            {/* Navbar */}
                 <Navigation />
                 <div className="overlay">
                 <Form className="submission-form" onSubmit={this.handleSubmit}>
-                        
+                        {/* ---------------------------Location, type and description input form starts ---------------------------- */}
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3" controlId="address">
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
                         <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange}/>
@@ -156,6 +164,9 @@ class SubmissionPage extends Component {
                                 {this.state.descriptionError}
                             </div>
                     </Form.Group>
+                    {/* ---------------------------Location, type and description input form ends ---------------------------- */}
+
+                    {/* ---------------------------Coordinates form starts ---------------------------- */}
                     <Row className="animate__animated animate__fadeInRight mb-3">
                         <Form.Group as={Col} md="6" controlId="longitude">
                             <Form.Label>Longitude</Form.Label>
@@ -170,6 +181,9 @@ class SubmissionPage extends Component {
                             <Form.Control placeholder="Ex: -79.3873116119053"/>
                         </Form.Group>
                     </Row>
+                    {/* ---------------------------Coordinates form ends ---------------------------- */}
+
+                    {/* <!-- Obtional image and video submission fields --> */}
                     <Row className="animate__animated animate__fadeInLeft mb-3">
                         <Form.Group as={Col} md="6" controlId="image" className="mb-3" >
                             <Form.Label>Upload Image (Optional)</Form.Label>
@@ -179,6 +193,8 @@ class SubmissionPage extends Component {
                             <Form.Label>Upload Video (Optional)</Form.Label>
                             <Form.Control type="file" accept="video/*" />
                         </Form.Group>
+
+                        {/* <!-- submit button --> */}
                         <Button block size="lg" type="submit" className="animate__animated animate__fadeInRight mt-4">
                                 Submit
                             </Button>

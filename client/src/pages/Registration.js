@@ -6,7 +6,7 @@ import '../css/registration-page.css';
 import ParticleBackground from '../ParticleBackground';
 
 
-
+//Setting initial state of few input boxes for form validation
 const initialState={
     email: "",
     password: "",
@@ -19,6 +19,7 @@ class RegistrationPage extends Component {
 
     state = initialState;
     
+    //------------------Form handling start------------------------------------------------
     handleEmailChange = event => {
         this.setState({
             email: event.target.value
@@ -31,7 +32,7 @@ class RegistrationPage extends Component {
         })
       };
 
-
+      //Validates the input for the forms to see if it matches requirements
       validate = () => {
         let emailError = "";
         let passwordError = "";
@@ -62,6 +63,7 @@ class RegistrationPage extends Component {
         return true;
       };
 
+      //Handles the submission of form
       handleSubmit = event => {
         event.preventDefault();
         const isValid = this.validate();
@@ -76,7 +78,7 @@ class RegistrationPage extends Component {
     render() {
         return (
             <>
-            
+                {/* Navbar */}
                 <Navigation />
                 {/* <!--  
                  <ParticleBackground className="particleStyle" /> 
@@ -85,6 +87,7 @@ class RegistrationPage extends Component {
                 <Row className="animate__animated animate__slideInDown register-page">
                     <Col className="register-section">
                         <Form onSubmit={this.handleSubmit}>
+                            {/* -- Email form -- */}
                             <Form.Label className="title">Registration</Form.Label>
                             <Form.Group size="lg" controlId="email">
                             <Form.Label>Email</Form.Label>
@@ -99,6 +102,7 @@ class RegistrationPage extends Component {
                                 {this.state.emailError}
                             </div>
                             </Form.Group>
+                            {/* -- Password form -- */}
                             <Form.Group size="lg" controlId="password" className="mt-4">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
