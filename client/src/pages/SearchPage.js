@@ -49,7 +49,6 @@ class SearchPage extends Component {
     reverseGeocodeCoordinates(){
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.userLat},${this.state.userLong}&sensor=false&key=${GOOGLE_MAPS_API_KEY}`)
         .then(response => response.json())
-        .then(data => console.log(data))
         .then(data => this.setState({
             userAddress: data.results[0].formatted_address
         }))
