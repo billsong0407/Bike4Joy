@@ -11,7 +11,7 @@ https://bike4joy.web.app/
 City of Toronto Outdoor Bike Parking Places: https://open.toronto.ca/dataset/bicycle-parking-high-capacity-outdoor/
 
 ### Tech Stack
-Frontend - React.js, JavaScript <br />
+Frontend - React.js, JavaScript - /client/src<br />
 Hosting - AWS EC2
 
 ### Notes
