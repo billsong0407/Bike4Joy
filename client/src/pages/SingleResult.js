@@ -7,6 +7,23 @@ import { Container, Row, Col, Table, Card } from 'react-bootstrap';
 import "../css/single-result-page.css";
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 
+function ReviewCard(props) {
+    return (
+        <Col>
+            <Card>
+                {/* Review with an image */}
+                <Card.Img variant="top" src={props.source} className="review-card-visual" />
+                <Card.Body>
+                <Card.Text>
+                    <p>{props.ratings}</p>
+                    <p>{props.comment}-{props.author}</p>
+                </Card.Text>
+                </Card.Body>
+            </Card>
+        </Col>
+    );
+}
+
 // Single Object page
 class SingleResultPage extends Component {
 
@@ -79,10 +96,9 @@ class SingleResultPage extends Component {
                     <div className="py-5">
                         <h1>Reviews:</h1>
                         <Row xs={1} md={3} className="g-4">
-                            
-                            <Col>
+                            {/* Review with an image */}
+                            {/* <Col>
                             <Card>
-                                {/* Review with an image */}
                                 <Card.Img variant="top" src="/images/p1.jpg" className="review-card-visual" />
                                 <Card.Body>
                                 <Card.Text>
@@ -91,7 +107,13 @@ class SingleResultPage extends Component {
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
-                            </Col>
+                            </Col> */}
+                            <ReviewCard 
+                                source="/images/p1.jpg"
+                                ratings="Ratings: ★★★★☆"
+                                comment="Racks are in good quality"
+                                author="Bob Leung"
+                            />
                             <Col>
                             <Card>
                                 <div className="video-wrapper">
@@ -108,17 +130,12 @@ class SingleResultPage extends Component {
                                 </Card.Body>
                             </Card>
                             </Col>
-                            <Col>
-                            <Card>
-                                <Card.Img variant="top" src="/images/p2.jpg" className="review-card-visual" />
-                                <Card.Body>
-                                <Card.Text>
-                                    <p>Ratings: ★★★★☆</p>
-                                    <p>Parking spots are clean and safe - Pradeep Kumar</p>
-                                </Card.Text>
-                                </Card.Body>
-                            </Card>
-                            </Col>
+                            <ReviewCard 
+                                source="/images/p2.jpg"
+                                ratings="Ratings: ★★★★☆"
+                                comment="Parking spots are clean and safe"
+                                author="Pradeep Kumar"
+                            />
                         </Row>
                         {/* <Row xs={1} md={2} className="g-4">
                             {Array.from({ length: 4 }).map((_, idx) => (
