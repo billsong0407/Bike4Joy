@@ -1,0 +1,24 @@
+----------------------------------------
+|   Table: Review
+----------------------------------------
+|   id: INT #primary key
+|   image: STRING #image url
+|   video: STRING #video url
+|   comment: STRING
+|   rating: STRING
+|   author: STRING
+|   lat: STRING
+|   lng: STRING
+----------------------------------------
+
+----------------------------------------
+|   Table: Location
+----------------------------------------
+|   id: INT #primary key
+|   lat: STRING
+|   lng: STRING
+|   capacity: INT 
+|   parkingType: STRING
+|   address: STRING
+|   postalCode: STRING
+----------------------------------------
