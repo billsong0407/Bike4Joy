@@ -12,7 +12,18 @@ function ReviewCard(props) {
         <Col>
             <Card>
                 {/* Review with an image */}
-                <Card.Img variant="top" src={props.source} className="review-card-visual" />
+                {props.image && 
+                    <Card.Img variant="top" src={props.image} className="review-card-visual" />
+                }
+
+                 {/* Review with video */}
+                {props.video && 
+                    <div className="video-wrapper">
+                        <video className="review-card-visual" controls>
+                            <source src="/videos/samplevideo.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                }
                 <Card.Body>
                 <Card.Text>
                     <p>{props.ratings}</p>
@@ -36,7 +47,9 @@ class SingleResultPage extends Component {
                 { "type": "Feature", "properties": { "_id": 5056, "ADDRESS_POINT_ID": 30069161, "ADDRESS_NUMBER": "35", "LINEAR_NAME_FULL": "York St", "ADDRESS_FULL": "35 York St", "POSTAL_CODE": "M5J 0C7", "MUNICIPALITY": "former Toronto", "CITY": "Toronto", "WARD": "Spadina-Fort York (10)", "PLACE_NAME": null, "GENERAL_USE_CODE": 115001, "CENTRELINE_ID": 13975053, "LO_NUM": 35, "LO_NUM_SUF": null, "HI_NUM": null, "HI_NUM_SUF": null, "LINEAR_NAME_ID": 4735, "X": null, "Y": null, "LONGITUDE": null, "LATITUDE": null, "ID": 54, "PARKING_TYPE": "Angled Bike Rack", "FLANKING": "Front St W", "BICYCLE_CAPACITY": 30, "SIZE_M": 2.9, "YEAR_INSTALLED": 2015, "BY_LAW": null, "DETAILS": null, "OBJECTID": 25 }, "geometry": { "type": "Point", "coordinates": [ -79.381465101411194, 43.643790673159501 ] } }
             ],
             reviews: [
-
+                {"image": "/images/p1.jpg", "video": "", "rating:": "Ratings: ★★★★☆", "comment": "Racks are in good quality", "author": "Bob Leung"},
+                {"image": "", "video": "/videos/samplevideo.mp4", "rating:": "Ratings: ★★☆☆☆", "comment": "Many abandoned bikes are taking the spots", "author": "Jasper Percy"},
+                {"image": "/images/p2.jpg", "video": "", "rating:": "Ratings: ★★★★☆", "comment": "Parking spots are clean and safe", "author": "Pradeep Kumar"},
             ],
         }
     }
@@ -96,63 +109,18 @@ class SingleResultPage extends Component {
                     <div className="py-5">
                         <h1>Reviews:</h1>
                         <Row xs={1} md={3} className="g-4">
-                            {/* Review with an image */}
-                            {/* <Col>
-                            <Card>
-                                <Card.Img variant="top" src="/images/p1.jpg" className="review-card-visual" />
-                                <Card.Body>
-                                <Card.Text>
-                                    <p>Ratings: ★★★★☆</p>
-                                    <p>Racks are in good quality - Bob Leung</p>
-                                </Card.Text>
-                                </Card.Body>
-                            </Card>
-                            </Col> */}
-                            <ReviewCard 
-                                source="/images/p1.jpg"
-                                ratings="Ratings: ★★★★☆"
-                                comment="Racks are in good quality"
-                                author="Bob Leung"
-                            />
-                            <Col>
-                            <Card>
-                                <div className="video-wrapper">
-                                    {/* Review with video */}
-                                    <video className="review-card-visual" controls>
-                                        <source src="/videos/samplevideo.mp4" type="video/mp4" />
-                                    </video>
-                                </div>
-                                <Card.Body>
-                                <Card.Text>
-                                    <p>Ratings: ★★☆☆☆</p>
-                                    <p>Many abandoned bikes are taking the spots - Jasper Percy</p>
-                                </Card.Text>
-                                </Card.Body>
-                            </Card>
-                            </Col>
-                            <ReviewCard 
-                                source="/images/p2.jpg"
-                                ratings="Ratings: ★★★★☆"
-                                comment="Parking spots are clean and safe"
-                                author="Pradeep Kumar"
-                            />
+                            {   
+                                this.state.reviews.map(review => (
+                                    <ReviewCard 
+                                        image={review.image}
+                                        video={review.video}
+                                        ratings={review.ratings}
+                                        comment={review.comment}
+                                        author={review.author}
+                                    />
+                                ))
+                            }
                         </Row>
-                        {/* <Row xs={1} md={2} className="g-4">
-                            {Array.from({ length: 4 }).map((_, idx) => (
-                                <Col>
-                                <Card>
-                                    <Card.Img variant="top" src="holder.js/100px160" />
-                                    <Card.Body>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text>
-                                        This is a longer card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.
-                                    </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                                </Col>
-                            ))}
-                            </Row> */}
                     </div>
                 </Container>
                 <Footer />
