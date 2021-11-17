@@ -9,6 +9,8 @@
 |   author: STRING
 |   lat: STRING
 |   lng: STRING
+|   bikeSize: FLOAT
+|   yearInstalled: INT
 ----------------------------------------
 
 ----------------------------------------
