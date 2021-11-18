@@ -1,6 +1,6 @@
 <?php
 
-include 'DatabaseController.php';
+include 'Database.php';
 
 $dbConnection = new DatabaseController();
 
