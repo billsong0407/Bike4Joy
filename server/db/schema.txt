@@ -1,26 +1,32 @@
-----------------------------------------
-|   Table: Review
-----------------------------------------
++---------------------------------------
+|   Table: REVIEWS
++---------------------------------------
 |   id: INT #primary key
-|   image: STRING #image url
-|   video: STRING #video url
-|   comment: STRING
-|   rating: STRING
-|   author: STRING
-|   lat: STRING
-|   lng: STRING
-|   bikeSize: FLOAT
-|   yearInstalled: INT
-----------------------------------------
+|   image: TEXT #image url
+|   video: TEXT #video url
+|   comment: TEXT
+|   rating: TEXT
+|   author: TEXT
++---------------------------------------
 
-----------------------------------------
-|   Table: Location
-----------------------------------------
++---------------------------------------
+|   Table: LOCATIONS
++---------------------------------------
 |   id: INT #primary key
-|   lat: STRING
-|   lng: STRING
+|   lat: TEXT
+|   lng: TEXT
 |   capacity: INT 
-|   parkingType: STRING
-|   address: STRING
-|   postalCode: STRING
-----------------------------------------
+|   parkingType: TEXT
+|   address: TEXT
+|   postalCode: TEXT
++---------------------------------------
+
++--------------------------------------------------
+|   Table: REVIEW_TO_LOCATION
++--------------------------------------------------
+|   loc_id: INT NOT NULL
+|   rev_id: INT NOT NULL
+|   PRIMARY KEY (loc_id, rev_id)
+|   FOREIGN KEY (loc_id) REFERENCES LOCATIONS(id)
+|   FOREIGN KEY (rev_id) REFERENCES REVIEWS(id)
++--------------------------------------------------
