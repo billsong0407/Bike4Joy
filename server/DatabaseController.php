@@ -11,13 +11,13 @@ class DatabaseController {
         $username = $credentials["DB_USERNAME"];
         $password = $credentials["DB_PASSWORD"];
         $port = $credentials["DB_PORT"];
-        $this->connection = new mysqli($host, $username, $password, $database, $port);
-
-        // Check connection
-        if($this->connection === false){
-            die("ERROR: Could not connect. " . $this->connection->connect_error . "\n");
+        
+        try{
+            $this->connection = new PDO("mysql:host=$host;dbname=$database;port=$port", $username, $password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch(PDOException $e) {
+            echo "Error Connecting the Database: " . $e->getMessage() . "\n";
         }
-
         // Print host information
         echo "Connect Successfully. Host info: " . $this->connection->host_info . "\n";
     }
@@ -27,12 +27,15 @@ class DatabaseController {
     }
 
     public function disconnect(){
-        $this->connection->close();
+        $this->connection = null;
     }
 
     public function readSQL($query){
         try{
-            $result = $this->connection->query($query);
+            $query = $this->connection->prepare($query);
+            $query->execute();
+            $query->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $query->fetchAll();
             return $result;
         } catch (Exception $e){
             exit($e->getMessage());
