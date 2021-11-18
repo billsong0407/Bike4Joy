@@ -33,26 +33,8 @@ if __name__ == "__main__" :
         
         if tables and "LOCATIONS" in list(tables[0]):
             cursor.execute("DELETE FROM LOCATIONS") # reset LOCATION TABLE
-            cursor.execute("DROP TABLE LOCATIONS")
+            # cursor.execute("DROP TABLE LOCATIONS")
             print("TABLE LOCATION DELETED")
-            
-        CREATE_TABLE_QUERY = """
-CREATE TABLE LOCATIONS(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    lat TEXT,
-    lng TEXT,
-    capacity TEXT,
-    parkingType TEXT,
-    address TEXT,
-    postalCode TEXT,
-    bikeSize FLOAT,
-    yearInstalled INT
-)
-"""
-        cursor.execute(CREATE_TABLE_QUERY)
-        connection.commit()    
-        
-        print("TABLE LOCATION CREATED")
         
         INSERT_QUERY = """
 INSERT INTO LOCATIONS (address, postalCode, parkingType, capacity, lat, lng, bikeSize, yearInstalled)
@@ -72,7 +54,7 @@ VALUES
             lat = geometry[1]
             lng = geometry[0]
             
-            INSERT_QUERY += f'("{address}", "{postal_code}", "{parking_type}", {capacity}, "{lat}", "{lng}", {bike_size}, {year_installed}),\n'
+            INSERT_QUERY += f'("{address}", "{postal_code}", "{parking_type}", {capacity}, {lat}, {lng}, {bike_size}, {year_installed}),\n'
             
         cursor.execute(INSERT_QUERY.rstrip().rstrip(','))
         connection.commit()
