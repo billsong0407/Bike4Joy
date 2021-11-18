@@ -13,6 +13,7 @@ if __name__ == "__main__" :
     DROP_LOCATIONS_TABLE = "DROP TABLE LOCATIONS"
     DROP_REVIEWS_TABLE = "DROP TABLE REVIEWS"
     DROP_RELATIONS_TABLE = "DROP TABLE REVIEW_TO_LOCATION"
+    DROP_USERS_TABLE = "DROP TABLE USERS"
     DROP_QUERY = """
 SET FOREIGN_KEY_CHECKS = 0;
 drop table if exists REVIEW_TO_LOCATION;
@@ -30,6 +31,7 @@ SET FOREIGN_KEY_CHECKS = 1;
             password=_password,
         ) as connection:
             cursor = connection.cursor()
+            cursor.execute(DROP_USERS_TABLE)
             cursor.execute(DROP_RELATIONS_TABLE)
             cursor.execute(DROP_LOCATIONS_TABLE)
             cursor.execute(DROP_REVIEWS_TABLE)

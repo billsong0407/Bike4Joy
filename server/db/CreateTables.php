@@ -32,15 +32,31 @@ try{
 }
 
 try{
+    $CREATE_USERS_TABLE_QUERY = "
+    CREATE TABLE USERS (
+        id INT NOT NULL AUTO_INCREMENT,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        PRIMARY KEY (id, name, email) 
+    )";
+    
+    $CREATE_USERS_TABLE_QUERY = $conn->prepare($CREATE_USERS_TABLE_QUERY);
+    $CREATE_USERS_TABLE_QUERY->execute();
+} catch(PDOException $e) {
+    echo "Error at creating USERS table: " . $e->getMessage() . "\n";
+}
+
+try{
     $CREATE_REVIEWS_TABLE_QUERY = "
     CREATE TABLE REVIEWS (
         id INT NOT NULL AUTO_INCREMENT,
         image TEXT,
         video TEXT,
         comment TEXT,
-        author TEXT,
+        user_id INT NOT NULL,
         rating TEXT,
-        PRIMARY KEY (id)
+        PRIMARY KEY (id),
+        FOREIGN KEY (user_id) REFERENCES USERS(id)
     )";
 
     $CREATE_REVIEWS_TABLE_QUERY = $conn->prepare($CREATE_REVIEWS_TABLE_QUERY);
@@ -57,8 +73,6 @@ try{
         FOREIGN KEY (loc_id) REFERENCES LOCATIONS(id) on delete cascade,
         FOREIGN KEY (rev_id) REFERENCES REVIEWS(id) on delete cascade
     )";
-    // PRIMARY KEY (loc_id, rev_id),
-    
 
     $CREATE_RELATIONS_TABLE_QUERY = $conn->prepare($CREATE_RELATIONS_TABLE_QUERY);
     $CREATE_RELATIONS_TABLE_QUERY->execute();

@@ -1,13 +1,23 @@
 +---------------------------------------
-|   Table: REVIEWS
+|   Table: USERS
 +---------------------------------------
+|   id: INT 
+|   name: TEXT NOT NULL
+|   email: TEXT NOT NULL
+|   PRIMARY KEY (id, name, email)
++---------------------------------------
+
++---------------------------------------
+|   Table: REVIEWS
++------------------------------------------------
 |   id: INT #primary key
 |   image: TEXT #image url
 |   video: TEXT #video url
 |   comment: TEXT
 |   rating: TEXT
-|   author: TEXT
-+---------------------------------------
+|   user_id: INT NOT NULL 
+|   FOREIGN KEY (user_id) REFERENCES USERS(id)
++------------------------------------------------
 
 +---------------------------------------
 |   Table: LOCATIONS
