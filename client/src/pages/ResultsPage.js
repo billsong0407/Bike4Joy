@@ -58,6 +58,11 @@ class ResultsPage extends Component {
                 { "type": "Feature", "properties": { "_id": 5057, "ADDRESS_POINT_ID": 30069163, "ADDRESS_NUMBER": "35", "LINEAR_NAME_FULL": "York St", "ADDRESS_FULL": "35 York St", "POSTAL_CODE": "M5J 0C7", "MUNICIPALITY": "former Toronto", "CITY": "Toronto", "WARD": "Spadina-Fort York (10)", "PLACE_NAME": null, "GENERAL_USE_CODE": 115001, "CENTRELINE_ID": 13975053, "LO_NUM": 35, "LO_NUM_SUF": null, "HI_NUM": null, "HI_NUM_SUF": null, "LINEAR_NAME_ID": 4735, "X": null, "Y": null, "LONGITUDE": null, "LATITUDE": null, "ID": 54, "PARKING_TYPE": "Angled Bike Rack", "FLANKING": "Front St W", "BICYCLE_CAPACITY": 30, "SIZE_M": 2.9, "YEAR_INSTALLED": 2015, "BY_LAW": null, "DETAILS": null, "OBJECTID": 25 }, "geometry": { "type": "Point", "coordinates": [ -79.38257283571842, 43.64604389375239 ] } },
                 { "type": "Feature", "properties": { "_id": 5058, "ADDRESS_POINT_ID": 30069164, "ADDRESS_NUMBER": "35", "LINEAR_NAME_FULL": "York St", "ADDRESS_FULL": "35 York St", "POSTAL_CODE": "M5J 0C7", "MUNICIPALITY": "former Toronto", "CITY": "Toronto", "WARD": "Spadina-Fort York (10)", "PLACE_NAME": null, "GENERAL_USE_CODE": 115001, "CENTRELINE_ID": 13975053, "LO_NUM": 35, "LO_NUM_SUF": null, "HI_NUM": null, "HI_NUM_SUF": null, "LINEAR_NAME_ID": 4735, "X": null, "Y": null, "LONGITUDE": null, "LATITUDE": null, "ID": 54, "PARKING_TYPE": "Angled Bike Rack", "FLANKING": "Front St W", "BICYCLE_CAPACITY": 30, "SIZE_M": 2.9, "YEAR_INSTALLED": 2015, "BY_LAW": null, "DETAILS": null, "OBJECTID": 25 }, "geometry": { "type": "Point", "coordinates": [ -79.38063545860469, 43.64531017421497 ] } }
             ],
+            locations: [
+                {"imageURL": "../images/p1.jpg", "postalCode": "M5J 1E5", "address": "46 York St", "rating": "★★★★★ (2 reviews)", "lat": "", "lng": "", "parkingType": "", "capacity": ""},
+                {"imageURL": "../images/p2.jpg", "postalCode": "M5J 0C7", "address": "35 York St", "rating": "★★★☆☆ (3 reviews)", "lat": "", "lng": "", "parkingType": "", "capacity": ""},
+                {"imageURL": "../images/p3.jpg", "postalCode": "M5J 1E5", "address": "61 Front St W", "rating": "★★★★☆ (7 reviews)", "lat": "", "lng": "", "parkingType": "", "capacity": ""}
+            ]
         }
     }
     render() {
@@ -83,24 +88,15 @@ class ResultsPage extends Component {
                     </div>
                     {/* Display results from search form  */}
                     <div className="result-cards">
-                        <ResultCard 
-                            imgURL="../images/p1.jpg"
-                            address="46 York St"
-                            postalCode="M5J 1E5"
-                            rating="★★★★★ (2 reviews)"
-                        />
-                        <ResultCard 
-                            imgURL="../images/p2.jpg"
-                            address="35 York St"
-                            postalCode="M5J 0C7"
-                            rating="★★★☆☆ (3 reviews)"
-                        />
-                        <ResultCard 
-                            imgURL="../images/p3.jpg"
-                            address="61 Front St W"
-                            postalCode="M5J 1E5"
-                            rating="★★★★☆ (7 reviews)"
-                        />
+                        {this.state.locations.map(location =>(
+                            <ResultCard 
+                                imgURL={location.imageURL}
+                                address={location.address}
+                                postalCode={location.postalCode}
+                                rating={location.rating}
+                            />
+                        ))
+                        }          
                     </div>
                 </Container>
                 <Footer />

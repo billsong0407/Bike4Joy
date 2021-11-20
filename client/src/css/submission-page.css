@@ -10,6 +10,10 @@
     /* padding-top: 30px; */
 }
 
+.rating-dropdown {
+    border: 2px solid green;
+}
+
 .overlay{
     background-color: #FDFEFE;
 }

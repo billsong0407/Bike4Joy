@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, FloatingLabel } from 'react-bootstrap';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/submission-page.css';
@@ -158,13 +158,37 @@ class SubmissionPage extends Component {
                                 {this.state.addressError}
                             </div>
                     </Form.Group>
-                    <Form.Group className="animate__animated animate__fadeInRight mb-3" controlId="parkingType">
+                    {/* <Form.Group className="animate__animated animate__fadeInRight mb-3" controlId="parkingType">
                         <Form.Label>Bike Parking Type</Form.Label>
                         <Form.Control placeholder="Bike Rack, Indoor Bike Shelter, etc" value={this.state.type} onChange={this.handleTypeChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.typeError}
                             </div>
-                    </Form.Group>
+                    </Form.Group> */}
+                    <Row className="animate__animated animate__fadeInRight mb-3">
+                        <Form.Group as={Col} md="4" controlId="parkingType">
+                            <Form.Label>Bike Parking Type</Form.Label>
+                        <Form.Control placeholder="Bike Rack, Indoor Bike Shelter, etc" value={this.state.type} onChange={this.handleTypeChange}/>
+                        <div style={{ fontSize: 13, color: "red" }}>
+                                {this.state.typeError}
+                            </div>
+                        </Form.Group>
+                        <Form.Group as={Col} md="4" controlId="capacity">
+                            <Form.Label>Bicycle Capacity</Form.Label>
+                            <Form.Control placeholder="10, 15, 20, etc" value={this.state.type} onChange={this.handleTypeChange}/>
+                        </Form.Group>
+                        <Form.Group as={Col} md="4" controlId="rating">
+                            <Form.Label>Rating</Form.Label>
+                            <Form.Select className="rating-dropdown">
+                                <option value="5">★★★★★</option>
+                                <option value="4">★★★★</option>
+                                <option value="3">★★★</option>
+                                <option value="2">★★</option>
+                                <option value="1">★</option>
+                            </Form.Select>
+                        </Form.Group>
+                        
+                    </Row>
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3" controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control as="textarea" rows={5} placeholder="Ex. Very clean with lots of shades, very nice for a summer cycling break." value={this.state.description} onChange={this.handleDescriptionChange}/>
