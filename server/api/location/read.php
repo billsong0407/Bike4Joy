@@ -15,6 +15,8 @@ $db = $database->getConnection();
 $location = new Location($db);
 
 // query locations
+// $sample_address = "\"236 Augusta Ave\"";
+// $stmt = $location->getID($sample_address);
 $stmt = $location->read();
 $num = $stmt->rowCount();
   

@@ -35,5 +35,16 @@ class Location{
     
         return $stmt;
     }
+
+    public function getID($address){
+        try {
+            $query = "SELECT id FROM " . $this->table_name . " WHERE address=" . $address . ";";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
 }
 ?>

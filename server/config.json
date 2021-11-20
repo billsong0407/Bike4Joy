@@ -3,5 +3,5 @@
     "DB_USERNAME": "",
     "DB_PASSWORD": "",
     "DB_PORT": "",
-    "DB_ADDRESS": ""
+    "DB_ADDRESS": "bike4joy-database.cvcxjrsjyuuy.us-east-2.rds.amazonaws.com"
 }
