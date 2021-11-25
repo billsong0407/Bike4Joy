@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/registration-page.css';
+import axios from 'axios';
 
 
 //Setting initial state of few input boxes for form validation
@@ -71,11 +72,24 @@ class RegistrationPage extends Component {
       handleSubmit = event => {
         event.preventDefault();
         const isValid = this.validate();
+        const obj ={
+            email:this.state.email,
+            password:this.state.password,
+          };
+
         if (isValid) {
-          console.log(this.state);
+          
+        axios.post('http://localhost/bike4joyBackend/index.php',obj)
+        .then(res=> console.log(res.data))
+        .catch(error => console.log(error));
+        console.log(obj);
+
           // clear form
           this.setState(initialState);
         }
+        
+        
+        
       };
 
 
