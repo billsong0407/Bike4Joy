@@ -52,13 +52,16 @@ class Location{
             $query = "SELECT id FROM " . $this->table_name . " WHERE address=" . $address . ";";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            return $stmt;
+            $loc_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
+            return $loc_id;
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
     }
 
     public function getID_Coord($lat, $lng){
+        $lat = round($lat, 5);
+        $lng = round($lng, 5);
         try {
             $lat_lower_bound = $lat - 0.00001;
             $lat_upper_bound = $lat + 0.00001;
@@ -68,7 +71,31 @@ class Location{
             // echo $query . "\n";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            return $stmt;
+            $loc_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
+            if (is_null($loc_id)) return null;
+            return $loc_id;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
+    public function create($address, $postalCode, $lat, $lng, $parkingType, $capacity, $bikeSize, $yearInstalled){
+        $loc_id = $this->getID_Coord($lat, $lng);
+        echo $loc_id . "\n";
+        if (is_null($loc_id)) {
+            $loc_id = $this->getID($address);
+        }
+        if (!is_null($loc_id)){
+            return $loc_id;
+        }
+        echo $loc_id . "\n";
+        try{
+            $query = "INSERT INTO LOCATIONS (address, postalCode, parkingType, capacity, lat, lng, bikeSize, yearInstalled) VALUES($address, $postalCode, $parkingType, $capacity, $lat, $lng, $bikeSize, $yearInstalled);";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            
+            $new_id = $this->getID_Coord($lat, $lng);
+            return $new_id;
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }

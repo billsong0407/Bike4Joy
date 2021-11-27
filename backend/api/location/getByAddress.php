@@ -24,30 +24,20 @@ if ((!$address) && gettype($address) != string){
     );
     return;
 }
-$stmt = $location->getID($address);
-$num = $stmt->rowCount();
-  
-// check if more than 0 record found
-if($num>0){
+$loc_id = $location->getID($address);
+
+if(!is_null($loc_id)){
   
     // locations array
     $locations_arr=array();
     $locations_arr["results"]=array();
   
-    // retrieve our table contents
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        // extract row
-        // this will make $row['name'] to
-        // just $name only
-        extract($row);
-  
-        $location_item=array(
-            "id" => $id,
-        );
-  
-        array_push($locations_arr["results"], $location_item);
-    }
-  
+    $location_item=array(
+        "id" => $loc_id,
+    );
+
+    array_push($locations_arr["results"], $location_item);
+    
     // set response code - 200 OK
     http_response_code(200);
   

@@ -15,18 +15,18 @@ $db = $database->getConnection();
 $location = new Location($db);
 
 // query locations
+// $sample_address = "236 Augusta Ave";
+$address=isset($_GET["address"]) ? $_GET["address"] : "";
+$postalCode=isset($_GET["postalCode"]) ? $_GET["postalCode"] : "";
 $lat=isset($_GET["lat"]) ? $_GET["lat"] : "";
 $lng=isset($_GET["lng"]) ? $_GET["lng"] : "";
+$parkingType=isset($_GET["parkingType"]) ? $_GET["parkingType"] : "";
+$capacity=isset($_GET["capacity"]) ? $_GET["capacity"] : "";
+$bikeSize=isset($_GET["bikeSize"]) ? $_GET["bikeSize"] : "";
+$yearInstalled=isset($_GET["yearInstalled"]) ? $_GET["yearInstalled"] : "";
 
-if (!$lat or !$lng or (!is_numeric($lat) or !is_numeric($lng))) {
-    echo json_encode(
-        array("message" => "Invalid Address Type.")
-    );
-    return;
-}
+$loc_id = $location->create($address, $postalCode, $lat, $lng, $parkingType, $capacity, $bikeSize, $yearInstalled);
 
-$loc_id = $location->getID_Coord($lat, $lng);
-  
 if(!is_null($loc_id)){
   
     // locations array

@@ -25,10 +25,12 @@
 |   Table: LOCATIONS
 +---------------------------------------
 |   id: INT #primary key
-|   lat: FLOAT 
-|   lng: FLOAT
+|   lat: DECIMAL(10, 5) NOT NULL
+|   lng: DECIMAL(10, 5) NOT NULL
 |   capacity: INT 
 |   parkingType: TEXT
+|   bikeSize: FLOAT
+|   yearInstalled: INT
 |   address: TEXT
 |   postalCode: TEXT
 +---------------------------------------
