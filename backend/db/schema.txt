@@ -1,0 +1,46 @@
++---------------------------------------
+|   Table: USERS
++---------------------------------------
+|   id: INT 
+|   name: TEXT NOT NULL
+|   email: TEXT NOT NULL
+|   PRIMARY KEY (id, name, email)
++---------------------------------------
+
++---------------------------------------
+|   Table: REVIEWS
++------------------------------------------------
+|   id: INT #primary key
+|   image: TEXT #image url
+|   video: TEXT #video url
+|   type: TEXT
+|   capacity: INT
+|   rating: TEXT
+|   description: TEXT
+|   user_id: INT NOT NULL 
+|   FOREIGN KEY (user_id) REFERENCES USERS(id)
++------------------------------------------------
+
++---------------------------------------
+|   Table: LOCATIONS
++---------------------------------------
+|   id: INT #primary key
+|   lat: DECIMAL(10, 5) NOT NULL
+|   lng: DECIMAL(10, 5) NOT NULL
+|   capacity: INT 
+|   parkingType: TEXT
+|   bikeSize: FLOAT
+|   yearInstalled: INT
+|   address: TEXT
+|   postalCode: TEXT
++---------------------------------------
+
++--------------------------------------------------
+|   Table: REVIEW_TO_LOCATION
++--------------------------------------------------
+|   loc_id: INT NOT NULL
+|   rev_id: INT NOT NULL
+|   PRIMARY KEY (loc_id, rev_id)
+|   FOREIGN KEY (loc_id) REFERENCES LOCATIONS(id)
+|   FOREIGN KEY (rev_id) REFERENCES REVIEWS(id)
++--------------------------------------------------

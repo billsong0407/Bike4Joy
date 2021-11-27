@@ -15,9 +15,7 @@ $db = $database->getConnection();
 $location = new Location($db);
 
 // query locations
-// $sample_address = "\"236 Augusta Ave\"";
-// $stmt = $location->getID($sample_address);
-$stmt = $location->read();
+$stmt = $location->getAll();
 $num = $stmt->rowCount();
   
 // check if more than 0 record found
@@ -25,11 +23,9 @@ if($num>0){
   
     // locations array
     $locations_arr=array();
-    $locations_arr["records"]=array();
+    $locations_arr["results"]=array();
   
     // retrieve our table contents
-    // fetch() is faster than fetchAll()
-    // http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         // extract row
         // this will make $row['name'] to
@@ -38,11 +34,15 @@ if($num>0){
   
         $location_item=array(
             "id" => $id,
-            "address" => $address,
-            "postal code" => $postalCode,
+            "ADDRESS" => $address,
+            "POSTAL_CODE" => $postalCode,
+            "lat" => $lat,
+            "lng" => $lng,
+            "BICYCLE_CAPACITY" => $capacity,
+            "PARKING_TYPE" => $parkingType
         );
   
-        array_push($locations_arr["records"], $location_item);
+        array_push($locations_arr["results"], $location_item);
     }
   
     // set response code - 200 OK
