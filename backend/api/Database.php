@@ -5,13 +5,12 @@ class DatabaseController {
 
     public function __construct(){
         /* Attempt MySQL server connection. */
-        $credentials = json_decode(file_get_contents('../config.json'), true);
+        $credentials = json_decode(file_get_contents('../../config.json'), true);
         $host = $credentials["DB_ADDRESS"];
         $database = $credentials["DB_NAME"];
         $username = $credentials["DB_USERNAME"];
         $password = $credentials["DB_PASSWORD"];
         $port = $credentials["DB_PORT"];
-
         try{
             $this->connection = new PDO("mysql:host=$host;dbname=$database;port=$port", $username, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
