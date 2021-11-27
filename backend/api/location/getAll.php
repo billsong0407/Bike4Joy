@@ -39,7 +39,7 @@ if($num>0){
             "lat" => $lat,
             "lng" => $lng,
             "BICYCLE_CAPACITY" => $capacity,
-            "PARKING TYPE" => $parkingType
+            "PARKING_TYPE" => $parkingType
         );
   
         array_push($locations_arr["results"], $location_item);

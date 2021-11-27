@@ -9,7 +9,7 @@ import '../css/search-page.css';
 import 'animate.css';
 
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
-const { parkingData } = require("../data/bike_parking.json")
+// const { parkingData } = require("../data/bike_parking.json")
 
 class SearchPage extends Component {
 
@@ -21,12 +21,31 @@ class SearchPage extends Component {
             userLat: null,
             userLong: null,
             userAddress: "35 Front Street West",
-
+            parkingData: [],
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.reverseGeocodeCoordinates = this.reverseGeocodeCoordinates.bind(this);
       }
+    
+    componentDidMount() {
+        fetch("http://127.0.0.1:8000/api/location/getAll.php")
+        .then(res => res.json())
+        .then(
+            (result) => {
+                console.log(result)
+                this.setState({
+                    parkingData: result.results
+                });
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+                console.log(error)
+            }
+        )
+    }
     
     // Get user location through browser
     getLocation(){
@@ -143,7 +162,7 @@ class SearchPage extends Component {
                     lat={43.6532}
                     lng={-79.3832}
                     zoom={12}
-                    mapData={parkingData}
+                    mapData={this.state.parkingData}
                     showLink={false}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}

@@ -81,14 +81,14 @@ class Location{
 
     public function create($address, $postalCode, $lat, $lng, $parkingType, $capacity, $bikeSize, $yearInstalled){
         $loc_id = $this->getID_Coord($lat, $lng);
-        echo $loc_id . "\n";
+        
         if (is_null($loc_id)) {
             $loc_id = $this->getID($address);
         }
         if (!is_null($loc_id)){
             return $loc_id;
         }
-        echo $loc_id . "\n";
+        
         try{
             $query = "INSERT INTO LOCATIONS (address, postalCode, parkingType, capacity, lat, lng, bikeSize, yearInstalled) VALUES($address, $postalCode, $parkingType, $capacity, $lat, $lng, $bikeSize, $yearInstalled);";
             $stmt = $this->conn->prepare($query);
