@@ -13,8 +13,12 @@
 |   id: INT #primary key
 |   image: TEXT #image url
 |   video: TEXT #video url
-|   comment: TEXT
+|   type: TEXT
+|   capacity: INT
 |   rating: TEXT
+|   description: TEXT
+|   longitude: INT
+|   latitude: INT
 |   user_id: INT NOT NULL 
 |   FOREIGN KEY (user_id) REFERENCES USERS(id)
 +------------------------------------------------

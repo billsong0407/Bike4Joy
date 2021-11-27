@@ -3,11 +3,14 @@ import { Form, Button, Row, Col, FloatingLabel } from 'react-bootstrap';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/submission-page.css';
+import axios from 'axios';
 
 //Setting initial state of few input boxes for form validation
 const initialState={
     address: "",
     type:"",
+    capacity:"",
+    rating:"",
     description:"",
     addressError: "",
     typeError:"",
@@ -84,6 +87,20 @@ class SubmissionPage extends Component {
         })
       }
 
+      //Sets state for capacity of bike parking
+      handleCapacityChange = (event) =>{
+        this.setState({
+            capacity: event.target.value
+        })
+      }
+
+      //Sets state for rating of bike parking
+      handleRatingChange = (event) =>{
+        this.setState({
+            rating: event.target.value
+        })
+      }
+
       //Sets state for description
       handleDescriptionChange = (event) =>{
           this.setState({
@@ -128,11 +145,24 @@ class SubmissionPage extends Component {
       //Handles the submission of form
       handleSubmit = event =>{
           //Alert shows that location is obtained but not submitted anywhere.
-          alert(`Note: Not submitted anywhere, this is just to make sure geolocation is working. ${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
+          //alert(`Note: Not submitted anywhere, this is just to make sure geolocation is working. ${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
           event.preventDefault()//To prevent data loss written after submitting
           const isValid = this.validate();
+
+          const obj ={
+            type:this.state.type,
+            capacity:this.state.capacity,
+            rating:this.state.rating,
+            description:this.state.description,
+            latitude:this.state.userLat,
+            longitude:this.state.userLong,
+          };
+
         if (isValid) {
-          console.log(this.state);
+            axios.post('http://localhost/bike4joyBackend/registration.php',obj)
+            .then(res=> console.log(res.data))
+            .catch(error => console.log(error));
+            console.log(obj);
           // clear form
           this.setState(initialState);
         }
@@ -175,11 +205,11 @@ class SubmissionPage extends Component {
                         </Form.Group>
                         <Form.Group as={Col} md="4" controlId="capacity">
                             <Form.Label>Bicycle Capacity</Form.Label>
-                            <Form.Control placeholder="10, 15, 20, etc" value={this.state.type} onChange={this.handleTypeChange}/>
+                            <Form.Control placeholder="10, 15, 20, etc" value={this.state.capacity} onChange={this.handleCapacityChange}/>
                         </Form.Group>
                         <Form.Group as={Col} md="4" controlId="rating">
                             <Form.Label>Rating</Form.Label>
-                            <Form.Select className="rating-dropdown">
+                            <Form.Select className="rating-dropdown" onChange={this.handleRatingChange}>
                                 <option value="5">★★★★★</option>
                                 <option value="4">★★★★</option>
                                 <option value="3">★★★</option>
