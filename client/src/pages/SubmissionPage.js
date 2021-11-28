@@ -159,7 +159,7 @@ class SubmissionPage extends Component {
           };
 
         if (isValid) {
-            axios.post('http://localhost/bike4joyBackend/registration.php',obj)
+            axios.post('http://localhost/bike4joyBackend/submission.php',obj)
             .then(res=> console.log(res.data))
             .catch(error => console.log(error));
             console.log(obj);
