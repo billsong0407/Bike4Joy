@@ -18,11 +18,8 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            latitude: null,
-            longitutde: null,
             userLat: null,
             userLong: null,
-            userAddress: "35 Front Street West",
             parkingData: [],
             redirect: false,
             address: null,
@@ -99,8 +96,6 @@ class SearchPage extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        // console.log(this.state.address)
-        // console.log(this.state.rating)
         this.setState({redirect: true});
     }
       
@@ -139,7 +134,7 @@ class SearchPage extends Component {
                                     {/* <option value="Postal Code">Postal Code</option> */}
                                 </Form.Select>
                                 </FloatingLabel>
-                               <Form.Control placeholder={this.state.userAddress} value={this.state.address} onChange={this.handleAddressChange} className="input-text"/> 
+                               <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange} className="input-text"/> 
                                 {/* <!-- Rating Dropdowns --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select onChange={this.handleRatingChange}>

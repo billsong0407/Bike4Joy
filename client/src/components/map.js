@@ -23,7 +23,7 @@ function CustomMap(props) {
     
     return (
         // Google Map Initialization 
-        <GoogleMap defaultZoom={props.zoom} defaultCenter={{ lat: props.lat, lng: props.lng}}>
+        <GoogleMap defaultZoom={props.zoom} defaultCenter={{ lat: Number(props.lat), lng: Number(props.lng)}}>
             {props.mapData.map(parking => (
                 // Place markers on map 
                 <Marker 
