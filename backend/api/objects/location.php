@@ -26,7 +26,19 @@ class Location{
     
         // select all query
         $query = "SELECT id, address, postalCode, capacity, parkingType, lat, lng FROM " . $this->table_name . ";";
-        
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // execute query
+        $stmt->execute();
+    
+        return $stmt;
+    }
+
+    public function getLocationInfo($address){
+        $query = "SELECT id, address, postalCode, capacity, parkingType, lat, lng FROM " . $this->table_name . " WHERE address='$address'" . ";";
+        // echo $query . "\n";
         // prepare query statement
         $stmt = $this->conn->prepare($query);
     
