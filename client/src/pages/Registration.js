@@ -79,7 +79,7 @@ class RegistrationPage extends Component {
 
         if (isValid) {
           
-        axios.post('http://localhost/bike4joyBackend/index.php',obj)
+        axios.post('http://localhost/bike4joyBackend/registration.php',obj)
         .then(res=> console.log(res.data))
         .catch(error => console.log(error));
         console.log(obj);

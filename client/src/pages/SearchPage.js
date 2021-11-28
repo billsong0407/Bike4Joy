@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Form, FloatingLabel, Button } from 'react-bootstrap';
+import { Redirect } from "react-router-dom";
+import axios from 'axios';
 
 import Navigation from '../components/navbar';
 import Footer from '../components/footer'
@@ -16,35 +18,21 @@ class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            latitude: null,
-            longitutde: null,
             userLat: null,
             userLong: null,
-            userAddress: "35 Front Street West",
             parkingData: [],
+            redirect: false,
+            address: null,
+            rating: null,
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.reverseGeocodeCoordinates = this.reverseGeocodeCoordinates.bind(this);
       }
-    
+
     componentDidMount() {
-        fetch("http://127.0.0.1:8000/api/location/getAll.php")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                console.log(result)
-                this.setState({
-                    parkingData: result.results
-                });
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-                console.log(error)
-            }
-        )
+        axios.get("http://127.0.0.1:8000/api/location/getAll.php")
+        .then(res => this.setState({parkingData: res.data.results}))
     }
     
     // Get user location through browser
@@ -69,7 +57,7 @@ class SearchPage extends Component {
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.userLat},${this.state.userLong}&sensor=false&key=${GOOGLE_MAPS_API_KEY}`)
         .then(response => response.json())
         .then(data => this.setState({
-            userAddress: data.results[0].formatted_address
+            address: data.results[0].formatted_address.split(',')[0]
         }))
         .catch(error => alert(error))
     }
@@ -93,10 +81,33 @@ class SearchPage extends Component {
             alert("An unknown error occurred.")
         }
     }
+
+    handleAddressChange = event => {
+        this.setState({
+            address: event.target.value
+        })
+    };
+
+    handleRatingChange = event => {
+        this.setState({
+            rating: event.target.value
+        })
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+        
+        if (this.state.address != null){
+            this.setState({redirect: true})
+        }else{
+            alert("\nNo Address Entered")
+        };
+    }
       
 
   render() {
-    return (
+    if (this.state.redirect) return <Redirect to={{pathname:"/results", state: {address: this.state.address, rating: this.state.rating}}} />;
+    else return (
         <>
             <Navigation></Navigation>
             {/* <!-- Banner --> */}
@@ -120,28 +131,28 @@ class SearchPage extends Component {
                         </div>
                         <div className="col-lg-9">
                             {/* <!-- Search Form --> */}
-                            <Form className="input-group">
+                            <Form className="input-group" onSubmit={this.handleSubmit}>
                                 {/* <!-- Dropdown menu --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select aria-label="Search Location">
-                                    <option value="Address">Address</option>
-                                    <option value="Postal Code">Postal Code</option>
+                                    <option>Address</option>
+                                    {/* <option value="Postal Code">Postal Code</option> */}
                                 </Form.Select>
                                 </FloatingLabel>
-                               <Form.Control placeholder={this.state.userAddress} className="input-text"/> 
+                               <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange} className="input-text"/> 
                                 {/* <!-- Rating Dropdowns --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
-                                <Form.Select>
-                                    <option value="any">Any Rating</option>
-                                    <option value="5">★★★★★</option>
-                                    <option value="4">★★★★</option>
-                                    <option value="3">★★★</option>
-                                    <option value="2">★★</option>
-                                    <option value="1">★</option>
+                                <Form.Select onChange={this.handleRatingChange}>
+                                    <option value={this.state.rating}>Any Ratings</option>
+                                    <option value={this.state.rating}>★★★★★</option>
+                                    <option value={this.state.rating}>★★★★</option>
+                                    <option value={this.state.rating}>★★★</option>
+                                    <option value={this.state.rating}>★★</option>
+                                    <option value={this.state.rating}>★</option>
                                 </Form.Select>
                                 </FloatingLabel>         
                                 {/* <!-- final search button --> */}     
-                                <Button href="/results" variant="success" type="submit" className="search-button">
+                                <Button type="submit" className="search-button" variant="success" >
                                     Search
                                 </Button>
                             </Form>
@@ -151,8 +162,8 @@ class SearchPage extends Component {
                     <div className="row justify-content-center">
                         {/* Button to get current location */}
                         <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>                      
-                        <span>Latitude: {this.state.userLat}</span>
-                        <span>Longitude: {this.state.userLong}</span>
+                        {/* <span>Latitude: {this.state.userLat}</span>
+                        <span>Longitude: {this.state.userLong}</span> */}
                     </div>
                 </div>
             </div>
