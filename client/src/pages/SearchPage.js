@@ -96,7 +96,12 @@ class SearchPage extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.setState({redirect: true});
+        
+        if (this.state.address != null){
+            this.setState({redirect: true})
+        }else{
+            alert("\nNo Address Entered")
+        };
     }
       
 
@@ -138,7 +143,7 @@ class SearchPage extends Component {
                                 {/* <!-- Rating Dropdowns --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select onChange={this.handleRatingChange}>
-                                    <option value={this.state.rating}>Any Rating</option>
+                                    <option value={this.state.rating}>Any Ratings</option>
                                     <option value={this.state.rating}>★★★★★</option>
                                     <option value={this.state.rating}>★★★★</option>
                                     <option value={this.state.rating}>★★★</option>
@@ -157,8 +162,8 @@ class SearchPage extends Component {
                     <div className="row justify-content-center">
                         {/* Button to get current location */}
                         <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>                      
-                        <span>Latitude: {this.state.userLat}</span>
-                        <span>Longitude: {this.state.userLong}</span>
+                        {/* <span>Latitude: {this.state.userLat}</span>
+                        <span>Longitude: {this.state.userLong}</span> */}
                     </div>
                 </div>
             </div>

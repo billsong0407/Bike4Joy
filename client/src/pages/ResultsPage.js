@@ -10,12 +10,11 @@ const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 
 // Result Card Component
 function ResultCard(props) {
-
     return (
         <Row className="no-gutters result-card">
             <Col className="col-auto">
                 {/* Street Image */}
-                <img className="street-image" src={props.imgURL} alt="location"></img>
+                <img className="street-image" src="../images/rack.jpg" alt="location"></img>
             </Col>
             <Col>
                 {/* location tabular information */}
@@ -34,7 +33,7 @@ function ResultCard(props) {
                     <tr>
                         {/* location rating  */}
                         <td className="first-column">Ratings:</td>
-                        <td>{props.rating}</td>
+                        {props.rating ? (<td>{props.rating}</td>):((<td>Any Ratings</td>))}
                     </tr>
                     <tr>
                         {/* link to location details (single object page)  */}
@@ -57,6 +56,8 @@ class ResultsPage extends Component {
             // state data
             data: [],
             locations: [],
+            defaultLat: 43.6532,
+            defaultLng: -79.3832,
             queryAddress: this.props.location.state.address,
             queryRating: this.props.location.state.rating,
             
@@ -69,10 +70,12 @@ class ResultsPage extends Component {
     }
 
     componentDidMount(){
-         axios.get("http://127.0.0.1:8000/api/location/get.php", {params: {address: this.state.queryAddress}})
+        axios.get("http://127.0.0.1:8000/api/location/get.php", {params: {address: this.state.queryAddress}})
         .then(res => {
             const location = res.data.results
-            this.setState({ data: location });
+            console.log(location[0].lat)
+            console.log(location[0].lng)
+            this.setState({ data: location, defaultLat: location[0].lat, defaultLng: location[0].lng });
         })
     }
 
@@ -84,8 +87,8 @@ class ResultsPage extends Component {
                     {/* <p>3 results found</p> */}
                     <div className="results-map-section mt-5">
                         {/* Google Maps Element  */}
-                        {this.state.data.length > 0 &&
-                            <Map
+                       {this.state.data.length > 0 &&
+                            (<Map
                                 lat={this.state.data[0].lat}
                                 lng={this.state.data[0].lng}
                                 zoom={14}
@@ -96,23 +99,32 @@ class ResultsPage extends Component {
                                 containerElement={<div style={{ height: `100%` }} />}
                                 mapElement={<div style={{ height: `100%` }} />}
                             >
-                            </Map>
-                        }
+                        </Map>)}
+                        {this.state.data.length === 0 &&
+                            (<Map
+                            lat={43.6532}
+                            lng={-79.3832}
+                            zoom={14}
+                            showLink={true}
+                            mapData={this.state.data}
+                            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                            loadingElement={<div style={{ height: `100%` }} />}
+                            containerElement={<div style={{ height: `100%` }} />}
+                            mapElement={<div style={{ height: `100%` }} />}
+                        >
+                        </Map>)}
                     </div>
                     {/* Display results from search form  */}
                     <div className="result-cards">
-                        {this.state.locations.length > 0 &&
-                            this.state.locations.map(location =>(
+                        {this.state.data.length > 0 ?
+                            (this.state.data.map(location =>(
                                 <ResultCard 
-                                    imgURL={location.imageURL}
-                                    address={location.address}
-                                    postalCode={location.postalCode}
-                                    rating={location.rating}
+                                    address={location.ADDRESS}
+                                    postalCode={location.POSTAL_CODE}
+                                    rating={this.state.queryRating}
                                 />
-                            ))
-                        }
-                        {this.state.locations.length <= 0 &&
-                            <p>No Results Found at {this.state.queryAddress}</p>
+                            ))):(
+                            <h1>No Results Found at {this.state.queryAddress}</h1>)
                         }
                     </div>
                 </Container>
