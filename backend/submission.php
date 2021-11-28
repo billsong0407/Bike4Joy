@@ -11,14 +11,20 @@ $database= "bike4joy";
 
 $request = json_decode($postdata);
 
-$email = $request->email;
-$password = $request->password;
+$type = $request->type;
+$capacity = $request->capacity;
+$rating = $request->rating;
+$description = $request->description;
+$longitude = $request->longitude;
+$latitude = $request->latitude;
  
 // Create connection
 $db = mysqli_connect($servername, $username, $sqlpassword, $database);
  
 
-$query = "INSERT INTO users VALUES('$email','$password')";
+$query = "INSERT INTO reviews VALUES('$type','$capacity','$rating','$description','$longitude','$latitude')";
+$stmt = $db->prepare($query);
+$stmt->execute();
 
 if(mysqli_query($db, $query)){
   echo "Data has been inserted successfully";
