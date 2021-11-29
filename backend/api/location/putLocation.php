@@ -22,10 +22,9 @@ $lat=isset($_GET["lat"]) ? $_GET["lat"] : "";
 $lng=isset($_GET["lng"]) ? $_GET["lng"] : "";
 $parkingType=isset($_GET["parkingType"]) ? $_GET["parkingType"] : "";
 $capacity=isset($_GET["capacity"]) ? $_GET["capacity"] : "";
-$bikeSize=isset($_GET["bikeSize"]) ? $_GET["bikeSize"] : "";
 $yearInstalled=isset($_GET["yearInstalled"]) ? $_GET["yearInstalled"] : "";
 
-$loc_id = $location->create($address, $postalCode, $lat, $lng, $parkingType, $capacity, $bikeSize, $yearInstalled);
+$loc_id = $location->create($address, $postalCode, $lat, $lng, $parkingType, $capacity, $yearInstalled);
 
 if(!is_null($loc_id)){
   

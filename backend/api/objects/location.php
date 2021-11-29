@@ -91,7 +91,7 @@ class Location{
         }
     }
 
-    public function create($address, $postalCode, $lat, $lng, $parkingType, $capacity, $bikeSize, $yearInstalled){
+    public function create($address, $postalCode, $lat, $lng, $parkingType, $capacity, $yearInstalled){
         $loc_id = $this->getID_Coord($lat, $lng);
         
         if (is_null($loc_id)) {
@@ -102,7 +102,7 @@ class Location{
         }
         
         try{
-            $query = "INSERT INTO LOCATIONS (address, postalCode, parkingType, capacity, lat, lng, bikeSize, yearInstalled) VALUES($address, $postalCode, $parkingType, $capacity, $lat, $lng, $bikeSize, $yearInstalled);";
+            $query = "INSERT INTO LOCATIONS (address, postalCode, parkingType, capacity, lat, lng, yearInstalled) VALUES($address, $postalCode, $parkingType, $capacity, $lat, $lng, $yearInstalled);";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             
