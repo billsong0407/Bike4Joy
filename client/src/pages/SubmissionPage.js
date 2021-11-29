@@ -150,6 +150,7 @@ class SubmissionPage extends Component {
           const isValid = this.validate();
 
           const obj ={
+            address:this.state.address,
             type:this.state.type,
             capacity:this.state.capacity,
             rating:this.state.rating,
