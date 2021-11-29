@@ -37,7 +37,9 @@ try{
         id INT NOT NULL AUTO_INCREMENT,
         name VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL,
-        PRIMARY KEY (id, name, email) 
+        userPassword VARCHAR(100) NOT NULL,
+        PRIMARY KEY (id, email),
+        UNIQUE (email) 
     )";
     
     $CREATE_USERS_TABLE_QUERY = $conn->prepare($CREATE_USERS_TABLE_QUERY);
