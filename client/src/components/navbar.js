@@ -8,16 +8,16 @@ const Navigation = () => {
         <Navbar expand="lg" sticky="top" className="page-nav">
             <Container fluid>
                 <Link to="/">
-                <Navbar.Brand>
-                    {/*  Website logo */}
-                    <img
-                        src="./images/white-logo.png"
-                        width="160"
-                        height="60"
-                        className="animate__animated animate__fadeIn d-inline-block align-top"
-                        alt="React Bootstrap logo"
-                    />
-                </Navbar.Brand>
+                    <Navbar.Brand>
+                        {/*  Website logo */}
+                        <img
+                            src="./images/white-logo.png"
+                            width="160"
+                            height="60"
+                            className="animate__animated animate__fadeIn d-inline-block align-top"
+                            alt="React Bootstrap logo"
+                        />
+                    </Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -30,7 +30,12 @@ const Navigation = () => {
                 {/* Button to register account */}
                 <Link to="/registration">
                     <Button variant="success" className="animate__animated animate__fadeIn">
-                     Register
+                        Register
+                    </Button>
+                </Link>
+                <Link to="/login">
+                    <Button variant="primary" className="animate__animated animate__fadeIn mx-2">
+                        Log In
                     </Button>
                 </Link>
                 </Navbar.Collapse>
