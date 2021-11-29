@@ -92,13 +92,17 @@ class RegistrationPage extends Component {
           };
 
         if (isValid) {
-            axios.post('http://localhost/bike4joyBackend/registration.php',obj)
-            .then(res=> console.log(res.data))
-            .catch(error => console.log(error));
-            console.log(obj);
-
-            // clear form
-            this.setState(initialState);
+            axios.get('http://127.0.0.1:8000/api/user/register.php',obj)
+            .then(res => {
+                const message = res.data.message
+                console.log(message)
+            })
+            .catch(error => {
+                console.log(error)
+                // clear form
+                this.setState(initialState);
+            });
+            
         }
       };
 
