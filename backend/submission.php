@@ -10,12 +10,19 @@ $sqlpassword = "";
 
 $request = json_decode($postdata);
 
-$type = $request->type;
-$capacity = $request->capacity;
-$rating = $request->rating;
-$description = $request->description;
+$address = $request->address;
+$postalCode = NULL;
 $longitude = $request->longitude;
 $latitude = $request->latitude;
+$type = $request->type;
+$capacity = $request->capacity;
+$yearInstalled = NULL;
+$image = NULL;
+$video = NULL;
+$comment = $request->description;
+$userid = NULL; //storing userid and pass to this page
+$rating = $request->rating;
+
  
 try {
   $pdo = new PDO("mysql:host=$servername;dbname=bike4joy", $username, $sqlpassword);
@@ -23,52 +30,20 @@ try {
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   echo "Connected successfully";
 
-  //The email we are looking for.
-  $emailToLookFor = $email;
-
-  //The SQL query.
-  $query = "SELECT COUNT(*) AS num FROM USERS WHERE email = :email";
-
-  //Prepare the SQL statement.
-  $stmt = $pdo->prepare($query);
-
-  //Bind our email value to the :email parameter.
-  $stmt->bindValue(':email', $emailToLookFor);
-
-  //Execute the statement.
-  $stmt->execute();
-
-  //Fetch the row / result.
-  $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  //If num is bigger than 0, the email already exists.
-  if($row['num'] > 0){
-   echo 'Row exists!';
-
-   //Find id corresponding to existing user
-   $emailToLookFor2 = $email;
-   $userid = "SELECT id FROM USERS WHERE email = :emailcheck";
-   $stmt2 = $pdo->prepare($userid);
-   $stmt2->bindValue(':emailcheck', $emailToLookFor2);
-   $stmt2->execute();
-   $realUserId = $stmt2->fetch(PDO::FETCH_ASSOC)["id"];
-   echo $realUserId; //<---Returned userid
-
-  } else{//Else the email doesnt exist.
-    echo 'Row does not exist!';
-    $sql = "INSERT INTO USERS VALUES(0, '$type', '$capacity','$rating', '$description', '$longitude', '$latitude')";
+ 
+    $sql = "INSERT INTO REVIEWS VALUES(0, '$image', '$video','$comment', 20, '$rating')"; //the 20 is the userid 
     // use exec() because no results are returned
     $pdo->exec($sql);
     echo " New record created successfully";
-   //Find id corresponding to existing user
-   $emailToLookFor2 = $email;
-   $userid = "SELECT id FROM USERS WHERE email = :emailcheck";
-   $stmt2 = $pdo->prepare($userid);
-   $stmt2->bindValue(':emailcheck', $emailToLookFor2);
-   $stmt2->execute();
-   $realUserId = $stmt2->fetch(PDO::FETCH_ASSOC)["id"];
-   echo $realUserId; //<---Returned userid
-  } 
+   //Find review id corresponding to the query submitted
+   $lookFor = $comment;
+   $reviewid = "SELECT id FROM REVIEWS WHERE comment = :commentcheck";
+   $stmt3 = $pdo->prepare($reviewid);
+   $stmt3->bindValue(':commentcheck', $lookFor);
+   $stmt3->execute();
+   $realReviewId = $stmt3->fetch(PDO::FETCH_ASSOC)["id"];
+   echo $realReviewId; //<-- returned reviewid
+  
 
 
 
