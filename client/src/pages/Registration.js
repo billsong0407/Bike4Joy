@@ -8,8 +8,10 @@ import axios from 'axios';
 
 //Setting initial state of few input boxes for form validation
 const initialState={
+    name: "",
     email: "",
     password: "",
+    nameError: "",
     emailError: "",
     passwordError: "",
 
@@ -26,26 +28,34 @@ class RegistrationPage extends Component {
         })
       };
 
-      handlePasswordChange = event => {
+    handlePasswordChange = event => {
         this.setState({
             password: event.target.value
         })
-      };
+    };
+
+    handleNameChange = event => {
+        this.setState({
+            name: event.target.value
+        })
+    };
 
       //Validates the input for the forms to see if it matches requirements
       validate = () => {
+        let nameError = "";
         let emailError = "";
         let passwordError = "";
         let regExp = /[a-zA-Z]/g;
+        const namePattern = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
+
+        // checks for name validation
+        if (!namePattern.test(this.state.name)){
+            nameError = "Invalid full name"
+        }
 
         //Checks and sets error messages for email 
         if (!this.state.email.includes("@")) {
           emailError = "invalid email, please include @ symbol";
-        }
-        //Return false if email does not match requirements
-        if (emailError ) {
-          this.setState({ emailError});
-          return false;
         }
 
         //Checks and sets error messages for password
@@ -58,12 +68,15 @@ class RegistrationPage extends Component {
         if (!regExp.test(this.state.password)){
             passwordError = "password must contain a letter";
         }
-        //Return false if password does not match requirements
-        if (passwordError) {
-            this.setState({ passwordError});
-            return false;
-          }
+        
+        this.setState({ nameError });
+        this.setState({ emailError });
+        this.setState({ passwordError });
 
+        //Return false if password does not match requirements
+        if (nameError || emailError || passwordError){
+            return false;
+        }
     
         return true;
       };
@@ -78,18 +91,14 @@ class RegistrationPage extends Component {
           };
 
         if (isValid) {
-          
-        axios.post('http://localhost/bike4joyBackend/registration.php',obj)
-        .then(res=> console.log(res.data))
-        .catch(error => console.log(error));
-        console.log(obj);
+            axios.post('http://localhost/bike4joyBackend/registration.php',obj)
+            .then(res=> console.log(res.data))
+            .catch(error => console.log(error));
+            console.log(obj);
 
-          // clear form
-          this.setState(initialState);
+            // clear form
+            this.setState(initialState);
         }
-        
-        
-        
       };
 
 
@@ -98,16 +107,26 @@ class RegistrationPage extends Component {
             <>
                 {/* Navbar */}
                 <Navigation />
-                {/* <!--  
-                 <ParticleBackground className="particleStyle" /> 
-                 --> */}
                 <Container fluid>
                 <Row className="animate__animated animate__slideInDown register-page">
                     <Col className="register-section">
                         <Form onSubmit={this.handleSubmit}>
-                            {/* -- Email form -- */}
+                            {/* -- Name form -- */}
                             <Form.Label className="title">Registration</Form.Label>
-                            <Form.Group size="lg" controlId="email">
+                            <Form.Group size="lg" controlId="name" className="mt-4">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                autoFocus
+                                placeholder="Jane Doe"
+                                value={this.state.name}
+                                onChange={this.handleNameChange}
+                            />
+                            <div style={{ fontSize: 13, color: "red" }}>
+                                {this.state.nameError}
+                            </div>
+                            </Form.Group>
+                            {/* -- Email form -- */}
+                            <Form.Group size="lg" controlId="email" className="mt-4">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
                                 autoFocus
