@@ -4,9 +4,9 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 $postdata = file_get_contents("php://input");
 
-$servername = "bike4joy-database.cvcxjrsjyuuy.us-east-2.rds.amazonaws.com";
-$username = "admin";
-$sqlpassword = "bike4joy123";
+$servername = "";
+$username = "";
+$sqlpassword = "";
 
 $request = json_decode($postdata);
 
