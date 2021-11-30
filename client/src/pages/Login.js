@@ -1,22 +1,47 @@
 import React, {Component} from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Redirect } from "react-router-dom";
+import axios from 'axios';
+
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/registration-page.css';
-import axios from 'axios';
 
-
-//Setting initial state of few input boxes for form validation
-const initialState={
-    email: "",
-    password: "",
-    emailError: "",
-    passwordError: "",
-};
 
 class LogInPage extends Component {
 
-    state = initialState;
+    //Setting initial state of few input boxes for form validation
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "",
+            email: "",
+            password: "",
+            nameError: "",
+            emailError: "",
+            passwordError: "",
+            redirectToReview: false,
+            user_id: null,
+        }
+    };
+
+    // componentDidMount(props) {
+    //     if (props.location.state.email){
+    //         this.setState({email: props.location.state.email})
+    //     }
+    // }
+
+    resetUserInfo(){
+        this.setState({
+            name: "",
+            email: "",
+            password: "",
+            nameError: "",
+            emailError: "",
+            passwordError: "",
+            user_id: "",
+        })
+    };
     
     //------------------Form handling start------------------------------------------------
     handleEmailChange = event => {
@@ -31,8 +56,8 @@ class LogInPage extends Component {
         })
     };
 
-      //Validates the input for the forms to see if it matches requirements
-      validate = () => {
+    //Validates the input for the forms to see if it matches requirements
+    validate = () => {
         let emailError = "";
         let passwordError = "";
         let regExp = /[a-zA-Z]/g;
@@ -62,30 +87,41 @@ class LogInPage extends Component {
         }
     
         return true;
-      };
+    };
 
-      //Handles the submission of form
-      handleSubmit = event => {
+    //Handles the submission of form
+    handleSubmit = event => {
         event.preventDefault();
         const isValid = this.validate();
         const obj ={
-            email:this.state.email,
-            password:this.state.password,
+            email: this.state.email,
+            userPassword: this.state.password,
           };
 
         if (isValid) {
-            axios.post('http://localhost/bike4joyBackend/registration.php',obj)
-            .then(res=> console.log(res.data))
-            .catch(error => console.log(error));
-            console.log(obj);
-
-            // clear form
-            this.setState(initialState);
+            // console.log(obj)
+            axios.get('http://127.0.0.1:8000/api/user/login.php', {params: obj})
+            .then(res=> {
+                const message = res.data.message
+                if (message === "success"){
+                    
+                    this.setState({redirectToReview: true, user_id: res.data.results})
+                    alert("Log In Success!");
+                }
+                this.resetUserInfo()
+            })
+            .catch(error => {
+                console.log(error)
+                alert("Invalid email or password")
+            });
         }
-      };
+    };
 
 
     render() {
+        if (this.state.redirectToReview) {
+            return <Redirect to={{pathname:"/submission", state: {userID: this.state.user_id}}} />;
+        } else
         return (
             <>
                 {/* Navbar */}
@@ -124,7 +160,7 @@ class LogInPage extends Component {
                             </Form.Group>
                             {/* <!-- register button --> */}
                             <Button block size="lg" type="submit" className="mt-4">
-                                Register
+                                Log In
                             </Button>
                         </Form>
                     </Col>
