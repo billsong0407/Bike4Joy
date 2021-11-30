@@ -6,20 +6,33 @@ import '../css/registration-page.css';
 import axios from 'axios';
 
 
-//Setting initial state of few input boxes for form validation
-const initialState={
-    name: "",
-    email: "",
-    password: "",
-    nameError: "",
-    emailError: "",
-    passwordError: "",
-
-};
 
 class RegistrationPage extends Component {
+    //Setting initial state of few input boxes for form validation
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "",
+            email: "",
+            password: "",
+            nameError: "",
+            emailError: "",
+            passwordError: "",
+            redirectToReview: false,
+            redirectToLogIn: false,
+        }
+    };
 
-    state = initialState;
+    resetUserInfo(){
+        this.setState({
+            name: "",
+            email: "",
+            password: "",
+            nameError: "",
+            emailError: "",
+            passwordError: "",
+        })
+    };
     
     //------------------Form handling start------------------------------------------------
     handleEmailChange = event => {
@@ -92,17 +105,23 @@ class RegistrationPage extends Component {
           };
 
         if (isValid) {
-            axios.get('http://127.0.0.1:8000/api/user/register.php',obj)
-            .then(res => {
+            console.log(obj)
+            axios.get('http://127.0.0.1:8000/api/user/register.php', {params: obj})
+            .then(res=> {
+                console.log(res.data)
                 const message = res.data.message
-                console.log(message)
+                if (message === "User already registered"){
+                    this.setState({redirectToLogIn: true})
+                    console.log(this.state.redirectToLogIn)
+                    console.log(this.state.redirectToReview)
+                }else {
+                    this.setState({redirectToReview: true})
+                    console.log(this.state.redirectToLogIn)
+                    console.log(this.state.redirectToReview)
+                }
+                this.resetUserInfo()
             })
-            .catch(error => {
-                console.log(error)
-                // clear form
-                this.setState(initialState);
-            });
-            
+            .catch(error => {console.log(error)});
         }
       };
 
