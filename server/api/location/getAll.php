@@ -10,7 +10,6 @@ class DatabaseController {
 
     public function __construct(){
         /* Attempt MySQL server connection. */
-        // $credentials = json_decode(file_get_contents('../../config.json'), true);
         $host = "bike4joy-database.cvcxjrsjyuuy.us-east-2.rds.amazonaws.com";
         $database = "";
         $username = "";
