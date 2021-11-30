@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import Map from '../components/map';
-import { Container, Row, Col, Table, Card } from 'react-bootstrap';
+import { Container, Row, Col, Table, Card, Button } from 'react-bootstrap';
 
 import "../css/single-result-page.css";
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
@@ -17,12 +17,16 @@ function ReviewCard(props) {
                 }
 
                  {/* Review with video */}
-                {props.video && 
+                {!props.image && props.video && 
                     <div className="video-wrapper">
                         <video className="review-card-visual" controls>
                             <source src="/videos/samplevideo.mp4" type="video/mp4" />
                         </video>
                     </div>
+                }
+
+                {!props.image && !props.video && 
+                    <Card.Img variant="top" src="../images/no_media.png" className="review-card-visual" />
                 }
                 <Card.Body>
                 <Card.Text>
@@ -47,9 +51,9 @@ class SingleResultPage extends Component {
                 { "type": "Feature", "properties": { "_id": 5056, "ADDRESS_POINT_ID": 30069161, "ADDRESS_NUMBER": "35", "LINEAR_NAME_FULL": "York St", "ADDRESS_FULL": "35 York St", "POSTAL_CODE": "M5J 0C7", "MUNICIPALITY": "former Toronto", "CITY": "Toronto", "WARD": "Spadina-Fort York (10)", "PLACE_NAME": null, "GENERAL_USE_CODE": 115001, "CENTRELINE_ID": 13975053, "LO_NUM": 35, "LO_NUM_SUF": null, "HI_NUM": null, "HI_NUM_SUF": null, "LINEAR_NAME_ID": 4735, "X": null, "Y": null, "LONGITUDE": null, "LATITUDE": null, "ID": 54, "PARKING_TYPE": "Angled Bike Rack", "FLANKING": "Front St W", "BICYCLE_CAPACITY": 30, "SIZE_M": 2.9, "YEAR_INSTALLED": 2015, "BY_LAW": null, "DETAILS": null, "OBJECTID": 25 }, "geometry": { "type": "Point", "coordinates": [ -79.381465101411194, 43.643790673159501 ] } }
             ],
             reviews: [
-                {"image": "/images/p1.jpg", "video": "", "rating:": "Ratings: ★★★★☆", "comment": "Racks are in good quality", "author": "Bob Leung"},
+                {"image": "/images/p1.jpg", "video": "/videos/samplevideo.mp4", "rating:": "Ratings: ★★★★☆", "comment": "Racks are in good quality", "author": "Bob Leung"},
                 {"image": "", "video": "/videos/samplevideo.mp4", "rating:": "Ratings: ★★☆☆☆", "comment": "Many abandoned bikes are taking the spots", "author": "Jasper Percy"},
-                {"image": "/images/p2.jpg", "video": "", "rating:": "Ratings: ★★★★☆", "comment": "Parking spots are clean and safe", "author": "Pradeep Kumar"},
+                {"image": "", "video": "", "rating:": "Ratings: ★★★★☆", "comment": "Parking spots are clean and safe", "author": "Pradeep Kumar"},
             ],
         }
     }
@@ -94,12 +98,14 @@ class SingleResultPage extends Component {
                                     <td>{this.state.data[0].properties.BICYCLE_CAPACITY}</td>
                                 </tr>
                                 <tr>
-                                    <td className="first-column">Size:</td>
-                                    <td>{this.state.data[0].properties.SIZE_M}</td>
-                                </tr>
-                                <tr>
                                     <td className="first-column">Year Installed:</td>
                                     <td>2015</td>
+                                </tr>
+                                <tr>
+                        {/* link to location details (single object page)  */}
+                                    <td></td>
+                                    <td><Button href="/submission" className="btn-success"
+                                    aria-pressed="true">submit a review</Button></td>
                                 </tr>
                                 </tbody>
                             </Table>

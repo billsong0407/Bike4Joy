@@ -1,5 +1,5 @@
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../App.css';
 
 const Navigation = () => {
