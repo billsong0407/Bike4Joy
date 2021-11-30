@@ -16,6 +16,7 @@ const initialState={
     typeError:"",
     descriptionError:"",   
 }
+
 class SubmissionPage extends Component {
     
     state = initialState;
@@ -28,11 +29,11 @@ class SubmissionPage extends Component {
             longitude: null,
             userLat: null,
             userLong: null,
-            
+            user_id: this.props.location.state.userID,
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
-      }
+    }
 
       //Check and get current location of user
       getLocation(){
@@ -171,12 +172,13 @@ class SubmissionPage extends Component {
       //------------------Form handling end------------------------------------------------
     
     render() {
-        this.getLocation();
+        // this.getLocation();
         return (
             <>
             {/* Navbar */}
                 <Navigation />
                 <div className="overlay">
+                    <p>User_id {this.state.user_id}</p>
                 <Form className="submission-form" onSubmit={this.handleSubmit}>
                         {/* ---------------------------Location, type and description input form starts ---------------------------- */}
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3" controlId="address">
