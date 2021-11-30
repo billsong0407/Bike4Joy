@@ -23,6 +23,11 @@ $comment = $request->description;
 $userid = NULL; //storing userid and pass to this page
 $rating = $request->rating;
 
+// include "location.php";
+// $locationClass = new Location();
+// $realLocationId = $locationClass->create($address, $postalCode, $latitude, $longitude, $type, $capacity, $yearInstalled);
+// echo $realLocationId;
+
  
 try {
   $pdo = new PDO("mysql:host=$servername;dbname=bike4joy", $username, $sqlpassword);
