@@ -30,10 +30,12 @@ class User {
             $query = "INSERT INTO USERS (name, email, userPassword) VALUES(\"$name\", \"$email\", \"$password\");";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            return;
             
-            // $new_id = $this->getID_Coord($lat, $lng);
-            // return $new_id;
+            $query = "SELECT id FROM USERS WHERE name=\"$name\" and email=\"$email\" and userPassword=\"$password\";";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $user_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
+            return $user_id;
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }

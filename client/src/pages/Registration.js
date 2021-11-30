@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Redirect } from "react-router-dom";
+
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/registration-page.css';
 import axios from 'axios';
 
 
-
 class RegistrationPage extends Component {
+
     //Setting initial state of few input boxes for form validation
     constructor(props) {
         super(props);
@@ -54,7 +56,7 @@ class RegistrationPage extends Component {
     };
 
       //Validates the input for the forms to see if it matches requirements
-      validate = () => {
+    validate = () => {
         let nameError = "";
         let emailError = "";
         let passwordError = "";
@@ -92,10 +94,10 @@ class RegistrationPage extends Component {
         }
     
         return true;
-      };
+    };
 
-      //Handles the submission of form
-      handleSubmit = event => {
+    //Handles the submission of form
+    handleSubmit = event => {
         event.preventDefault();
         const isValid = this.validate();
         const obj ={
@@ -105,28 +107,29 @@ class RegistrationPage extends Component {
           };
 
         if (isValid) {
-            console.log(obj)
             axios.get('http://127.0.0.1:8000/api/user/register.php', {params: obj})
             .then(res=> {
-                console.log(res.data)
                 const message = res.data.message
                 if (message === "User already registered"){
                     this.setState({redirectToLogIn: true})
-                    console.log(this.state.redirectToLogIn)
-                    console.log(this.state.redirectToReview)
+                    alert(`${this.state.email} exists, have an account ? redirecting to login`);
                 }else {
-                    this.setState({redirectToReview: true})
-                    console.log(this.state.redirectToLogIn)
-                    console.log(this.state.redirectToReview)
+                    this.setState({redirectToReview: true, user_id: res.data.results})
+                    alert("registration success!");
                 }
                 this.resetUserInfo()
             })
             .catch(error => {console.log(error)});
         }
-      };
-
+    };
 
     render() {
+        if (this.state.redirectToLogIn) {
+            return <Redirect to={{pathname:"/login", state: {email: this.state.email}}} />;
+        }
+        else if (this.state.redirectToReview) {
+            return <Redirect to={{pathname:"/submission", state: {userID: this.state.user_id}}} />;
+        } else
         return (
             <>
                 {/* Navbar */}
