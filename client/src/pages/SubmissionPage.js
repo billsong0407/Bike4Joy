@@ -19,6 +19,7 @@ class SubmissionPage extends Component {
             capacity: "",
             queryRating: "★★★★★",
             description:"",
+            imgName: "",
             imgFile: "",
             videoFile: "",
             addressError: "",
@@ -122,7 +123,8 @@ class SubmissionPage extends Component {
 
     handleImageFileChange = (event) =>{
         this.setState({
-            imgFile: event.target.value
+            imgName: event.target.files[0].name,
+            imgFile: event.target.files[0]
         })
     }
 
@@ -179,15 +181,21 @@ class SubmissionPage extends Component {
             capacity: this.state.capacity,
             rating: this.state.queryRating,
             description: this.state.description,
-            imgFile: this.state.imgFile,
-            videoFile: this.state.videoFile,
+            // imgName: this.state.imgName,
+            // imgFile: this.state.imgFile,
+            // videoFile: this.state.videoFile,
             lat: this.state.lat,
             lng: this.state.lng,
             userID: this.state.user_id,
         };
+
+        const formData = new FormData();
+
+        formData.append('imgFile', this.state.imgFile)
+
         console.log(obj)
         // if (isValid) {
-        axios.post("http://127.0.0.1:8000/api/review/submit.php", null, {params: obj})
+        axios.post("http://127.0.0.1:8000/api/review/submit.php", formData, {params: obj})
         .then(res=> console.log(res.data))
         .catch(error => console.log(error));
             
