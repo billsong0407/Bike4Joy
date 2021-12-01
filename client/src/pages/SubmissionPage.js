@@ -5,38 +5,49 @@ import Footer from '../components/footer';
 import '../css/submission-page.css';
 import axios from 'axios';
 
-//Setting initial state of few input boxes for form validation
-const initialState={
-    address: "",
-    type:"",
-    capacity:"",
-    rating:"",
-    description:"",
-    addressError: "",
-    typeError:"",
-    descriptionError:"",   
-}
 
 class SubmissionPage extends Component {
     
-    state = initialState;
-
-    //required contructor for coordinates in react js
+    //Setting initial state of few input boxes for form validation
     constructor(props) {
         super(props);
         this.state = {
-            latitude: null,
-            longitude: null,
-            userLat: null,
-            userLong: null,
+            lat: "",
+            lng: "",
+            address: "",
+            parkType: "",
+            capacity: "",
+            queryRating: "★★★★★",
+            description:"",
+            imgFile: "",
+            videoFile: "",
+            addressError: "",
+            typeError:"",
+            descriptionError:"", 
             user_id: this.props.location.state.userID,
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
+        this.handleRatingChange = this.handleRatingChange.bind(this);
     }
 
+    resetUserInfo(){
+        this.setState({
+            address: "",
+            parkType:"",
+            capacity:"",
+            queryRating:"★★★★★",
+            description:"",
+            imgFile: "",
+            videoFile: "",
+            addressError: "",
+            typeError:"",
+            descriptionError:"",
+        })
+    };
+
       //Check and get current location of user
-      getLocation(){
+    getLocation(){
           // if location is supported
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
@@ -75,42 +86,54 @@ class SubmissionPage extends Component {
 
       //------------------Form handling start------------------------------------------------
      //Sets state for address
-      handleAddressChange= (event) =>{
+    handleAddressChange= (event) =>{
         this.setState({
             address: event.target.value
         })
-      }
+    }
 
     //Sets state for type of bike parking
-      handleTypeChange = (event) =>{
+    handleParkTypeChange = (event) =>{
         this.setState({
-            type: event.target.value
+            parkType: event.target.value
         })
-      }
+    }
 
       //Sets state for capacity of bike parking
-      handleCapacityChange = (event) =>{
+    handleCapacityChange = (event) =>{
         this.setState({
             capacity: event.target.value
         })
-      }
+    }
 
       //Sets state for rating of bike parking
-      handleRatingChange = (event) =>{
+    handleRatingChange(event){
         this.setState({
-            rating: event.target.value
+            queryRating: event.target.value
         })
-      }
+    }
 
       //Sets state for description
-      handleDescriptionChange = (event) =>{
-          this.setState({
-              description: event.target.value
-          })
-      }
+    handleDescriptionChange = (event) =>{
+        this.setState({
+            description: event.target.value
+        })
+    }
+
+    handleImageFileChange = (event) =>{
+        this.setState({
+            imgFile: event.target.value
+        })
+    }
+
+    handleVideoFileChange = (event) =>{
+        this.setState({
+            videoFile: event.target.value
+        })
+    }
 
       //Validates the input for the forms to see if it matches requirements
-      validate = () => {
+    validate = () => {
         let addressError = "";
         let typeError = "";
         let descriptionError = "";
@@ -120,7 +143,7 @@ class SubmissionPage extends Component {
         if (!regExp.test(this.state.address)){
           addressError = "Please include an address";
         }
-        if (!regExp.test(this.state.type)){
+        if (!regExp.test(this.state.parkType)){
           typeError = "Please make sure this is not blank";
         }
         if (!regExp.test(this.state.description)){
@@ -145,29 +168,32 @@ class SubmissionPage extends Component {
 
       //Handles the submission of form
       handleSubmit = event =>{
-          //Alert shows that location is obtained but not submitted anywhere.
-          //alert(`Note: Not submitted anywhere, this is just to make sure geolocation is working. ${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
-          event.preventDefault()//To prevent data loss written after submitting
-          const isValid = this.validate();
+        //Alert shows that location is obtained but not submitted anywhere.
+        //alert(`Note: Not submitted anywhere, this is just to make sure geolocation is working. ${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
+        event.preventDefault()//To prevent data loss written after submitting
+        // const isValid = this.validate();
 
-          const obj ={
-            address:this.state.address,
-            type:this.state.type,
-            capacity:this.state.capacity,
-            rating:this.state.rating,
-            description:this.state.description,
-            latitude:this.state.userLat,
-            longitude:this.state.userLong,
-          };
-
-        if (isValid) {
-            axios.post('http://localhost/bike4joy/submission.php',obj)
-            .then(res=> console.log(res.data))
-            .catch(error => console.log(error));
-            console.log(obj);
-          // clear form
-          this.setState(initialState);
-        }
+        const obj ={
+            address: this.state.address,
+            parkType: this.state.parkType,
+            capacity: this.state.capacity,
+            rating: this.state.queryRating,
+            description: this.state.description,
+            imgFile: this.state.imgFile,
+            videoFile: this.state.videoFile,
+            lat: this.state.lat,
+            lng: this.state.lng,
+            userID: this.state.user_id,
+        };
+        console.log(obj)
+        // if (isValid) {
+        //     axios.post('http://localhost/bike4joy/submission.php',obj)
+        //     .then(res=> console.log(res.data))
+        //     .catch(error => console.log(error));
+        //     console.log(obj);
+        //   // clear form
+        //   this.resetUserInfo
+        // }
       }
       //------------------Form handling end------------------------------------------------
     
@@ -181,7 +207,7 @@ class SubmissionPage extends Component {
                     <p>User_id {this.state.user_id}</p>
                 <Form className="submission-form" onSubmit={this.handleSubmit}>
                         {/* ---------------------------Location, type and description input form starts ---------------------------- */}
-                    <Form.Group className="animate__animated animate__fadeInLeft mb-3" controlId="address">
+                    <Form.Group className="animate__animated animate__fadeInLeft mb-3">
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
                         <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
@@ -189,30 +215,30 @@ class SubmissionPage extends Component {
                             </div>
                     </Form.Group>
                     <Row className="animate__animated animate__fadeInRight mb-3">
-                        <Form.Group as={Col} md="4" controlId="parkingType">
+                        <Form.Group as={Col} md="4">
                             <Form.Label>Bike Parking Type</Form.Label>
-                        <Form.Control placeholder="Bike Rack, Indoor Bike Shelter, etc" value={this.state.type} onChange={this.handleTypeChange}/>
+                        <Form.Control placeholder="Bike Rack, Indoor Bike Shelter, etc" value={this.state.parkType} onChange={this.handleParkTypeChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.typeError}
                             </div>
                         </Form.Group>
-                        <Form.Group as={Col} md="4" controlId="capacity">
+                        <Form.Group as={Col} md="4">
                             <Form.Label>Bicycle Capacity</Form.Label>
                             <Form.Control placeholder="10, 15, 20, etc" value={this.state.capacity} onChange={this.handleCapacityChange}/>
                         </Form.Group>
-                        <Form.Group as={Col} md="4" controlId="rating">
+                        <Form.Group as={Col} md="4">
                             <Form.Label>Rating</Form.Label>
                             <Form.Select className="rating-dropdown" onChange={this.handleRatingChange}>
-                                <option value="5">★★★★★</option>
-                                <option value="4">★★★★</option>
-                                <option value="3">★★★</option>
-                                <option value="2">★★</option>
-                                <option value="1">★</option>
+                                <option value="★★★★★">★★★★★</option>
+                                <option value="★★★★">★★★★</option>
+                                <option value="★★★">★★★</option>
+                                <option value="★★">★★</option>
+                                <option value="★">★</option>
                             </Form.Select>
                         </Form.Group>
                         
                     </Row>
-                    <Form.Group className="animate__animated animate__fadeInLeft mb-3" controlId="description">
+                    <Form.Group className="animate__animated animate__fadeInLeft mb-3">
                         <Form.Label>Description</Form.Label>
                         <Form.Control as="textarea" rows={5} placeholder="Ex. Very clean with lots of shades, very nice for a summer cycling break." value={this.state.description} onChange={this.handleDescriptionChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
@@ -223,16 +249,12 @@ class SubmissionPage extends Component {
 
                     {/* ---------------------------Coordinates form starts ---------------------------- */}
                     <Row className="animate__animated animate__fadeInRight mb-3">
-                        <Form.Group as={Col} md="6" controlId="longitude">
+                        <Form.Group as={Col} md="6" controlId="longitude" >
                             <Form.Label>Longitude</Form.Label>
-                            
-                            
                             <Form.Control placeholder="Ex: 43.641867413067914"/>
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="latitude">
                             <Form.Label>Latitude</Form.Label>
-                            
-                        
                             <Form.Control placeholder="Ex: -79.3873116119053"/>
                         </Form.Group>
                     </Row>
@@ -240,19 +262,19 @@ class SubmissionPage extends Component {
 
                     {/* <!-- Obtional image and video submission fields --> */}
                     <Row className="animate__animated animate__fadeInLeft mb-3">
-                        <Form.Group as={Col} md="6" controlId="image" className="mb-3" >
+                        <Form.Group as={Col} md="6" className="mb-3">
                             <Form.Label>Upload Image (Optional)</Form.Label>
-                            <Form.Control type="file" accept="image/*" />
+                            <Form.Control type="file" accept="image/*" onChange={this.handleImageFileChange}/>
                         </Form.Group>
-                        <Form.Group as={Col} md="6" controlId="video" className="mb-3">
+                        <Form.Group as={Col} md="6" className="mb-3" >
                             <Form.Label>Upload Video (Optional)</Form.Label>
-                            <Form.Control type="file" accept="video/*" />
+                            <Form.Control type="file" accept="video/*" onChange={this.handleVideoFileChange}/>
                         </Form.Group>
 
                         {/* <!-- submit button --> */}
                         <Button block size="lg" type="submit" className="animate__animated animate__fadeInRight mt-4">
-                                Submit
-                            </Button>
+                            Submit
+                        </Button>
                     </Row>
                     
                 </Form>
