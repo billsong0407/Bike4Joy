@@ -63,12 +63,12 @@ class LogInPage extends Component {
         let regExp = /[a-zA-Z]/g;
 
         //Checks and sets error messages for email 
-        if (!this.state.email.includes("@")) {
+        if (! /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(this.state.email)) {
           emailError = "invalid email, please include @ symbol";
         }
 
         //Checks and sets error messages for password
-        if (!this.state.password.includes("1") && !this.state.password.includes("2") && !this.state.password.includes("3") && !this.state.password.includes("4") && !this.state.password.includes("5") && !this.state.password.includes("6") && !this.state.password.includes("7") && !this.state.password.includes("8") && !this.state.password.includes("9") && !this.state.password.includes("0")){
+        if (!/\d/.test(this.state.password)){
             passwordError = "password must at least a number";
         }
         if (this.state.password.length <= 6){
