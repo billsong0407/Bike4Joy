@@ -1,15 +1,16 @@
 <?php
 	
-	// Run:$ composer require aws/aws-sdk-php
+	// RUN:$ composer require aws/aws-sdk-php <---(Run this in the folder where this file is located)
+	// vendor folder should be generated, autoload.php file should be in the vendor folder
 	require 'vendor/autoload.php';
 	
 	use Aws\S3\S3Client;
 	use Aws\S3\Exception\S3Exception;
 
 	// AWS Info
-	$bucketName = 'ride4boybucket';
-	$IAM_KEY = 'AKIASAF4PYI3PMBV764R';
-	$IAM_SECRET = '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';
+	$bucketName = '';
+	$IAM_KEY = '';
+	$IAM_SECRET = '';
 
 	// Connect to AWS
 	try {
@@ -21,6 +22,7 @@
 					'secret' => $IAM_SECRET
 				),
 				'version' => 'latest',
+				//change region if doesnt work
 				'region'  => 'us-east-2'
 			)
 		);
@@ -29,9 +31,9 @@
 		die("Error: " . $e->getMessage());
 	}
 
-	
-	// For this, I would generate a unqiue random string for the key name. 
+	//keyName could be set to anything
 	$keyName = 'object1' . basename($_FILES["fileToUpload"]['name']);
+	//change region if doesnt work
 	$pathInS3 = 'https://s3.us-east-2.amazonaws.com/' . $bucketName . '/' . $keyName;
 
 	// Add it to S3
@@ -44,11 +46,13 @@
 				'Bucket'=>$bucketName,
 				'Key' =>  $keyName,
 				'SourceFile' => $file,
-				'ACL' => 'public-read' //this this on public read
+				//this this on public read
+				'ACL' => 'public-read' 
 			)
 		);
         $imageUrl = $result['ObjectURL']; //<--returned image url
 
+		//catch errors
 	} catch (S3Exception $e) {
 		die('Error:' . $e->getMessage());
 	} catch (Exception $e) {
@@ -56,7 +60,7 @@
 	}
 
 
-	echo 'Done';
+	echo 'Done ';
     echo $imageUrl;
 
 	
