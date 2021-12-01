@@ -50,7 +50,7 @@ class Location{
 
     public function getByID($id){
         try {
-            $query = "SELECT * FROM " . $this->table_name . " WHERE id=" . $id . ";";
+            $query = "SELECT id, address, postalCode, capacity, parkingType, lat, lng FROM " . $this->table_name . " WHERE id=" . $id . ";";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt;
