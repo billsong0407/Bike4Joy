@@ -187,10 +187,10 @@ class SubmissionPage extends Component {
         };
         console.log(obj)
         // if (isValid) {
-        //     axios.post('http://localhost/bike4joy/submission.php',obj)
-        //     .then(res=> console.log(res.data))
-        //     .catch(error => console.log(error));
-        //     console.log(obj);
+        axios.post("http://127.0.0.1:8000/api/review/submit.php", null, {params: obj})
+        .then(res=> console.log(res.data))
+        .catch(error => console.log(error));
+            
         //   // clear form
         //   this.resetUserInfo
         // }

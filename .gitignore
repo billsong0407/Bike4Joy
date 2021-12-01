@@ -122,3 +122,6 @@ vendor/._.DS_Store
 *.pem
 client/src/config.json
 client/build
+
+# php packages
+vendor
