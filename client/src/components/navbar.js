@@ -11,7 +11,7 @@ const Navigation = () => {
                     <Navbar.Brand>
                         {/*  Website logo */}
                         <img
-                            src="./images/white-logo.png"
+                            src="../images/white-logo.png"
                             width="160"
                             height="60"
                             className="animate__animated animate__fadeIn d-inline-block align-top"
