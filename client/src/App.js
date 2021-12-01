@@ -18,7 +18,7 @@ function App() {
             <Route path="/registration" component={RegistrationPage}></Route>
             <Route path="/submission" component={SubmissionPage}></Route>
             <Route path="/results" component={ResultsPage}></Route>
-            <Route path="/single" component={SingleResultPage}></Route>
+            <Route path="/single/:id" component={SingleResultPage}></Route>
             <Route path="/login" component={LogInPage}></Route>
           </Switch>
         </div>

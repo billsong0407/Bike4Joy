@@ -22,8 +22,8 @@ class SearchPage extends Component {
             userLong: null,
             parkingData: [],
             redirect: false,
-            address: null,
-            rating: null,
+            address: "",
+            rating: "",
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);

@@ -23,7 +23,7 @@ function CustomMap(props) {
     
     return (
         // Google Map Initialization 
-        <GoogleMap defaultZoom={props.zoom} defaultCenter={{ lat: Number(props.lat), lng: Number(props.lng)}}>
+        <GoogleMap defaultZoom={props.zoom} defaultCenter={{ lat: props.lat ? Number(props.lat) : 43.6532, lng: props.lng ? Number(props.lng) : -79.3832}}>
             {props.mapData.map(parking => (
                 // Place markers on map 
                 <Marker 
@@ -59,13 +59,13 @@ function CustomMap(props) {
                         <p>{selectedPlace.PARKING_TYPE}</p>
                         <p>Capacity: {selectedPlace.BICYCLE_CAPACITY}</p>
                         {props.showLink && (
-                            <p><a href="./single">More Details</a></p>
+                            <p><a href={`./single/id=${selectedPlace.id}`}>More Details</a></p>
                         )}
                     </div>
                 </InfoWindow>
+                
             )}
         </GoogleMap>
-
     )
 }
 
