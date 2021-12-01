@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Table, Container, Row, Col, Button } from 'react-bootstrap';
+import { Redirect } from "react-router-dom";
 import axios from 'axios';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
@@ -9,43 +10,64 @@ import "../css/results-page.css"
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 
 // Result Card Component
-function ResultCard(props) {
-    return (
-        <Row className="no-gutters result-card">
-            <Col className="col-auto">
-                {/* Street Image */}
-                <img className="street-image" src="../images/rack.jpg" alt="location"></img>
-            </Col>
-            <Col>
-                {/* location tabular information */}
-                <Table striped responsive>
-                    <tbody>
-                    <tr>
-                        {/* location address  */}
-                        <td className="first-column">Address:</td>
-                        <td>{props.address}</td>
-                    </tr>
-                    <tr>
-                        {/* location postal code  */}
-                        <td className="first-column">Postal Code:</td>
-                        <td>{props.postalCode}</td>
-                    </tr>
-                    <tr>
-                        {/* location rating  */}
-                        <td className="first-column">Ratings:</td>
-                        {props.rating ? (<td>{props.rating}</td>):((<td>Any Ratings</td>))}
-                    </tr>
-                    <tr>
-                        {/* link to location details (single object page)  */}
-                        <td></td>
-                        <td><Button href="/single" className="btn-success"
-                        aria-pressed="true">Details</Button></td>
-                    </tr>
-                    </tbody>
-                </Table>
-            </Col>
-        </Row>
-    );
+class ResultCard extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            parkingLoc: props.location,
+            address: props.location.ADDRESS,
+            postalCode: props.location.POSTAL_CODE,
+            rating: props.rating,
+            loc_id: props.location.id,
+            redirect: false,
+        }
+    }
+    toSinglePage = () => {
+        this.setState({
+            redirect: true,
+        })
+    }
+    render(){
+        if (this.state.redirect) return (
+        <Redirect 
+            to={{pathname: `/single/id=${this.state.loc_id}`}} 
+        /> )
+        else return (
+            <Row className="no-gutters result-card">
+                <Col className="col-auto">
+                    {/* Street Image */}
+                    <img className="street-image" src="../images/rack.jpg" alt="location"></img>
+                </Col>
+                <Col>
+                    {/* location tabular information */}
+                    <Table striped responsive>
+                        <tbody>
+                        <tr>
+                            {/* location address  */}
+                            <td className="first-column">Address:</td>
+                            <td>{this.state.address}</td>
+                        </tr>
+                        <tr>
+                            {/* location postal code  */}
+                            <td className="first-column">Postal Code:</td>
+                            <td>{this.state.postalCode}</td>
+                        </tr>
+                        <tr>
+                            {/* location rating  */}
+                            <td className="first-column">Ratings:</td>
+                            { this.state.rating ? (<td>{this.state.rating}</td>):((<td>Any Ratings</td>))}
+                        </tr>
+                        <tr>
+                            {/* link to location details (single object page)  */}
+                            <td></td>
+                            <td><Button onClick={this.toSinglePage} className="btn-success" aria-pressed="true">Details</Button></td>
+                        </tr>
+                        </tbody>
+                    </Table>
+                </Col>
+            </Row>
+        );
+    }
 }
 
 class ResultsPage extends Component {
@@ -60,12 +82,6 @@ class ResultsPage extends Component {
             defaultLng: -79.3832,
             queryAddress: this.props.location.state.address,
             queryRating: this.props.location.state.rating,
-            
-            // locations: [
-            //     {"imageURL": "../images/p1.jpg", "postalCode": "M5J 1E5", "address": "46 York St", "rating": "★★★★★ (2 reviews)", "lat": "", "lng": "", "parkingType": "", "capacity": ""},
-            //     {"imageURL": "../images/p2.jpg", "postalCode": "M5J 0C7", "address": "35 York St", "rating": "★★★☆☆ (3 reviews)", "lat": "", "lng": "", "parkingType": "", "capacity": ""},
-            //     {"imageURL": "../images/p3.jpg", "postalCode": "M5J 1E5", "address": "61 Front St W", "rating": "★★★★☆ (7 reviews)", "lat": "", "lng": "", "parkingType": "", "capacity": ""}
-            // ]
         }
     }
 
@@ -73,8 +89,6 @@ class ResultsPage extends Component {
         axios.get("http://127.0.0.1:8000/api/location/get.php", {params: {address: this.state.queryAddress}})
         .then(res => {
             const location = res.data.results
-            console.log(location[0].lat)
-            console.log(location[0].lng)
             this.setState({ data: location, defaultLat: location[0].lat, defaultLng: location[0].lng });
         })
     }
@@ -119,8 +133,7 @@ class ResultsPage extends Component {
                         {this.state.data.length > 0 ?
                             (this.state.data.map(location =>(
                                 <ResultCard 
-                                    address={location.ADDRESS}
-                                    postalCode={location.POSTAL_CODE}
+                                    location={location}
                                     rating={this.state.queryRating}
                                 />
                             ))):(

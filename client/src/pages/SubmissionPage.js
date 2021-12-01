@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, Button, Row, Col, FloatingLabel } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/submission-page.css';
@@ -16,6 +16,7 @@ const initialState={
     typeError:"",
     descriptionError:"",   
 }
+
 class SubmissionPage extends Component {
     
     state = initialState;
@@ -28,11 +29,11 @@ class SubmissionPage extends Component {
             longitude: null,
             userLat: null,
             userLong: null,
-            
+            user_id: this.props.location.state.userID,
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
-      }
+    }
 
       //Check and get current location of user
       getLocation(){
@@ -150,6 +151,7 @@ class SubmissionPage extends Component {
           const isValid = this.validate();
 
           const obj ={
+            address:this.state.address,
             type:this.state.type,
             capacity:this.state.capacity,
             rating:this.state.rating,
@@ -159,7 +161,7 @@ class SubmissionPage extends Component {
           };
 
         if (isValid) {
-            axios.post('http://localhost/bike4joyBackend/submission.php',obj)
+            axios.post('http://localhost/bike4joy/submission.php',obj)
             .then(res=> console.log(res.data))
             .catch(error => console.log(error));
             console.log(obj);
@@ -168,17 +170,15 @@ class SubmissionPage extends Component {
         }
       }
       //------------------Form handling end------------------------------------------------
-
-      
-
     
     render() {
-        this.getLocation();
+        // this.getLocation();
         return (
             <>
             {/* Navbar */}
                 <Navigation />
                 <div className="overlay">
+                    <p>User_id {this.state.user_id}</p>
                 <Form className="submission-form" onSubmit={this.handleSubmit}>
                         {/* ---------------------------Location, type and description input form starts ---------------------------- */}
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3" controlId="address">
@@ -188,13 +188,6 @@ class SubmissionPage extends Component {
                                 {this.state.addressError}
                             </div>
                     </Form.Group>
-                    {/* <Form.Group className="animate__animated animate__fadeInRight mb-3" controlId="parkingType">
-                        <Form.Label>Bike Parking Type</Form.Label>
-                        <Form.Control placeholder="Bike Rack, Indoor Bike Shelter, etc" value={this.state.type} onChange={this.handleTypeChange}/>
-                        <div style={{ fontSize: 13, color: "red" }}>
-                                {this.state.typeError}
-                            </div>
-                    </Form.Group> */}
                     <Row className="animate__animated animate__fadeInRight mb-3">
                         <Form.Group as={Col} md="4" controlId="parkingType">
                             <Form.Label>Bike Parking Type</Form.Label>

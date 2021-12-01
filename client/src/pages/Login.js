@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
+import axios from 'axios';
 
 import Navigation from '../components/navbar';
 import Footer from '../components/footer';
 import '../css/registration-page.css';
-import axios from 'axios';
 
 
-class RegistrationPage extends Component {
+class LogInPage extends Component {
 
     //Setting initial state of few input boxes for form validation
     constructor(props) {
@@ -21,9 +21,15 @@ class RegistrationPage extends Component {
             emailError: "",
             passwordError: "",
             redirectToReview: false,
-            redirectToLogIn: false,
+            user_id: null,
         }
     };
+
+    // componentDidMount(props) {
+    //     if (props.location.state.email){
+    //         this.setState({email: props.location.state.email})
+    //     }
+    // }
 
     resetUserInfo(){
         this.setState({
@@ -33,6 +39,7 @@ class RegistrationPage extends Component {
             nameError: "",
             emailError: "",
             passwordError: "",
+            user_id: "",
         })
     };
     
@@ -49,24 +56,11 @@ class RegistrationPage extends Component {
         })
     };
 
-    handleNameChange = event => {
-        this.setState({
-            name: event.target.value
-        })
-    };
-
-      //Validates the input for the forms to see if it matches requirements
+    //Validates the input for the forms to see if it matches requirements
     validate = () => {
-        let nameError = "";
         let emailError = "";
         let passwordError = "";
         let regExp = /[a-zA-Z]/g;
-        const namePattern = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
-
-        // checks for name validation
-        if (!namePattern.test(this.state.name)){
-            nameError = "Invalid full name"
-        }
 
         //Checks and sets error messages for email 
         if (!this.state.email.includes("@")) {
@@ -83,13 +77,12 @@ class RegistrationPage extends Component {
         if (!regExp.test(this.state.password)){
             passwordError = "password must contain a letter";
         }
-        
-        this.setState({ nameError });
+ 
         this.setState({ emailError });
         this.setState({ passwordError });
 
         //Return false if password does not match requirements
-        if (nameError || emailError || passwordError){
+        if (emailError || passwordError){
             return false;
         }
     
@@ -101,33 +94,32 @@ class RegistrationPage extends Component {
         event.preventDefault();
         const isValid = this.validate();
         const obj ={
-            name: this.state.name,
             email: this.state.email,
-            password: this.state.password,
+            userPassword: this.state.password,
           };
 
         if (isValid) {
-            axios.get('http://127.0.0.1:8000/api/user/register.php', {params: obj})
+            // console.log(obj)
+            axios.get('http://127.0.0.1:8000/api/user/login.php', {params: obj})
             .then(res=> {
                 const message = res.data.message
-                if (message === "User already registered"){
-                    this.setState({redirectToLogIn: true})
-                    alert(`${this.state.email} exists, have an account ? redirecting to login`);
-                }else {
+                if (message === "success"){
+                    
                     this.setState({redirectToReview: true, user_id: res.data.results})
-                    alert("registration success!");
+                    alert("Log In Success!");
                 }
                 this.resetUserInfo()
             })
-            .catch(error => {console.log(error)});
+            .catch(error => {
+                console.log(error)
+                alert("Invalid email or password")
+            });
         }
     };
 
+
     render() {
-        if (this.state.redirectToLogIn) {
-            return <Redirect to={{pathname:"/login", state: {email: this.state.email}}} />;
-        }
-        else if (this.state.redirectToReview) {
+        if (this.state.redirectToReview) {
             return <Redirect to={{pathname:"/submission", state: {userID: this.state.user_id}}} />;
         } else
         return (
@@ -138,24 +130,12 @@ class RegistrationPage extends Component {
                 <Row className="animate__animated animate__slideInDown register-page">
                     <Col className="register-section">
                         <Form onSubmit={this.handleSubmit}>
-                            {/* -- Name form -- */}
-                            <Form.Label className="title">Registration</Form.Label>
-                            <Form.Group size="lg" controlId="name" className="mt-4">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control
-                                autoFocus
-                                placeholder="Jane Doe"
-                                value={this.state.name}
-                                onChange={this.handleNameChange}
-                            />
-                            <div style={{ fontSize: 13, color: "red" }}>
-                                {this.state.nameError}
-                            </div>
-                            </Form.Group>
                             {/* -- Email form -- */}
+                            <Form.Label className="title">Log In</Form.Label>
                             <Form.Group size="lg" controlId="email" className="mt-4">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
+                                autoFocus
                                 type="name" //Set to type="name" instead of type="email" on purpose to demonstrate that form validation is implemented manually
                                 placeholder="name@email.com"
                                 value={this.state.email}
@@ -180,7 +160,7 @@ class RegistrationPage extends Component {
                             </Form.Group>
                             {/* <!-- register button --> */}
                             <Button block size="lg" type="submit" className="mt-4">
-                                Register
+                                Log In
                             </Button>
                         </Form>
                     </Col>
@@ -194,4 +174,4 @@ class RegistrationPage extends Component {
     }
 }
 
-export default RegistrationPage;
+export default LogInPage;

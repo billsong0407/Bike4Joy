@@ -2,7 +2,7 @@
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-  
+
 class DatabaseController {
     private $connection = null;
 
@@ -48,16 +48,16 @@ class Location{
         $this->conn = $db;
     }
 
-    public function getLocationInfo($address){
-        $query = "SELECT id, address, postalCode, capacity, parkingType, lat, lng FROM " . $this->table_name . " WHERE address='$address'" . ";";
-        // echo $query . "\n";
-        // prepare query statement
-        $stmt = $this->conn->prepare($query);
-    
-        // execute query
-        $stmt->execute();
-    
-        return $stmt;
+    // read locations
+    public function getByID($id){
+        try {
+            $query = "SELECT id, address, postalCode, capacity, parkingType, lat, lng FROM " . $this->table_name . " WHERE id=" . $id . ";";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
     }
 }
   
@@ -68,17 +68,11 @@ $db = $database->getConnection();
 // initialize object
 $location = new Location($db);
 
-$address=isset($_GET["address"]) ? $_GET["address"] : "";
+$loc_id =isset($_GET["id"]) ? $_GET["id"] : "";
 
-if ((!$address) && gettype($address) != string){
-    echo json_encode(
-        array("message" => "Invalid Address Type.")
-    );
-    return;
-}
 
 // query locations
-$stmt = $location->getLocationInfo($address);
+$stmt = $location->getByID($loc_id);
 $num = $stmt->rowCount();
   
 // check if more than 0 record found

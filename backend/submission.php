@@ -4,33 +4,56 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 $postdata = file_get_contents("php://input");
 
-$servername = "localhost";
-$username = "root";
+$servername = "";
+$username = "";
 $sqlpassword = "";
-$database= "bike4joy";
 
 $request = json_decode($postdata);
 
-$type = $request->type;
-$capacity = $request->capacity;
-$rating = $request->rating;
-$description = $request->description;
+$address = $request->address;
+$postalCode = NULL;
 $longitude = $request->longitude;
 $latitude = $request->latitude;
- 
-// Create connection
-$db = mysqli_connect($servername, $username, $sqlpassword, $database);
- 
+$type = $request->type;
+$capacity = $request->capacity;
+$yearInstalled = NULL;
+$image = NULL;
+$video = NULL;
+$comment = $request->description;
+$userid = NULL; //storing userid and pass to this page
+$rating = $request->rating;
 
-$query = "INSERT INTO reviews VALUES('$type','$capacity','$rating','$description','$longitude','$latitude')";
-$stmt = $db->prepare($query);
-$stmt->execute();
+// include "location.php";
+// $locationClass = new Location();
+// $realLocationId = $locationClass->create($address, $postalCode, $latitude, $longitude, $type, $capacity, $yearInstalled);
+// echo $realLocationId;
 
-if(mysqli_query($db, $query)){
-  echo "Data has been inserted successfully";
-}else{
-  echo "Error entering data to database ";
-  echo $email;
-  echo $db->error;
+ 
+try {
+  $pdo = new PDO("mysql:host=$servername;dbname=bike4joy", $username, $sqlpassword);
+  // set the PDO error mode to exception
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connected successfully";
+
+ 
+    $sql = "INSERT INTO REVIEWS VALUES(0, '$image', '$video','$comment', 20, '$rating')"; //the 20 is the userid 
+    // use exec() because no results are returned
+    $pdo->exec($sql);
+    echo " New record created successfully";
+   //Find review id corresponding to the query submitted
+   $lookFor = $comment;
+   $reviewid = "SELECT id FROM REVIEWS WHERE comment = :commentcheck";
+   $stmt3 = $pdo->prepare($reviewid);
+   $stmt3->bindValue(':commentcheck', $lookFor);
+   $stmt3->execute();
+   $realReviewId = $stmt3->fetch(PDO::FETCH_ASSOC)["id"];
+   echo $realReviewId; //<-- returned reviewid
+  
+
+
+
+
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
 }
 ?>
