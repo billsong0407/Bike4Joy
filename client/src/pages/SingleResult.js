@@ -4,7 +4,7 @@ import Footer from '../components/footer';
 import Map from '../components/map';
 import axios from 'axios';
 import { Container, Row, Col, Table, Card, Button } from 'react-bootstrap';
-import { Link, Redirect } from "react-router-dom";
+// import { Link, Redirect } from "react-router-dom";
 
 import "../css/single-result-page.css";
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");

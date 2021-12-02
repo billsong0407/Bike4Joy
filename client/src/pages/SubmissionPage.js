@@ -21,6 +21,7 @@ class SubmissionPage extends Component {
             description:"",
             imgName: "",
             imgFile: "",
+            videoName: "",
             videoFile: "",
             addressError: "",
             typeError:"",
@@ -130,7 +131,20 @@ class SubmissionPage extends Component {
 
     handleVideoFileChange = (event) =>{
         this.setState({
-            videoFile: event.target.value
+            videoName: event.target.files[0].name,
+            videoFile: event.target.files[0]
+        })
+    }
+
+    handleLatChange = (event) => {
+        this.setState({
+            lat: event.target.value
+        })
+    }
+
+    handleLngChange = (event) => {
+        this.setState({
+            lng: event.target.value
         })
     }
 
@@ -181,9 +195,6 @@ class SubmissionPage extends Component {
             capacity: this.state.capacity,
             rating: this.state.queryRating,
             description: this.state.description,
-            // imgName: this.state.imgName,
-            // imgFile: this.state.imgFile,
-            // videoFile: this.state.videoFile,
             lat: this.state.lat,
             lng: this.state.lng,
             userID: this.state.user_id,
@@ -192,6 +203,7 @@ class SubmissionPage extends Component {
         const formData = new FormData();
 
         formData.append('imgFile', this.state.imgFile)
+        formData.append('imgFile', this.state.videoFile)
 
         console.log(obj)
         // if (isValid) {
@@ -257,13 +269,13 @@ class SubmissionPage extends Component {
 
                     {/* ---------------------------Coordinates form starts ---------------------------- */}
                     <Row className="animate__animated animate__fadeInRight mb-3">
-                        <Form.Group as={Col} md="6" controlId="longitude" >
-                            <Form.Label>Longitude</Form.Label>
-                            <Form.Control placeholder="Ex: 43.641867413067914"/>
-                        </Form.Group>
-                        <Form.Group as={Col} md="6" controlId="latitude">
+                        <Form.Group as={Col} md="6">
                             <Form.Label>Latitude</Form.Label>
-                            <Form.Control placeholder="Ex: -79.3873116119053"/>
+                            <Form.Control value={this.state.lat} onChange={this.handleLatChange} placeholder="Ex: 43.641867413067914"/>
+                        </Form.Group>
+                        <Form.Group as={Col} md="6">
+                            <Form.Label>Longitude</Form.Label>
+                            <Form.Control value={this.state.lng} onChange={this.handleLngChange} placeholder="Ex: -79.3873116119053"/>
                         </Form.Group>
                     </Row>
                     {/* ---------------------------Coordinates form ends ---------------------------- */}
