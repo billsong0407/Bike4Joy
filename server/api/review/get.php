@@ -3,9 +3,58 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
   
-// include database and object files
-include_once '../database.php';
-include_once '../objects/review.php';
+class DatabaseController {
+    private $connection = null;
+
+    public function __construct(){
+        /* Attempt MySQL server connection. */
+        $host = "bike4joy-database.cvcxjrsjyuuy.us-east-2.rds.amazonaws.com";
+        $database = "";
+        $username = "";
+        $password = "";
+        $port = 3306;
+        try{
+            $this->connection = new PDO("mysql:host=$host;dbname=$database;port=$port", $username, $password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch(PDOException $e) {
+            echo "Error Connecting the Database: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public function getConnection(){
+        return $this->connection;
+    }
+}
+
+class Review {
+    private $conn;
+    private $table_name = "REVIEWS";
+
+    public $id;
+    public $image;
+    public $video;
+    public $rating;
+    public $comment;
+    public $user_id;
+
+    // constructor with $db as database connection
+    public function __construct($db){
+        $this->conn = $db;
+    }
+
+    public function getReviews($loc_id){
+        try{
+            $query = "SELECT rating, comment, image, video, name FROM REVIEW_TO_LOCATION INNER JOIN REVIEWS ON rev_id=REVIEWS.id INNER JOIN USERS on REVIEWS.user_id=USERS.id WHERE loc_id=$loc_id;";
+            
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt;
+        } catch (\PDOException $e) {
+            return "error";
+            exit($e->getMessage());
+        }
+    }
+}
   
 // instantiate database
 $database = new DatabaseController();

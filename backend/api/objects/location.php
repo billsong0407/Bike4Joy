@@ -59,18 +59,6 @@ class Location{
         }
     }
 
-    public function getID($address){
-        try {
-            $query = "SELECT id FROM " . $this->table_name . " WHERE address=" . $address . ";";
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute();
-            $loc_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
-            return $loc_id;
-        } catch (\PDOException $e) {
-            exit($e->getMessage());
-        }
-    }
-
     public function getID_Coord($lat, $lng){
         $lat = round($lat, 5);
         $lng = round($lng, 5);
@@ -91,23 +79,31 @@ class Location{
         }
     }
 
-    public function create($address, $postalCode, $lat, $lng, $parkingType, $capacity, $yearInstalled){
-        $loc_id = $this->getID_Coord($lat, $lng);
-        
-        if (is_null($loc_id)) {
-            $loc_id = $this->getID($address);
-        }
-        if (!is_null($loc_id)){
-            return $loc_id;
-        }
-        
+    public function checkLocExists($address, $parkingType){
         try{
-            $query = "INSERT INTO LOCATIONS (address, postalCode, parkingType, capacity, lat, lng, yearInstalled) VALUES($address, $postalCode, $parkingType, $capacity, $lat, $lng, $yearInstalled);";
+            $query = "SELECT id FROM LOCATIONS WHERE upper(address)=\"$address\" and upper(parkingType)=\"$parkingType\"";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             
-            $new_id = $this->getID_Coord($lat, $lng);
-            return $new_id;
+            $loc_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
+            return $loc_id;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+
+    }
+
+    public function create($address, $parkingType, $capacity, $lat, $lng){
+        $loc_id = $this->checkLocExists($address, $parkingType);
+        if (!is_null($loc_id)) return $loc_id;
+           
+        try{
+            $query = "INSERT INTO LOCATIONS (address, parkingType, capacity, lat, lng) VALUES(\"$address\", \"$parkingType\", $capacity, $lat, $lng);";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+
+            $loc_id = $this->conn->lastInsertId();
+            return $loc_id;
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }

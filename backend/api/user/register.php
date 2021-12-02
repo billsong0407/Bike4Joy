@@ -18,31 +18,54 @@ $user = new User($db);
 $name = isset($_GET["name"]) ? $_GET["name"] : "";
 $email = isset($_GET["email"]) ? $_GET["email"] : "";
 $password = isset($_GET["userPassword"]) ? $_GET["userPassword"] : "";
+
+// input validation: 
+if (is_numeric($email) OR is_numeric($password) OR is_numeric($name) OR empty($email) OR empty($password) OR empty($name)) {
+    // set response code
+    http_response_code(404);
+  
+    // tell the user invalid input type
+    echo json_encode(
+        array("message" => "invalid input type")
+    );
+    return;
+}
+
+// check if user is registered in the database first
 $check = $user->isUser($email);
+
+// when the submitted infomation is new to to the database
 if($check == False){
+
+    // appends the user information into the database and gets the user id
     $user_id = $user->registerUser($name, $email, $password);
     
+    // result array
     $user_arr=array();
     $user_arr["results"] = $user_id;
     $user_arr["message"] = "User just registered";
-    // // set response code - 200 OK
+
+    // set response code - 200 OK
     http_response_code(200);
   
-    // // show locations data in json format
+    // show locations data in json format
     echo json_encode($user_arr);
 
 }
+
+// when the submitted info exists in the database
 else if ($check == True){
   
     // set response code - 404 Not found
     http_response_code(200);
   
-    // tell the user no locations found
+    // tell the user that email exists and should log in instead
     echo json_encode(
         array("message" => "User already registered")
     );
 }
-  
+
+// otherwise it is a server error
 else{
   
     // set response code - 404 Not found

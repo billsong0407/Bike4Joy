@@ -14,8 +14,6 @@
 |   id: INT #primary key
 |   image: TEXT #image url
 |   video: TEXT #video url
-|   type: TEXT
-|   capacity: INT
 |   rating: TEXT
 |   description: TEXT
 |   user_id: INT NOT NULL 

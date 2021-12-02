@@ -4,6 +4,7 @@ import Footer from '../components/footer';
 import Map from '../components/map';
 import axios from 'axios';
 import { Container, Row, Col, Table, Card, Button } from 'react-bootstrap';
+import { Link, Redirect } from "react-router-dom";
 
 import "../css/single-result-page.css";
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
@@ -32,7 +33,7 @@ function ReviewCard(props) {
                 <Card.Body>
                 <Card.Text>
                     <p>{props.ratings}</p>
-                    <p>{props.comment}-{props.author}</p>
+                    <p>{props.comment} - {props.author}</p>
                 </Card.Text>
                 </Card.Body>
             </Card>
@@ -48,11 +49,7 @@ class SingleResultPage extends Component {
         super(props);
         this.state = {
             data: [],
-            reviews: [
-                {"image": "/images/p1.jpg", "video": "/videos/samplevideo.mp4", "rating:": "Ratings: ★★★★☆", "comment": "Racks are in good quality", "author": "Bob Leung"},
-                {"image": "", "video": "/videos/samplevideo.mp4", "rating:": "Ratings: ★★☆☆☆", "comment": "Many abandoned bikes are taking the spots", "author": "Jasper Percy"},
-                {"image": "", "video": "", "rating:": "Ratings: ★★★★☆", "comment": "Parking spots are clean and safe", "author": "Pradeep Kumar"},
-            ],
+            reviews: [],
         }
     }
 
@@ -67,17 +64,26 @@ class SingleResultPage extends Component {
     }
 
     getLocation(locID){
-        console.log(locID)
         axios.get("http://127.0.0.1:8000/api/location/getByID.php", {params: {id: locID}})
         .then(res => {
             const location = res.data.results
-            console.log(location)
             this.setState({ data: location });
         })
     }
 
     getReviews(locID){
-        // console.log(locID)
+        axios.get("http://127.0.0.1:8000/api/review/get.php", {params: {id: locID}})
+        .then(res => {
+            const reviewsData = res.data.results
+            console.log(reviewsData)
+            this.setState({ reviews: reviewsData });
+        })
+    }
+
+    redirectToSubmission(){
+        // this.setState({
+        //     redirectToReview: true,
+        // })
     }
 
     render(){
@@ -140,8 +146,10 @@ class SingleResultPage extends Component {
                                 <tr>
                                     {/* link to location details (single object page)  */}
                                     <td></td>
-                                    <td><Button href="/submission" className="btn-success"
-                                    aria-pressed="true">submit a review</Button></td>
+                                    <td>
+                                        <Button href="/submission" className="btn-success" aria-pressed="true" 
+                                        onClick={this.redirectToSubmission}>submit a review</Button>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </Table>
@@ -150,20 +158,23 @@ class SingleResultPage extends Component {
                     </Row>
                     {/* Show reviews and corresponding ratings */}
                     <div className="py-5">
-                        <h1>Reviews:</h1>
+                        
                         <Row xs={1} md={3} className="g-4">
-                            {   
+                            {this.state.reviews.length > 0 && (   
                                 this.state.reviews.map(review => (
                                     <ReviewCard 
-                                        image={review.image}
-                                        video={review.video}
-                                        ratings={review.ratings}
-                                        comment={review.comment}
-                                        author={review.author}
+                                        image={review.IMAGE}
+                                        video={review.VIDEO}
+                                        ratings={review.RATING}
+                                        comment={review.COMMENT}
+                                        author={review.USERNAME}
                                     />
                                 ))
-                            }
+                            )}
                         </Row>
+                        {this.state.reviews.length <= 0 && (
+                            <h1>No Reviews Found</h1>
+                        )}
                     </div>
                 </Container>
                 <Footer />

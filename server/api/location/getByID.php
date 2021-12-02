@@ -68,8 +68,20 @@ $db = $database->getConnection();
 // initialize object
 $location = new Location($db);
 
+// query locations
 $loc_id =isset($_GET["id"]) ? $_GET["id"] : "";
 
+// input validation
+if (!is_numeric($loc_id) OR empty($loc_id)){
+
+    // set response code
+    http_response_code(404);
+
+    echo json_encode(
+        array("message" => "Invalid Input Type.")
+    );
+    return;
+}
 
 // query locations
 $stmt = $location->getByID($loc_id);

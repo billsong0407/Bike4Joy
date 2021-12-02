@@ -36,7 +36,7 @@ try {
   echo "Connected successfully";
 
  
-    $sql = "INSERT INTO REVIEWS VALUES(0, '$image', '$video','$comment', 20, '$rating')"; //the 20 is the userid 
+    $sql = "INSERT INTO REVIEWS VALUES(0, '$image', '$video','$comment', 20, '$rating')"; //the 20 is the temp userid 
     // use exec() because no results are returned
     $pdo->exec($sql);
     echo " New record created successfully";
@@ -48,10 +48,6 @@ try {
    $stmt3->execute();
    $realReviewId = $stmt3->fetch(PDO::FETCH_ASSOC)["id"];
    echo $realReviewId; //<-- returned reviewid
-  
-
-
-
 
 } catch(PDOException $e) {
   echo "Connection failed: " . $e->getMessage();
