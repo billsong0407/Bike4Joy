@@ -77,10 +77,25 @@ $user = new User($db);
 // query locations
 $email = isset($_GET["email"]) ? $_GET["email"] : "";
 $password = isset($_GET["userPassword"]) ? $_GET["userPassword"] : "";
+
+// input validation: 
+if (is_numeric($email) OR is_numeric($password) OR empty($email) OR empty($password)) {
+    // set response code
+    http_response_code(404);
+  
+    // tell the user invalid input type
+    echo json_encode(
+        array("message" => "invalid input type")
+    );
+    return;
+}
+
+// search in the database through function
 $user_id = $user->logIn($email, $password);
+
 if(!is_null($user_id)){
   
-    // locations array
+    // results array
     $user_arr=array();
     $user_arr["results"] = $user_id;
     $user_arr["message"] = "success";

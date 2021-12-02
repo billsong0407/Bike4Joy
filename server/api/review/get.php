@@ -2,7 +2,7 @@
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-
+  
 class DatabaseController {
     private $connection = null;
 
@@ -26,54 +26,48 @@ class DatabaseController {
     }
 }
 
-class Location{
-  
-    // database connection and table name
+class Review {
     private $conn;
-    private $table_name = "LOCATIONS";
-  
-    // object properties
+    private $table_name = "REVIEWS";
+
     public $id;
-    public $lat;
-    public $lng;
-    public $capacity;
-    public $parkingType;
-    public $address;
-    public $postalCode;
-    public $bikeSize;
-    public $yearInstalled;
-  
+    public $image;
+    public $video;
+    public $rating;
+    public $comment;
+    public $user_id;
+
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
     }
 
-    // read locations
-    public function getByID($id){
-        try {
-            $query = "SELECT id, address, postalCode, capacity, parkingType, lat, lng FROM " . $this->table_name . " WHERE id=" . $id . ";";
+    public function getReviews($loc_id){
+        try{
+            $query = "SELECT rating, comment, image, video, name FROM REVIEW_TO_LOCATION INNER JOIN REVIEWS ON rev_id=REVIEWS.id INNER JOIN USERS on REVIEWS.user_id=USERS.id WHERE loc_id=$loc_id;";
+            
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt;
         } catch (\PDOException $e) {
+            return "error";
             exit($e->getMessage());
         }
     }
 }
   
-// instantiate database and location object
+// instantiate database
 $database = new DatabaseController();
 $db = $database->getConnection();
 
 // initialize object
-$location = new Location($db);
+$review = new Review($db);
 
 // query locations
-$loc_id =isset($_GET["id"]) ? $_GET["id"] : "";
+$loc_id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 // input validation
 if (!is_numeric($loc_id) OR empty($loc_id)){
-
     // set response code
     http_response_code(404);
 
@@ -83,16 +77,16 @@ if (!is_numeric($loc_id) OR empty($loc_id)){
     return;
 }
 
-// query locations
-$stmt = $location->getByID($loc_id);
+// get validated sql statement, it contains review data from the database
+$stmt = $review->getReviews($loc_id);
 $num = $stmt->rowCount();
   
-// check if more than 0 record found
+// check if there is a review
 if($num>0){
   
-    // locations array
-    $locations_arr=array();
-    $locations_arr["results"]=array();
+    // reviews array
+    $reviews_arr=array();
+    $reviews_arr["results"]=array();
   
     // retrieve our table contents
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -101,24 +95,23 @@ if($num>0){
         // just $name only
         extract($row);
   
-        $location_item=array(
-            "id" => $id,
-            "ADDRESS" => $address,
-            "POSTAL_CODE" => $postalCode,
-            "lat" => $lat,
-            "lng" => $lng,
-            "BICYCLE_CAPACITY" => $capacity,
-            "PARKING_TYPE" => $parkingType
+        $review_item=array(
+            "RATING" => $rating,
+            "COMMENT" => $comment,
+            "USERNAME" => $name,
+            "IMAGE" => $image,
+            "VIDEO" => $video,
         );
-  
-        array_push($locations_arr["results"], $location_item);
+
+        // appends to review array
+        array_push($reviews_arr["results"], $review_item);
     }
   
     // set response code - 200 OK
     http_response_code(200);
   
-    // show locations data in json format
-    echo json_encode($locations_arr);
+    // show review data in json format
+    echo json_encode($reviews_arr);
 }
   
 else{
@@ -126,9 +119,9 @@ else{
     // set response code - 404 Not found
     http_response_code(404);
   
-    // tell the user no locations found
+    // tell the user no reviews found
     echo json_encode(
-        array("message" => "No locations found.")
+        array("message" => "no reviews found.")
     );
 }
 
