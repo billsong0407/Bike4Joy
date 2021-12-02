@@ -4,6 +4,7 @@ import Footer from '../components/footer';
 import Map from '../components/map';
 import axios from 'axios';
 import { Container, Row, Col, Table, Card, Button } from 'react-bootstrap';
+import { Link, Redirect } from "react-router-dom";
 
 import "../css/single-result-page.css";
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
@@ -49,11 +50,6 @@ class SingleResultPage extends Component {
         this.state = {
             data: [],
             reviews: [],
-            // reviews: [
-            //     {"image": "/images/p1.jpg", "video": "/videos/samplevideo.mp4", "rating:": "Ratings: ★★★★☆", "comment": "Racks are in good quality", "author": "Bob Leung"},
-            //     {"image": "", "video": "/videos/samplevideo.mp4", "rating:": "Ratings: ★★☆☆☆", "comment": "Many abandoned bikes are taking the spots", "author": "Jasper Percy"},
-            //     {"image": "", "video": "", "rating:": "Ratings: ★★★★☆", "comment": "Parking spots are clean and safe", "author": "Pradeep Kumar"},
-            // ],
         }
     }
 
@@ -82,6 +78,12 @@ class SingleResultPage extends Component {
             console.log(reviewsData)
             this.setState({ reviews: reviewsData });
         })
+    }
+
+    redirectToSubmission(){
+        // this.setState({
+        //     redirectToReview: true,
+        // })
     }
 
     render(){
@@ -144,8 +146,10 @@ class SingleResultPage extends Component {
                                 <tr>
                                     {/* link to location details (single object page)  */}
                                     <td></td>
-                                    <td><Button href="/submission" className="btn-success"
-                                    aria-pressed="true">submit a review</Button></td>
+                                    <td>
+                                        <Button href="/submission" className="btn-success" aria-pressed="true" 
+                                        onClick={this.redirectToSubmission}>submit a review</Button>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </Table>
