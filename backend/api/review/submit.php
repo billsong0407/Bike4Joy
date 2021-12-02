@@ -23,17 +23,37 @@ $review = new Review($db);
 // query locations
 $address = isset($_GET["address"]) ? strtoupper($_GET["address"]) : "";
 $parkingType = isset($_GET["parkType"]) ? strtoupper($_GET["parkType"]) : "";
-$capacity = isset($_GET["capacity"]) ? strtoupper($_GET["capacity"]) : "";
+$capacity = isset($_GET["capacity"]) ? $_GET["capacity"] : "";
 $lat = isset($_GET["lat"]) ? $_GET["lat"] : "";
 $lng = isset($_GET["lng"]) ? $_GET["lng"] : "";
 
-$loc_id = $location->create($address, $parkingType, $capacity, $lat, $lng);
+// location input validation
+if (is_numeric($address) OR is_numeric($parkingType) OR !($lat == strval((float) $lat)) OR !($lng == strval((float) $lng)) OR empty($address) OR empty($parkingType) OR empty($lat) OR empty($lng)){
+    // set response code
+    http_response_code(404);
+
+    echo json_encode(
+        array("message" => "Invalid Input Type.")
+    );
+    return;
+}
 
 $rating = isset($_GET["rating"]) ? $_GET["rating"] : "";
 $description = isset($_GET["description"]) ? $_GET["description"] : "";
 $user_id = isset($_GET["userID"]) ? $_GET["userID"] : "";
 
-//keyName could be set to anything
+// review input validation
+if (!is_numeric($user_id) OR empty($user_id) OR empty($rating)){
+    // set response code
+    http_response_code(404);
+
+    echo json_encode(
+        array("message" => "Invalid Input Type.")
+    );
+    return;
+}
+
+// check if image or video is uploaded
 $is_image = false;
 $is_video = false;
 $imageUrl = "";
@@ -51,6 +71,7 @@ if (!is_null($_FILES["imgFile"]['tmp_name'])){
     $file = null;
 }
 
+// due to limited storage in s3, we only store one of the image or video
 if ($is_image || $is_video){
     // AWS Info
     $bucketName = '';
@@ -73,12 +94,14 @@ if ($is_image || $is_video){
     } catch (Exception $e) {
         die("Error: " . $e->getMessage());
     }
+
+    // hash file with current timestamp
     $t=time();
     date_default_timezone_set('America/New_York');
     $timestamp = date("Y-m-d-H-i-s",$t);
     $keyName = $timestamp ."-" . $file_name;
-    // echo $keyName . "\n";
-
+    
+    // AWS s3 path
     $pathInS3 = 'https://s3.us-east-2.amazonaws.com/' . $bucketName . '/' . $keyName;
 
     // Add it to S3
@@ -107,11 +130,10 @@ if ($is_image || $is_video){
     }
 }
 
-echo $imageUrl . "\n";
-echo $videoUrl . "\n";
-// $imageUrl = "https://ride4boybucket.s3.us-east-2.amazonaws.com/2021-12-01-11-30-29-rack.jpg";
-// $videoUrl = "";
+// fetch location id from the database based on the info provided
+$loc_id = $location->create($address, $parkingType, $capacity, $lat, $lng);
 
+// appends review data in the database and check if operation is successfull
 $result = $review->createReview($loc_id, $imageUrl, $videoUrl, $rating, $description, $user_id);
 if ($result){
     http_response_code(200);

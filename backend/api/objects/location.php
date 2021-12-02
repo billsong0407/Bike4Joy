@@ -59,18 +59,6 @@ class Location{
         }
     }
 
-    // public function getID($address){
-    //     try {
-    //         $query = "SELECT id FROM " . $this->table_name . " WHERE address=" . $address . ";";
-    //         $stmt = $this->conn->prepare($query);
-    //         $stmt->execute();
-    //         $loc_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
-    //         return $loc_id;
-    //     } catch (\PDOException $e) {
-    //         exit($e->getMessage());
-    //     }
-    // }
-
     public function getID_Coord($lat, $lng){
         $lat = round($lat, 5);
         $lng = round($lng, 5);
@@ -94,7 +82,6 @@ class Location{
     public function checkLocExists($address, $parkingType){
         try{
             $query = "SELECT id FROM LOCATIONS WHERE upper(address)=\"$address\" and upper(parkingType)=\"$parkingType\"";
-            echo $query . "\n";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             
@@ -112,7 +99,6 @@ class Location{
            
         try{
             $query = "INSERT INTO LOCATIONS (address, parkingType, capacity, lat, lng) VALUES(\"$address\", \"$parkingType\", $capacity, $lat, $lng);";
-            echo $query . "\n";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
 

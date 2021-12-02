@@ -7,20 +7,32 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '../database.php';
 include_once '../objects/review.php';
   
-// instantiate database and location object
+// instantiate database
 $database = new DatabaseController();
 $db = $database->getConnection();
 
 // initialize object
 $review = new Review($db);
 
+// query locations
 $loc_id = isset($_GET["id"]) ? $_GET["id"] : "";
 
-// query locations
+// input validation
+if (!is_numeric($loc_id) OR empty($loc_id)){
+    // set response code
+    http_response_code(404);
+
+    echo json_encode(
+        array("message" => "Invalid Input Type.")
+    );
+    return;
+}
+
+// get validated sql statement, it contains review data from the database
 $stmt = $review->getReviews($loc_id);
 $num = $stmt->rowCount();
   
-// check if more than 0 record found
+// check if there is a review
 if($num>0){
   
     // reviews array
@@ -41,14 +53,15 @@ if($num>0){
             "IMAGE" => $image,
             "VIDEO" => $video,
         );
-  
+
+        // appends to review array
         array_push($reviews_arr["results"], $review_item);
     }
   
     // set response code - 200 OK
     http_response_code(200);
   
-    // show locations data in json format
+    // show review data in json format
     echo json_encode($reviews_arr);
 }
   
