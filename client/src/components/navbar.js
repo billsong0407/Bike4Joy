@@ -25,8 +25,7 @@ const Navigation = () => {
                     <Nav.Link href="/#search-form" className="animate__animated animate__fadeIn text-link">Search</Nav.Link>
                 </Nav>
                 <Nav className="mx-5 me-auto" navbarScroll>
-                    <Nav.Link as={Link} to={{pathname: "/submission", state:{userID: null}}}
-                             className="animate__animated animate__fadeIn text-link">Review</Nav.Link>
+                    <Nav.Link href="/submission" className="animate__animated animate__fadeIn text-link">Review</Nav.Link>
                     
                 </Nav>
                 {/* Button to register account */}

@@ -80,12 +80,6 @@ class SingleResultPage extends Component {
         })
     }
 
-    redirectToSubmission(){
-        // this.setState({
-        //     redirectToReview: true,
-        // })
-    }
-
     render(){
         return (
             <>
@@ -147,8 +141,7 @@ class SingleResultPage extends Component {
                                     {/* link to location details (single object page)  */}
                                     <td></td>
                                     <td>
-                                        <Button href="/submission" className="btn-success" aria-pressed="true" 
-                                        onClick={this.redirectToSubmission}>submit a review</Button>
+                                        <Button href="/submission" className="btn-success" aria-pressed="true">submit a review</Button>
                                     </td>
                                 </tr>
                                 </tbody>

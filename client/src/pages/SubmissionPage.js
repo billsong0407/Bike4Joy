@@ -26,11 +26,27 @@ class SubmissionPage extends Component {
             addressError: "",
             typeError:"",
             descriptionError:"", 
-            user_id: this.props.location.state.userID,
+            user_id: "",
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.handleRatingChange = this.handleRatingChange.bind(this);
+        // console.log(localStorage.getItem("userID"))
+    }
+
+    componentDidMount(){
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+        const userID = sessionStorage.getItem('userID');
+        if (isLoggedIn){
+            // console.log("is logged in")
+            this.setState({
+                user_id: userID,
+            })
+        }else{
+            this.setState({
+                user_id: null,
+            })
+        }
     }
 
     resetUserInfo(){
@@ -163,8 +179,8 @@ class SubmissionPage extends Component {
         if (!regExp.test(this.state.parkType)){
           typeError = "Please make sure this is not blank";
         }
-        if (!regExp.test(this.state.capacity)){
-            capacityError = "Please make sure this is not blank";
+        if (!Number.isInteger(parseInt(this.state.capacity)) || parseInt(this.state.capacity) <= 0){
+            capacityError = "Please enter an integer > 0";
           }
         if (!regExp.test(this.state.description)){
             descriptionError = "Please include a description";
@@ -204,31 +220,44 @@ class SubmissionPage extends Component {
         const formData = new FormData();
 
         formData.append('imgFile', this.state.imgFile)
-        formData.append('imgFile', this.state.videoFile)
+        formData.append('vidFile', this.state.videoFile)
 
         console.log(obj)
         if (isValid) {
-        axios.post("http://127.0.0.1:8000/api/review/submit.php", formData, {params: obj})
-        .then(res=> console.log(res.data))
-        .catch(error => console.log(error));
-            
-        //   // clear form
-        //   this.resetUserInfo
+            axios.post("http://127.0.0.1:8000/api/review/submit.php", formData, {params: obj})
+            .then(res=> {
+                console.log(res.data)
+                if (res.data.message === "successful submission"){
+                    alert("Review Submitted")
+                    this.resetUserInfo()
+                }else {
+                    alert("Some errors occured. Try again later")
+                }
+            })
+            .catch(error => console.log(error));
         }
       }
       //------------------Form handling end------------------------------------------------
     
     render() {
-        // this.getLocation();
-        return (
+        if (!this.state.user_id) return (
+            <>
+                <Navigation />
+                <div className="submission-form">
+                <h1>Please log in first to make the review</h1>
+                </div>
+                <Footer />
+            </>
+        );
+        else return (
             <>
             {/* Navbar */}
                 <Navigation />
                 <div className="overlay">
-                    <p>User_id {this.state.user_id}</p>
                 <Form className="submission-form" onSubmit={this.handleSubmit}>
                         {/* ---------------------------Location, type and description input form starts ---------------------------- */}
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3">
+                        
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
                         <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
@@ -296,6 +325,7 @@ class SubmissionPage extends Component {
                         </Form.Group>
 
                         {/* <!-- submit button --> */}
+                        <Form.Label>Submit as User ID {this.state.user_id}</Form.Label>
                         <Button block size="lg" type="submit" className="animate__animated animate__fadeInRight mt-4">
                             Submit
                         </Button>
