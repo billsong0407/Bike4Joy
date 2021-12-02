@@ -138,6 +138,7 @@ class SubmissionPage extends Component {
     validate = () => {
         let addressError = "";
         let typeError = "";
+        let capacityError = "";
         let descriptionError = "";
         let regExp = /[a-zA-Z]/g;
 
@@ -148,23 +149,23 @@ class SubmissionPage extends Component {
         if (!regExp.test(this.state.parkType)){
           typeError = "Please make sure this is not blank";
         }
+        if (!regExp.test(this.state.capacity)){
+            capacityError = "Please make sure this is not blank";
+          }
         if (!regExp.test(this.state.description)){
             descriptionError = "Please include a description";
         }
         
+        this.setState({ addressError});
+        this.setState({typeError});
+        this.setState({capacityError});
+        this.setState({descriptionError});
         //Return false if any of the form inputs does not match with the above requirements
-        if (addressError) {
-          this.setState({ addressError});
+        if (addressError || typeError || capacityError || descriptionError) {
+          
           return false;
         }
-        if (typeError) {
-            this.setState({typeError});
-            return false;
-          }
-        if (descriptionError) {
-            this.setState({descriptionError});
-            return false;
-          }
+        
         return true;
       };
 
@@ -173,7 +174,7 @@ class SubmissionPage extends Component {
         //Alert shows that location is obtained but not submitted anywhere.
         //alert(`Note: Not submitted anywhere, this is just to make sure geolocation is working. ${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
         event.preventDefault()//To prevent data loss written after submitting
-        // const isValid = this.validate();
+        const isValid = this.validate();
 
         const obj ={
             address: this.state.address,
@@ -194,14 +195,14 @@ class SubmissionPage extends Component {
         formData.append('imgFile', this.state.imgFile)
 
         console.log(obj)
-        // if (isValid) {
+        if (isValid) {
         axios.post("http://127.0.0.1:8000/api/review/submit.php", formData, {params: obj})
         .then(res=> console.log(res.data))
         .catch(error => console.log(error));
             
         //   // clear form
         //   this.resetUserInfo
-        // }
+        }
       }
       //------------------Form handling end------------------------------------------------
     
@@ -233,6 +234,9 @@ class SubmissionPage extends Component {
                         <Form.Group as={Col} md="4">
                             <Form.Label>Bicycle Capacity</Form.Label>
                             <Form.Control placeholder="10, 15, 20, etc" value={this.state.capacity} onChange={this.handleCapacityChange}/>
+                            <div style={{ fontSize: 13, color: "red" }}>
+                                {this.state.capacityError}
+                            </div>
                         </Form.Group>
                         <Form.Group as={Col} md="4">
                             <Form.Label>Rating</Form.Label>
