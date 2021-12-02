@@ -8,7 +8,7 @@ class Review {
     public $image;
     public $video;
     public $rating;
-    public $description;
+    public $comment;
     public $user_id;
 
     // constructor with $db as database connection
@@ -16,16 +16,13 @@ class Review {
         $this->conn = $db;
     }
 
-    public function isUser($email){
+    public function getReviews($loc_id){
         try{
-            $query = "SELECT id FROM $this->table_name WHERE email=\"$email\";";
+            $query = "SELECT rating, comment, image, video, name FROM REVIEW_TO_LOCATION INNER JOIN REVIEWS ON rev_id=REVIEWS.id INNER JOIN USERS on REVIEWS.user_id=USERS.id WHERE loc_id=$loc_id;";
             
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            $user_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
-
-            if (is_null($user_id)) return false;
-            return true;
+            return $stmt;
         } catch (\PDOException $e) {
             return "error";
             exit($e->getMessage());
@@ -34,7 +31,7 @@ class Review {
 
     public function create($image, $video, $rating, $description, $userID){
         try{
-            $query = "SELECT MAX(id) FROM REVIEWS WHERE image=\"$image\" and video=\"$video\" and rating=\"$rating\" and description=\"$description\" and userID==\"$userID\";";
+            $query = "SELECT MAX(id) FROM REVIEWS WHERE image=\"$image\" and video=\"$video\" and rating=\"$rating\" and comment=\"$description\" and user_id==\"$userID\";";
             // echo $query . "\n";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();

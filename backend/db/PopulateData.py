@@ -60,6 +60,36 @@ VALUES
         connection.commit()
         print("ALL LOCATION DATA LOADED INTO BIKE4JOY DATABASE")
         
+        INSERT_QUERY = """
+INSERT INTO USERS(name, email, userPassword) VALUES 
+("Franklin Tian", "fronk@discord.com", "fronkfronk123"),
+("Jane Doe", "kirakirarinhm@gmail.com", "test123"),
+("Frank Fonk", "fronk@godaddy.com", "bik4joy")
+"""
+        
+        cursor.execute(INSERT_QUERY.rstrip())
+        connection.commit()
+        
+        INSERT_QUERY = """
+INSERT INTO REVIEWS(image, video, comment, rating, user_id) VALUES 
+(\"\", \"\", "Good Place", \"★★★★★\", 1),
+(\"https://ride4boybucket.s3.us-east-2.amazonaws.com/2021-12-01-11-30-29-rack.jpg\", \"\", "Excellent Environment", \"★★★★\", 2),
+(\"\", \"\", "Looks pretty safe to park", \"★★★\", 3)
+"""
+        
+        cursor.execute(INSERT_QUERY.rstrip())
+        connection.commit()
+        
+        INSERT_QUERY = """
+INSERT INTO REVIEW_TO_LOCATION(loc_id, rev_id) VALUES 
+(2, 1),
+(2, 2),
+(2, 3)
+"""
+        
+        cursor.execute(INSERT_QUERY.rstrip())
+        connection.commit()
+        
         if connection.is_connected():
             connection.cursor().close()
             connection.close()

@@ -19,6 +19,7 @@ class ResultCard extends Component {
             postalCode: props.location.POSTAL_CODE,
             rating: props.rating,
             loc_id: props.location.id,
+            parkingType: props.location.PARKING_TYPE,
             redirect: false,
         }
     }
@@ -51,6 +52,11 @@ class ResultCard extends Component {
                             {/* location postal code  */}
                             <td className="first-column">Postal Code:</td>
                             <td>{this.state.postalCode}</td>
+                        </tr>
+                        <tr>
+                            {/* location rating  */}
+                            <td className="first-column">Parking Type:</td>
+                            <td>{this.state.parkingType}</td>
                         </tr>
                         <tr>
                             {/* location rating  */}
