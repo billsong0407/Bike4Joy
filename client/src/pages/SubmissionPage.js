@@ -165,34 +165,39 @@ class SubmissionPage extends Component {
     }
 
       //Validates the input for the forms to see if it matches requirements
-    validate = () => {
+      validate = () => {
         let addressError = "";
         let typeError = "";
         let capacityError = "";
         let descriptionError = "";
         let regExp = /[a-zA-Z]/g;
+        let addressRegExp = /^\d+\s[A-z]+\s[A-z]+/;
+        let capacityRegExp = /^[1-9]*$/;
+        let emptyRegExp = /^(?!\s*$).+/;
 
         //Checks and sets error messages for address, type and description
-        if (!regExp.test(this.state.address)){
-          addressError = "Please include an address";
+        if (!addressRegExp.test(this.state.address)){
+          addressError = "Please enter a valid address";
         }
-        if (!regExp.test(this.state.parkType)){
-          typeError = "Please make sure this is not blank";
+        if (!emptyRegExp.test(this.state.parkType)){
+          typeError = "Please make sure to specify a bike parking type";
         }
-        if (!Number.isInteger(parseInt(this.state.capacity)) || parseInt(this.state.capacity) <= 0){
-            capacityError = "Please enter an integer > 0";
+        if (!emptyRegExp.test(this.state.capacity)){
+            capacityError = "Please make sure give an estimate of bicycle capacity quantity";
           }
+        if (!capacityRegExp.test(this.state.capacity)){
+            capacityError = "Please enter a positive integer"
+        }
         if (!regExp.test(this.state.description)){
-            descriptionError = "Please include a description";
+            descriptionError = "Please include a description with characters";
         }
         
-        this.setState({ addressError});
+        this.setState({addressError});
         this.setState({typeError});
         this.setState({capacityError});
         this.setState({descriptionError});
         //Return false if any of the form inputs does not match with the above requirements
         if (addressError || typeError || capacityError || descriptionError) {
-          
           return false;
         }
         
