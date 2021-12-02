@@ -29,17 +29,20 @@ class Review {
         }
     }
 
-    public function create($image, $video, $rating, $description, $userID){
+    public function createReview($locID, $image, $video, $rating, $description, $userID){
         try{
-            $query = "SELECT MAX(id) FROM REVIEWS WHERE image=\"$image\" and video=\"$video\" and rating=\"$rating\" and comment=\"$description\" and user_id==\"$userID\";";
-            // echo $query . "\n";
+            $query = "INSERT INTO REVIEWS(image, video, comment, rating, user_id) VALUES (\"$image\", \"$video\", \"$description\", \"$rating\", $userID);";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-            $user_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
-            // echo $user_id . "\n";
-            if (is_null($user_id)) return null;
-            return $user_id;
+
+            $rev_id = $this->conn->lastInsertId();
+
+            $query = "INSERT INTO REVIEW_TO_LOCATION(loc_id, rev_id) VALUES ($locID, $rev_id)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return "success";
         } catch (\PDOException $e) {
+            return false;
             exit($e->getMessage());
         }
     }
