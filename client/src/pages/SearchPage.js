@@ -31,7 +31,7 @@ class SearchPage extends Component {
       }
 
     componentDidMount() {
-        axios.get("http://127.0.0.1:8000/api/location/getAll.php")
+        axios.get("http://3.139.109.205/bike4joy/api/location/getAll.php")
         .then(res => this.setState({parkingData: res.data.results}))
     }
     

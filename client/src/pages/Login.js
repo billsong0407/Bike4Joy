@@ -100,7 +100,7 @@ class LogInPage extends Component {
 
         if (isValid) {
             // console.log(obj)
-            axios.get('http://127.0.0.1:8000/api/user/login.php', {params: obj})
+            axios.get('http://3.139.109.205/bike4joy/api/user/login.php', {params: obj})
             .then(res=> {
                 const message = res.data.message
                 if (message === "success"){

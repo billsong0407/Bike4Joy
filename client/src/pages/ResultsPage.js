@@ -92,7 +92,7 @@ class ResultsPage extends Component {
     }
 
     componentDidMount(){
-        axios.get("http://127.0.0.1:8000/api/location/get.php", {params: {address: this.state.queryAddress}})
+        axios.get("http://3.139.109.205/bike4joy/api/location/get.php", {params: {address: this.state.queryAddress}})
         .then(res => {
             const location = res.data.results
             this.setState({ data: location, defaultLat: location[0].lat, defaultLng: location[0].lng });

@@ -64,7 +64,7 @@ class SingleResultPage extends Component {
     }
 
     getLocation(locID){
-        axios.get("http://127.0.0.1:8000/api/location/getByID.php", {params: {id: locID}})
+        axios.get("http://3.139.109.205/bike4joy/api/location/getByID.php", {params: {id: locID}})
         .then(res => {
             const location = res.data.results
             this.setState({ data: location });
@@ -72,7 +72,7 @@ class SingleResultPage extends Component {
     }
 
     getReviews(locID){
-        axios.get("http://127.0.0.1:8000/api/review/get.php", {params: {id: locID}})
+        axios.get("http://3.139.109.205/bike4joy/api/review/get.php", {params: {id: locID}})
         .then(res => {
             const reviewsData = res.data.results
             console.log(reviewsData)
