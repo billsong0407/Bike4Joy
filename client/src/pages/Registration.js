@@ -25,6 +25,7 @@ class RegistrationPage extends Component {
         }
     };
 
+    //reset user info properties
     resetUserInfo(){
         this.setState({
             name: "",
@@ -37,18 +38,21 @@ class RegistrationPage extends Component {
     };
     
     //------------------Form handling start------------------------------------------------
+    //sets the state of the email value
     handleEmailChange = event => {
         this.setState({
             email: event.target.value
         })
       };
 
+      //sets the state of the password value
     handlePasswordChange = event => {
         this.setState({
             password: event.target.value
         })
     };
 
+    //sets the state of the name value
     handleNameChange = event => {
         this.setState({
             name: event.target.value
@@ -106,13 +110,17 @@ class RegistrationPage extends Component {
             password: this.state.password,
           };
 
+          //connection to the register.php file 
         if (isValid) {
             axios.get('http://3.139.109.205/bike4joy/api/user/register.php', {params: obj})
             .then(res=> {
                 const message = res.data.message
+                //check if user is already registered or not
                 if (message === "User already registered"){
+                    //sets state for page redirection later on
                     this.setState({redirectToLogIn: true})
                     alert(`${this.state.email} exists, have an account ? redirecting to login`);
+                    //not registered
                 }else {
                     this.setState({redirectToReview: true, user_id: res.data.results})
                     alert("registration success!");
@@ -124,6 +132,7 @@ class RegistrationPage extends Component {
     };
 
     render() {
+        //redirection to various pages based on the state 
         if (this.state.redirectToLogIn) {
             return <Redirect to={{pathname:"/login", state: {email: this.state.email}}} />;
         }
