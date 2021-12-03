@@ -21,8 +21,6 @@ class SubmissionPage extends Component {
             description:"",
             imgName: "",
             imgFile: "",
-            videoName: "",
-            videoFile: "",
             addressError: "",
             typeError:"",
             descriptionError:"", 
@@ -58,8 +56,6 @@ class SubmissionPage extends Component {
             description:"",
             imgName: "",
             imgFile: "",
-            videoName: "",
-            videoFile: "",
             addressError: "",
             typeError:"",
             descriptionError:"",
@@ -147,13 +143,6 @@ class SubmissionPage extends Component {
         })
     }
 
-    handleVideoFileChange = (event) =>{
-        this.setState({
-            videoName: event.target.files[0].name,
-            videoFile: event.target.files[0]
-        })
-    }
-
     handleLatChange = (event) => {
         this.setState({
             lat: event.target.value
@@ -224,10 +213,9 @@ class SubmissionPage extends Component {
             userID: this.state.user_id,
         };
 
+        // form data here actually stores any files waiting to be uploaded
         const formData = new FormData();
-
         formData.append('imgFile', this.state.imgFile)
-        formData.append('vidFile', this.state.videoFile)
 
         // console.log(obj)
         if (isValid) {
@@ -266,7 +254,7 @@ class SubmissionPage extends Component {
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3">
                         
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
-                        <Form.Control placeholder="13 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange}/>
+                        <Form.Control placeholder="213 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.addressError}
                             </div>

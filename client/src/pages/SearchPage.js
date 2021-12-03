@@ -139,7 +139,7 @@ class SearchPage extends Component {
                                     {/* <option value="Postal Code">Postal Code</option> */}
                                 </Form.Select>
                                 </FloatingLabel>
-                               <Form.Control placeholder="13 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange} className="input-text"/> 
+                               <Form.Control placeholder="213 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange} className="input-text"/> 
                                 {/* <!-- Rating Dropdowns --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select onChange={this.handleRatingChange}>

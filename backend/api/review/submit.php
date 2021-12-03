@@ -54,26 +54,22 @@ if (!is_numeric($user_id) OR empty($user_id) OR empty($rating)){
     return;
 }
 
-// check if image or video is uploaded
+// check if a image file is attached
 $is_image = false;
-$is_video = false;
 $imageUrl = "";
 $videoUrl = "";
 if (!is_null($_FILES["imgFile"]['tmp_name'])){
     $file_name = basename($_FILES["imgFile"]['name']);
     $file = $_FILES["imgFile"]['tmp_name'];
     $is_image = true;
-} else if (!is_null($_FILES["vidFile"]['tmp_name'])){
-    $file_name = basename($_FILES["vidFile"]['name']);
-    $file = $_FILES["vidFile"]['tmp_name'];
-    $is_video = true;
-} else{
+} 
+else{
     $file_name = "";
     $file = null;
 }
 
-// due to limited storage in s3, we only store one of the image or video
-if ($is_image || $is_video){
+// due to limited storage in s3, we only store one image per upload
+if ($is_image){
     // AWS Info
     $bucketName = '';
     $IAM_KEY = '';

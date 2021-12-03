@@ -100,7 +100,7 @@ class ResultsPage extends Component {
             // it means any rating is fine
             num_stars = 0
         }
-        axios.get("http://127.0.0.1:8000/api/location/get.php", {params: {address: this.state.queryAddress, rating: num_stars}})
+        axios.get("http://3.139.109.205/bike4joy/api/location/get.php", {params: {address: this.state.queryAddress, rating: num_stars}})
         .then(res => {
             const location = res.data.results
             this.setState({ data: location, defaultLat: location[0].lat, defaultLng: location[0].lng });
