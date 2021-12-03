@@ -36,15 +36,34 @@ class Location{
         return $stmt;
     }
 
-    public function getLocationInfo($address){
-        $query = "SELECT id, address, postalCode, capacity, parkingType, lat, lng FROM " . $this->table_name . " WHERE address='$address'" . ";";
-        // echo $query . "\n";
+    public function getByAddress($address){
+        $query = "SELECT LOCATIONS.id, address, postalCode, capacity, parkingType, lat, lng, AVG(CHAR_LENGTH(REVIEWS.rating)) AS avgRating
+        FROM REVIEW_TO_LOCATION 
+        INNER JOIN REVIEWS ON rev_id=REVIEWS.id 
+        INNER JOIN LOCATIONS ON loc_id=LOCATIONS.id
+        WHERE LOCATIONS.address=\"$address\"
+        GROUP BY LOCATIONS.id;
+        ";
         // prepare query statement
         $stmt = $this->conn->prepare($query);
-    
+
         // execute query
         $stmt->execute();
-    
+        return $stmt;
+    }
+
+    public function getByRating($rating){
+        $query = "SELECT LOCATIONS.id, address, postalCode, capacity, parkingType, lat, lng, AVG(CHAR_LENGTH(REVIEWS.rating)) AS avgRating
+        FROM REVIEW_TO_LOCATION 
+        INNER JOIN REVIEWS ON rev_id=REVIEWS.id 
+        INNER JOIN LOCATIONS ON loc_id=LOCATIONS.id
+        GROUP BY LOCATIONS.id;
+        ";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // execute query
+        $stmt->execute();
         return $stmt;
     }
 
@@ -96,7 +115,10 @@ class Location{
     public function create($address, $parkingType, $capacity, $lat, $lng){
         $loc_id = $this->checkLocExists($address, $parkingType);
         if (!is_null($loc_id)) return $loc_id;
-           
+
+        // round latitude and longitude to 5 decimal places
+        $lat = round($lat, 5);
+        $lng = round($lng, 5);
         try{
             $query = "INSERT INTO LOCATIONS (address, parkingType, capacity, lat, lng) VALUES(\"$address\", \"$parkingType\", $capacity, $lat, $lng);";
             $stmt = $this->conn->prepare($query);

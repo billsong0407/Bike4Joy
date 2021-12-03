@@ -51,15 +51,16 @@ class User {
         }
     }
 
-    public function logIn($email, $password){
+    public function registerUser($name, $email, $password){
         try{
-            $query = "SELECT id FROM USERS WHERE email=\"$email\" and userPassword=\"$password\";";
-            // echo $query . "\n";
+            $query = "INSERT INTO USERS (name, email, userPassword) VALUES(\"$name\", \"$email\", \"$password\");";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            
+            $query = "SELECT id FROM USERS WHERE name=\"$name\" and email=\"$email\" and userPassword=\"$password\";";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             $user_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
-            // echo $user_id . "\n";
-            if (is_null($user_id)) return null;
             return $user_id;
         } catch (\PDOException $e) {
             exit($e->getMessage());

@@ -28,7 +28,8 @@ $lat = isset($_GET["lat"]) ? $_GET["lat"] : "";
 $lng = isset($_GET["lng"]) ? $_GET["lng"] : "";
 
 // location input validation
-if (is_numeric($address) OR is_numeric($parkingType) OR !($lat == strval((float) $lat)) OR !($lng == strval((float) $lng)) OR empty($address) OR empty($parkingType) OR empty($lat) OR empty($lng)){
+if (is_numeric($address) OR is_numeric($parkingType) OR !is_numeric($lat) OR !is_numeric($lng) OR empty($address) OR empty($parkingType) OR empty($lat) OR empty($lng)){
+    echo "here\n";
     // set response code
     http_response_code(404);
 

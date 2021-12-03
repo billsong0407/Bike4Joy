@@ -107,7 +107,7 @@ class RegistrationPage extends Component {
           };
 
         if (isValid) {
-            axios.get('http://127.0.0.1:8000/api/user/register.php', {params: obj})
+            axios.get('http://3.139.109.205/bike4joy/api/user/register.php', {params: obj})
             .then(res=> {
                 const message = res.data.message
                 if (message === "User already registered"){

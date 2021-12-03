@@ -4,7 +4,7 @@ import Footer from '../components/footer';
 import Map from '../components/map';
 import axios from 'axios';
 import { Container, Row, Col, Table, Card, Button } from 'react-bootstrap';
-import { Link, Redirect } from "react-router-dom";
+// import { Link, Redirect } from "react-router-dom";
 
 import "../css/single-result-page.css";
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
@@ -64,7 +64,7 @@ class SingleResultPage extends Component {
     }
 
     getLocation(locID){
-        axios.get("http://127.0.0.1:8000/api/location/getByID.php", {params: {id: locID}})
+        axios.get("http://3.139.109.205/bike4joy/api/location/getByID.php", {params: {id: locID}})
         .then(res => {
             const location = res.data.results
             this.setState({ data: location });
@@ -72,18 +72,12 @@ class SingleResultPage extends Component {
     }
 
     getReviews(locID){
-        axios.get("http://127.0.0.1:8000/api/review/get.php", {params: {id: locID}})
+        axios.get("http://3.139.109.205/bike4joy/api/review/get.php", {params: {id: locID}})
         .then(res => {
             const reviewsData = res.data.results
             console.log(reviewsData)
             this.setState({ reviews: reviewsData });
         })
-    }
-
-    redirectToSubmission(){
-        // this.setState({
-        //     redirectToReview: true,
-        // })
     }
 
     render(){
@@ -147,8 +141,7 @@ class SingleResultPage extends Component {
                                     {/* link to location details (single object page)  */}
                                     <td></td>
                                     <td>
-                                        <Button href="/submission" className="btn-success" aria-pressed="true" 
-                                        onClick={this.redirectToSubmission}>submit a review</Button>
+                                        <Button href="/submission" className="btn-success" aria-pressed="true">submit a review</Button>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -21,15 +21,32 @@ class SubmissionPage extends Component {
             description:"",
             imgName: "",
             imgFile: "",
+            videoName: "",
             videoFile: "",
             addressError: "",
             typeError:"",
             descriptionError:"", 
-            user_id: this.props.location.state.userID,
+            user_id: "",
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.handleRatingChange = this.handleRatingChange.bind(this);
+        // console.log(localStorage.getItem("userID"))
+    }
+
+    componentDidMount(){
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+        const userID = sessionStorage.getItem('userID');
+        if (isLoggedIn){
+            // console.log("is logged in")
+            this.setState({
+                user_id: userID,
+            })
+        }else{
+            this.setState({
+                user_id: null,
+            })
+        }
     }
 
     resetUserInfo(){
@@ -39,7 +56,9 @@ class SubmissionPage extends Component {
             capacity:"",
             queryRating:"★★★★★",
             description:"",
+            imgName: "",
             imgFile: "",
+            videoName: "",
             videoFile: "",
             addressError: "",
             typeError:"",
@@ -130,41 +149,60 @@ class SubmissionPage extends Component {
 
     handleVideoFileChange = (event) =>{
         this.setState({
-            videoFile: event.target.value
+            videoName: event.target.files[0].name,
+            videoFile: event.target.files[0]
+        })
+    }
+
+    handleLatChange = (event) => {
+        this.setState({
+            lat: event.target.value
+        })
+    }
+
+    handleLngChange = (event) => {
+        this.setState({
+            lng: event.target.value
         })
     }
 
       //Validates the input for the forms to see if it matches requirements
-    validate = () => {
+      validate = () => {
         let addressError = "";
         let typeError = "";
+        let capacityError = "";
         let descriptionError = "";
         let regExp = /[a-zA-Z]/g;
+        let addressRegExp = /^\d+\s[A-z]+\s[A-z]+/;
+        let capacityRegExp = /^[1-9]*$/;
+        let emptyRegExp = /^(?!\s*$).+/;
 
         //Checks and sets error messages for address, type and description
-        if (!regExp.test(this.state.address)){
-          addressError = "Please include an address";
+        if (!addressRegExp.test(this.state.address)){
+          addressError = "Please enter a valid address";
         }
-        if (!regExp.test(this.state.parkType)){
-          typeError = "Please make sure this is not blank";
+        if (!emptyRegExp.test(this.state.parkType)){
+          typeError = "Please make sure to specify a bike parking type";
+        }
+        if (!emptyRegExp.test(this.state.capacity)){
+            capacityError = "Please make sure give an estimate of bicycle capacity quantity";
+        }
+        if (!Number.isInteger(parseInt(this.state.capacity)) || parseInt(this.state.capacity) <= 0){
+            capacityError = "Please enter an integer > 0";
         }
         if (!regExp.test(this.state.description)){
-            descriptionError = "Please include a description";
+            descriptionError = "Please include a description with characters";
         }
         
+        this.setState({addressError});
+        this.setState({typeError});
+        this.setState({capacityError});
+        this.setState({descriptionError});
         //Return false if any of the form inputs does not match with the above requirements
-        if (addressError) {
-          this.setState({ addressError});
+        if (addressError || typeError || capacityError || descriptionError) {
           return false;
         }
-        if (typeError) {
-            this.setState({typeError});
-            return false;
-          }
-        if (descriptionError) {
-            this.setState({descriptionError});
-            return false;
-          }
+        
         return true;
       };
 
@@ -173,7 +211,7 @@ class SubmissionPage extends Component {
         //Alert shows that location is obtained but not submitted anywhere.
         //alert(`Note: Not submitted anywhere, this is just to make sure geolocation is working. ${this.state.address} ${this.state.type} ${this.state.description} Your location: ${this.state.userLat} ${this.state.userLong}`)
         event.preventDefault()//To prevent data loss written after submitting
-        // const isValid = this.validate();
+        const isValid = this.validate();
 
         const obj ={
             address: this.state.address,
@@ -181,9 +219,6 @@ class SubmissionPage extends Component {
             capacity: this.state.capacity,
             rating: this.state.queryRating,
             description: this.state.description,
-            // imgName: this.state.imgName,
-            // imgFile: this.state.imgFile,
-            // videoFile: this.state.videoFile,
             lat: this.state.lat,
             lng: this.state.lng,
             userID: this.state.user_id,
@@ -192,32 +227,46 @@ class SubmissionPage extends Component {
         const formData = new FormData();
 
         formData.append('imgFile', this.state.imgFile)
+        formData.append('vidFile', this.state.videoFile)
 
-        console.log(obj)
-        // if (isValid) {
-        axios.post("http://127.0.0.1:8000/api/review/submit.php", formData, {params: obj})
-        .then(res=> console.log(res.data))
-        .catch(error => console.log(error));
-            
-        //   // clear form
-        //   this.resetUserInfo
-        // }
+        // console.log(obj)
+        if (isValid) {
+            axios.post("http://3.139.109.205/bike4joy/api/review/submit.php", formData, {params: obj})
+            .then(res=> {
+                // console.log(res.data)
+                if (res.data.message === "successful submission"){
+                    alert("Review Submitted")
+                    this.resetUserInfo()
+                }else {
+                    alert("Some errors occured. Try again later")
+                }
+            })
+            .catch(error => console.log(error));
+        }
       }
       //------------------Form handling end------------------------------------------------
     
     render() {
-        // this.getLocation();
-        return (
+        if (!this.state.user_id) return (
+            <>
+                <Navigation />
+                <div className="submission-form">
+                <h1>Please log in first to make a review</h1>
+                </div>
+                <Footer />
+            </>
+        );
+        else return (
             <>
             {/* Navbar */}
                 <Navigation />
                 <div className="overlay">
-                    <p>User_id {this.state.user_id}</p>
                 <Form className="submission-form" onSubmit={this.handleSubmit}>
                         {/* ---------------------------Location, type and description input form starts ---------------------------- */}
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3">
+                        
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
-                        <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange}/>
+                        <Form.Control placeholder="13 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.addressError}
                             </div>
@@ -233,6 +282,9 @@ class SubmissionPage extends Component {
                         <Form.Group as={Col} md="4">
                             <Form.Label>Bicycle Capacity</Form.Label>
                             <Form.Control placeholder="10, 15, 20, etc" value={this.state.capacity} onChange={this.handleCapacityChange}/>
+                            <div style={{ fontSize: 13, color: "red" }}>
+                                {this.state.capacityError}
+                            </div>
                         </Form.Group>
                         <Form.Group as={Col} md="4">
                             <Form.Label>Rating</Form.Label>
@@ -257,13 +309,13 @@ class SubmissionPage extends Component {
 
                     {/* ---------------------------Coordinates form starts ---------------------------- */}
                     <Row className="animate__animated animate__fadeInRight mb-3">
-                        <Form.Group as={Col} md="6" controlId="longitude" >
-                            <Form.Label>Longitude</Form.Label>
-                            <Form.Control placeholder="Ex: 43.641867413067914"/>
-                        </Form.Group>
-                        <Form.Group as={Col} md="6" controlId="latitude">
+                        <Form.Group as={Col} md="6">
                             <Form.Label>Latitude</Form.Label>
-                            <Form.Control placeholder="Ex: -79.3873116119053"/>
+                            <Form.Control value={this.state.lat} onChange={this.handleLatChange} placeholder="Ex: 43.641867413067914"/>
+                        </Form.Group>
+                        <Form.Group as={Col} md="6">
+                            <Form.Label>Longitude</Form.Label>
+                            <Form.Control value={this.state.lng} onChange={this.handleLngChange} placeholder="Ex: -79.3873116119053"/>
                         </Form.Group>
                     </Row>
                     {/* ---------------------------Coordinates form ends ---------------------------- */}
@@ -280,6 +332,7 @@ class SubmissionPage extends Component {
                         </Form.Group>
 
                         {/* <!-- submit button --> */}
+                        <Form.Label>Submit as User ID {this.state.user_id}</Form.Label>
                         <Button block size="lg" type="submit" className="animate__animated animate__fadeInRight mt-4">
                             Submit
                         </Button>

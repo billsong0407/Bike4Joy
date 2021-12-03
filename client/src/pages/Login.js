@@ -89,6 +89,11 @@ class LogInPage extends Component {
         return true;
     };
 
+    userJustLoggedIn(userID){
+        sessionStorage.setItem("isLoggedIn", 'true');
+        sessionStorage.setItem("userID", userID);
+    }
+
     //Handles the submission of form
     handleSubmit = event => {
         event.preventDefault();
@@ -100,11 +105,11 @@ class LogInPage extends Component {
 
         if (isValid) {
             // console.log(obj)
-            axios.get('http://127.0.0.1:8000/api/user/login.php', {params: obj})
+            axios.get('http://3.139.109.205/bike4joy/api/user/login.php', {params: obj})
             .then(res=> {
                 const message = res.data.message
                 if (message === "success"){
-                    
+                    this.userJustLoggedIn(res.data.results)
                     this.setState({redirectToReview: true, user_id: res.data.results})
                     alert("Log In Success!");
                 }

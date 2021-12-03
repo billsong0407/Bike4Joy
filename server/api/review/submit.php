@@ -70,7 +70,8 @@ class Location{
     public function create($address, $parkingType, $capacity, $lat, $lng){
         $loc_id = $this->checkLocExists($address, $parkingType);
         if (!is_null($loc_id)) return $loc_id;
-           
+        $lat = round($lat, 5);
+        $lng = round($lng, 5);
         try{
             $query = "INSERT INTO LOCATIONS (address, parkingType, capacity, lat, lng) VALUES(\"$address\", \"$parkingType\", $capacity, $lat, $lng);";
             $stmt = $this->conn->prepare($query);
@@ -135,7 +136,7 @@ $lat = isset($_GET["lat"]) ? $_GET["lat"] : "";
 $lng = isset($_GET["lng"]) ? $_GET["lng"] : "";
 
 // location input validation
-if (is_numeric($address) OR is_numeric($parkingType) OR !($lat == strval((float) $lat)) OR !($lng == strval((float) $lng)) OR empty($address) OR empty($parkingType) OR empty($lat) OR empty($lng)){
+if (is_numeric($address) OR is_numeric($parkingType) OR !is_numeric($lat) OR !is_numeric($lng) OR empty($address) OR empty($parkingType) OR empty($lat) OR empty($lng)){
     // set response code
     http_response_code(404);
 
