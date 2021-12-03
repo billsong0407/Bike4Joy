@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {cloneElement, Component} from 'react';
 import { Table, Container, Row, Col, Button } from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
@@ -17,7 +17,7 @@ class ResultCard extends Component {
             parkingLoc: props.location,
             address: props.location.ADDRESS,
             postalCode: props.location.POSTAL_CODE,
-            rating: props.rating,
+            avgRating: props.location.AVG_RATING,
             loc_id: props.location.id,
             parkingType: props.location.PARKING_TYPE,
             redirect: false,
@@ -60,8 +60,8 @@ class ResultCard extends Component {
                         </tr>
                         <tr>
                             {/* location rating  */}
-                            <td className="first-column">Ratings:</td>
-                            { this.state.rating ? (<td>{this.state.rating}</td>):((<td>Any Ratings</td>))}
+                            <td className="first-column">Average Rating:</td>
+                            { this.state.avgRating ? (<td>{"★".repeat(this.state.avgRating)}</td>):((<td>Not Available</td>))}
                         </tr>
                         <tr>
                             {/* link to location details (single object page)  */}
@@ -92,7 +92,15 @@ class ResultsPage extends Component {
     }
 
     componentDidMount(){
-        axios.get("http://3.139.109.205/bike4joy/api/location/get.php", {params: {address: this.state.queryAddress}})
+        let num_stars;
+        if (this.state.queryRating){
+            // count the number of ★
+            num_stars = (this.state.queryRating.match(/★/g) || []).length;
+        }else{
+            // it means any rating is fine
+            num_stars = 0
+        }
+        axios.get("http://127.0.0.1:8000/api/location/get.php", {params: {address: this.state.queryAddress, rating: num_stars}})
         .then(res => {
             const location = res.data.results
             this.setState({ data: location, defaultLat: location[0].lat, defaultLng: location[0].lng });
@@ -140,10 +148,10 @@ class ResultsPage extends Component {
                             (this.state.data.map(location =>(
                                 <ResultCard 
                                     location={location}
-                                    rating={this.state.queryRating}
+                                    rating={location.AVG_RATING}
                                 />
                             ))):(
-                            <h1>No Results Found at {this.state.queryAddress}</h1>)
+                            <h1>No Results Found at {this.state.queryAddress} or with a Average Rating of {this.state.queryRating ? this.state.queryRating : "Any"}</h1>)
                         }
                     </div>
                 </Container>

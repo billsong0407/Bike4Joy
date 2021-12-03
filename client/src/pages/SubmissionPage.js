@@ -56,7 +56,9 @@ class SubmissionPage extends Component {
             capacity:"",
             queryRating:"★★★★★",
             description:"",
+            imgName: "",
             imgFile: "",
+            videoName: "",
             videoFile: "",
             addressError: "",
             typeError:"",
@@ -227,11 +229,11 @@ class SubmissionPage extends Component {
         formData.append('imgFile', this.state.imgFile)
         formData.append('vidFile', this.state.videoFile)
 
-        console.log(obj)
+        // console.log(obj)
         if (isValid) {
             axios.post("http://3.139.109.205/bike4joy/api/review/submit.php", formData, {params: obj})
             .then(res=> {
-                console.log(res.data)
+                // console.log(res.data)
                 if (res.data.message === "successful submission"){
                     alert("Review Submitted")
                     this.resetUserInfo()
@@ -264,7 +266,7 @@ class SubmissionPage extends Component {
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3">
                         
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
-                        <Form.Control placeholder="35 Front Street West" value={this.state.address} onChange={this.handleAddressChange}/>
+                        <Form.Control placeholder="13 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.addressError}
                             </div>
