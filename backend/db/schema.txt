@@ -3,24 +3,23 @@
 +---------------------------------------
 |   id: INT 
 |   name: TEXT NOT NULL
-|   email: TEXT NOT NULL UNIQUE
+|   email: TEXT NOT NULL UNIQUE # an email can only register one account
 |   password: TEXT NOT NULL
 |   PRIMARY KEY (id, email) # 1 user per email
 +---------------------------------------
 
-+---------------------------------------
++-------------------------------------------------
 |   Table: REVIEWS
-+------------------------------------------------
++-------------------------------------------------
 |   id: INT #primary key
 |   image: TEXT #image url
-|   video: TEXT #video url
 |   rating: TEXT
 |   description: TEXT
 |   user_id: INT NOT NULL 
 |   FOREIGN KEY (user_id) REFERENCES USERS(id)
-+------------------------------------------------
++-------------------------------------------------
 
-+---------------------------------------
++------------------------------------------
 |   Table: LOCATIONS
 +---------------------------------------
 |   id: INT #primary key

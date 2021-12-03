@@ -1,4 +1,7 @@
 <?php
+// Script used to create tables in the database
+// it is not used in the local and deployed server
+// it has no impacts on the live website
 
 $credentials = json_decode(file_get_contents('../config.json'), true);
 $host = $credentials["DB_ADDRESS"];

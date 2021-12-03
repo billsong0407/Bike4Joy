@@ -1,5 +1,7 @@
 <?php
 
+// user object represents a user
+// contains infomation that will be displayed on the client side
 class User {
     // database connection and table name
     private $conn;
@@ -14,6 +16,7 @@ class User {
     public function isUser($email){
         try{
             // query to get the user id of the users table
+            // one user per email
             $query = "SELECT id FROM $this->table_name WHERE email=\"$email\";";
 
             // prepare query statement
@@ -52,7 +55,7 @@ class User {
             // execute query
             $stmt->execute();
 
-            //get userid and return it
+            //get user id and return it
             $user_id = $stmt->fetch(PDO::FETCH_ASSOC)["id"];
             return $user_id;
         } catch (\PDOException $e) {

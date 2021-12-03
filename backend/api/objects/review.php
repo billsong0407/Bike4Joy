@@ -1,5 +1,7 @@
 <?php
 
+// review object represents a review submitted by an user.
+// contains infomation that will be displayed on the client side
 class Review {
     // database connection and table name
     private $conn;
@@ -39,7 +41,8 @@ class Review {
     //function to create a review
     public function createReview($locID, $image, $video, $rating, $description, $userID){
         try{
-            //query to insert a review into the reviews table
+            // query to insert a review into the reviews table
+            // user can submit same reviews
             $query = "INSERT INTO REVIEWS(image, video, comment, rating, user_id) VALUES (\"$image\", \"$video\", \"$description\", \"$rating\", $userID);";
 
             // prepare query statement
@@ -50,7 +53,7 @@ class Review {
 
             $rev_id = $this->conn->lastInsertId();
 
-            //also insert the reviewid and its corresponding locationid to the review_to_location table
+            // also insert the reviewid and its corresponding locationid to the review_to_location table
             $query = "INSERT INTO REVIEW_TO_LOCATION(loc_id, rev_id) VALUES ($locID, $rev_id)";
 
             // prepare query statement
