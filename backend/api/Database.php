@@ -7,6 +7,7 @@ class DatabaseController {
     public function __construct(){
         # get database credentials
         $credentials = json_decode(file_get_contents('../../config.json'), true);
+        //sets database credential properties
         $host = $credentials["DB_ADDRESS"];
         $database = $credentials["DB_NAME"];
         $username = $credentials["DB_USERNAME"];
@@ -17,6 +18,7 @@ class DatabaseController {
         try{
             $this->connection = new PDO("mysql:host=$host;dbname=$database;port=$port", $username, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //unable to connect
         } catch(PDOException $e) {
             echo "Error Connecting the Database: " . $e->getMessage() . "\n";
         }
@@ -37,6 +39,8 @@ class DatabaseController {
         try{
             // prepare statement
             $query = $this->connection->prepare($query);
+
+            // execute query
             $query->execute();
 
             // return results
