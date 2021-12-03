@@ -25,12 +25,7 @@ class LogInPage extends Component {
         }
     };
 
-    // componentDidMount(props) {
-    //     if (props.location.state.email){
-    //         this.setState({email: props.location.state.email})
-    //     }
-    // }
-
+    //function to reset user info properties
     resetUserInfo(){
         this.setState({
             name: "",
@@ -44,12 +39,14 @@ class LogInPage extends Component {
     };
     
     //------------------Form handling start------------------------------------------------
+    //sets the state of the email value
     handleEmailChange = event => {
         this.setState({
             email: event.target.value
         })
       };
 
+      //sets the state of the password value
     handlePasswordChange = event => {
         this.setState({
             password: event.target.value
@@ -67,7 +64,7 @@ class LogInPage extends Component {
           emailError = "invalid email, please include @ symbol";
         }
 
-        //Checks and sets error messages for password
+        //Various checks and sets error messages for password
         if (!/\d/.test(this.state.password)){
             passwordError = "password must at least a number";
         }
@@ -78,6 +75,7 @@ class LogInPage extends Component {
             passwordError = "password must contain a letter";
         }
  
+        //sets the error of the email and password if it doesnt match the requirements
         this.setState({ emailError });
         this.setState({ passwordError });
 
@@ -89,6 +87,7 @@ class LogInPage extends Component {
         return true;
     };
 
+    //function to store the session of the logged in user
     userJustLoggedIn(userID){
         sessionStorage.setItem("isLoggedIn", 'true');
         sessionStorage.setItem("userID", userID);
@@ -98,15 +97,17 @@ class LogInPage extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const isValid = this.validate();
+        //declare few objects be to called from the login.php file
         const obj ={
             email: this.state.email,
             userPassword: this.state.password,
           };
 
+          //connection to the login.php file 
         if (isValid) {
-            // console.log(obj)
             axios.get('http://3.139.109.205/bike4joy/api/user/login.php', {params: obj})
             .then(res=> {
+                //set state to be logged in for user
                 const message = res.data.message
                 if (message === "success"){
                     this.userJustLoggedIn(res.data.results)
@@ -124,6 +125,7 @@ class LogInPage extends Component {
 
 
     render() {
+        //redirection to submission page based on the state 
         if (this.state.redirectToReview) {
             return <Redirect to={{pathname:"/submission", state: {userID: this.state.user_id}}} />;
         } else

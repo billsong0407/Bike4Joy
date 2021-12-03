@@ -61,6 +61,7 @@ class RegistrationPage extends Component {
 
       //Validates the input for the forms to see if it matches requirements
     validate = () => {
+        //declare various variables and regular expression for validation checking
         let nameError = "";
         let emailError = "";
         let passwordError = "";
@@ -88,6 +89,7 @@ class RegistrationPage extends Component {
             passwordError = "password must contain a letter";
         }
         
+        //sets the error of the name, email and password if it doesnt match the requirements
         this.setState({ nameError });
         this.setState({ emailError });
         this.setState({ passwordError });
@@ -104,6 +106,7 @@ class RegistrationPage extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const isValid = this.validate();
+        //declare few objects be to called from the register.php file
         const obj ={
             name: this.state.name,
             email: this.state.email,
