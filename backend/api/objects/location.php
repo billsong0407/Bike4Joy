@@ -96,7 +96,10 @@ class Location{
     public function create($address, $parkingType, $capacity, $lat, $lng){
         $loc_id = $this->checkLocExists($address, $parkingType);
         if (!is_null($loc_id)) return $loc_id;
-           
+
+        // round latitude and longitude to 5 decimal places
+        $lat = round($lat, 5);
+        $lng = round($lng, 5);
         try{
             $query = "INSERT INTO LOCATIONS (address, parkingType, capacity, lat, lng) VALUES(\"$address\", \"$parkingType\", $capacity, $lat, $lng);";
             $stmt = $this->conn->prepare($query);

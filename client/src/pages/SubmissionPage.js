@@ -184,9 +184,9 @@ class SubmissionPage extends Component {
         }
         if (!emptyRegExp.test(this.state.capacity)){
             capacityError = "Please make sure give an estimate of bicycle capacity quantity";
-          }
-        if (!capacityRegExp.test(this.state.capacity)){
-            capacityError = "Please enter a positive integer"
+        }
+        if (!Number.isInteger(parseInt(this.state.capacity)) || parseInt(this.state.capacity) <= 0){
+            capacityError = "Please enter an integer > 0";
         }
         if (!regExp.test(this.state.description)){
             descriptionError = "Please include a description with characters";
@@ -229,7 +229,7 @@ class SubmissionPage extends Component {
 
         console.log(obj)
         if (isValid) {
-            axios.post("http://127.0.0.1:8000/api/review/submit.php", formData, {params: obj})
+            axios.post("http://3.139.109.205/bike4joy/api/review/submit.php", formData, {params: obj})
             .then(res=> {
                 console.log(res.data)
                 if (res.data.message === "successful submission"){
@@ -249,7 +249,7 @@ class SubmissionPage extends Component {
             <>
                 <Navigation />
                 <div className="submission-form">
-                <h1>Please log in first to make the review</h1>
+                <h1>Please log in first to make a review</h1>
                 </div>
                 <Footer />
             </>
