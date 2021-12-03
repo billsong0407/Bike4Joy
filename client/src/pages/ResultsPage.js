@@ -1,4 +1,4 @@
-import React, {cloneElement, Component} from 'react';
+import React, {Component} from 'react';
 import { Table, Container, Row, Col, Button } from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
 import axios from 'axios';

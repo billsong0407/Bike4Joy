@@ -163,7 +163,6 @@ class SubmissionPage extends Component {
         let descriptionError = "";
         let regExp = /[a-zA-Z]/g;
         let addressRegExp = /^\d+\s[A-z]+\s[A-z]+/;
-        let capacityRegExp = /^[1-9]*$/;
         let emptyRegExp = /^(?!\s*$).+/;
 
         //Checks and sets error messages for address, type and description
