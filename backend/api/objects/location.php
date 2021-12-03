@@ -36,7 +36,10 @@ class Location{
         return $stmt;
     }
 
+    //search by address
     public function getByAddress($address){
+
+        //query to select by locations id
         $query = "SELECT LOCATIONS.id, address, postalCode, capacity, parkingType, lat, lng, AVG(CHAR_LENGTH(REVIEWS.rating)) AS avgRating
         FROM REVIEW_TO_LOCATION 
         INNER JOIN REVIEWS ON rev_id=REVIEWS.id 
@@ -52,6 +55,7 @@ class Location{
         return $stmt;
     }
 
+    //search by rating
     public function getByRating($rating){
         $query = "SELECT LOCATIONS.id, address, postalCode, capacity, parkingType, lat, lng, AVG(CHAR_LENGTH(REVIEWS.rating)) AS avgRating
         FROM REVIEW_TO_LOCATION 
@@ -70,7 +74,11 @@ class Location{
     public function getByID($id){
         try {
             $query = "SELECT id, address, postalCode, capacity, parkingType, lat, lng FROM " . $this->table_name . " WHERE id=" . $id . ";";
+
+            // prepare query statement
             $stmt = $this->conn->prepare($query);
+
+            // execute query
             $stmt->execute();
             return $stmt;
         } catch (\PDOException $e) {
