@@ -176,8 +176,8 @@ class SearchPage extends Component {
                     <div className="row justify-content-center">
                         {/* Button to get current location */}
                         <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>                      
-                        {/* <span>Latitude: {this.state.userLat}</span>
-                        <span>Longitude: {this.state.userLong}</span> */}
+                        <span>Latitude: {this.state.userLat}</span>
+                        <span>Longitude: {this.state.userLong}</span>
                     </div>
                 </div>
             </div>

@@ -3,33 +3,33 @@
 +---------------------------------------
 |   id: INT 
 |   name: TEXT NOT NULL
-|   email: TEXT NOT NULL UNIQUE # an email can only register one account
+|   email: TEXT NOT NULL UNIQUE   # an email can only register one account
 |   password: TEXT NOT NULL
-|   PRIMARY KEY (id, email) # 1 user per email
+|   PRIMARY KEY (id, email)   # 1 user per email
 +---------------------------------------
 
 +-------------------------------------------------
 |   Table: REVIEWS
 +-------------------------------------------------
-|   id: INT #primary key
-|   image: TEXT #image url
+|   id: INT   # primary key
+|   image: TEXT   # image url from AWS S3 bucket
 |   rating: TEXT
 |   description: TEXT
-|   user_id: INT NOT NULL 
+|   user_id: INT NOT NULL   # Only log in users can submit reviews
 |   FOREIGN KEY (user_id) REFERENCES USERS(id)
 +-------------------------------------------------
 
 +------------------------------------------
 |   Table: LOCATIONS
 +---------------------------------------
-|   id: INT #primary key
+|   id: INT # primary key
 |   lat: DECIMAL(10, 5) NOT NULL
 |   lng: DECIMAL(10, 5) NOT NULL
-|   capacity: INT 
-|   parkingType: TEXT
+|   capacity: INT NOT NULL
+|   parkingType: TEXT  NOT NULL
 |   bikeSize: FLOAT
 |   yearInstalled: INT
-|   address: TEXT
+|   address: TEXT NOT NULL  # An address can have different types of parking spot (shelter, rack, etc)
 |   postalCode: TEXT
 +---------------------------------------
 
@@ -38,7 +38,7 @@
 +--------------------------------------------------
 |   loc_id: INT NOT NULL
 |   rev_id: INT NOT NULL
-|   PRIMARY KEY (loc_id, rev_id)
+|   PRIMARY KEY (loc_id, rev_id)    # one location can have multiple reviews
 |   FOREIGN KEY (loc_id) REFERENCES LOCATIONS(id)
 |   FOREIGN KEY (rev_id) REFERENCES REVIEWS(id)
 +--------------------------------------------------
