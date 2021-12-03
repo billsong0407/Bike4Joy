@@ -326,13 +326,9 @@ class SubmissionPage extends Component {
                             <Form.Label>Upload Image (Optional)</Form.Label>
                             <Form.Control type="file" accept="image/*" onChange={this.handleImageFileChange}/>
                         </Form.Group>
-                        <Form.Group as={Col} md="6" className="mb-3" >
-                            <Form.Label>Upload Video (Optional)</Form.Label>
-                            <Form.Control type="file" accept="video/*" onChange={this.handleVideoFileChange}/>
-                        </Form.Group>
 
                         {/* <!-- submit button --> */}
-                        <Form.Label>Submit as User ID {this.state.user_id}</Form.Label>
+                        <Form.Label>Submit as User ID: {this.state.user_id}</Form.Label>
                         <Button block size="lg" type="submit" className="animate__animated animate__fadeInRight mt-4">
                             Submit
                         </Button>
