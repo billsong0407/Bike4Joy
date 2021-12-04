@@ -60,6 +60,7 @@ class SearchPage extends Component {
         this.reverseGeocodeCoordinates();
     }
 
+    //get reverse geocode coordinates
     reverseGeocodeCoordinates(){
         // fetch google geo coding api
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.userLat},${this.state.userLong}&sensor=false&key=${GOOGLE_MAPS_API_KEY}`)
