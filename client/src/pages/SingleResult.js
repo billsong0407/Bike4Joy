@@ -9,6 +9,7 @@ import { Container, Row, Col, Table, Card, Button } from 'react-bootstrap';
 import "../css/single-result-page.css";
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 
+//function to display the review card
 function ReviewCard(props) {
     return (
         <Col>
@@ -53,9 +54,12 @@ class SingleResultPage extends Component {
         }
     }
 
+    
     componentDidMount(props){
+        //decalre parameter as location id
         let param = this.props.match.params.id
         let param_val = param.split('=')[1]
+        //sets state of location id as param_val
         this.setState({
             locID: param_val
         })
@@ -63,6 +67,7 @@ class SingleResultPage extends Component {
         this.getReviews(param_val)
     }
 
+    //gets location based on location id and set state of location
     getLocation(locID){
         axios.get("http://3.139.109.205/bike4joy/api/location/getByID.php", {params: {id: locID}})
         .then(res => {
@@ -71,6 +76,7 @@ class SingleResultPage extends Component {
         })
     }
 
+    //get reviews by location id and set state of reviews 
     getReviews(locID){
         axios.get("http://3.139.109.205/bike4joy/api/review/get.php", {params: {id: locID}})
         .then(res => {

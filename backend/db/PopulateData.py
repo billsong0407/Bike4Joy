@@ -1,4 +1,7 @@
 # The purpose of this script is to initialize the database and populating the initial location data
+# it was ran before the server deployment
+# it is not used in the local and deployed server at any time
+# it has no impacts on the live website interactions
 
 import json
 import mysql.connector

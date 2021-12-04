@@ -78,7 +78,7 @@ $user = new User($db);
 // query locations
 $name = isset($_GET["name"]) ? $_GET["name"] : "";
 $email = isset($_GET["email"]) ? $_GET["email"] : "";
-$password = isset($_GET["userPassword"]) ? $_GET["userPassword"] : "";
+$password = isset($_GET["password"]) ? $_GET["password"] : "";
 
 // input validation: 
 if (is_numeric($email) OR is_numeric($password) OR is_numeric($name) OR empty($email) OR empty($password) OR empty($name)) {

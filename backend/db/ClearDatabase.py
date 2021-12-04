@@ -1,3 +1,7 @@
+# Script used to delete all data in the database
+# it is not used in the local and deployed server
+# it has no impacts on the live website
+
 import json
 from mysql.connector import connect, Error
 

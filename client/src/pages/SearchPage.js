@@ -11,10 +11,10 @@ import '../css/search-page.css';
 import 'animate.css';
 
 const { GOOGLE_MAPS_API_KEY } = require("../config.json");
-// const { parkingData } = require("../data/bike_parking.json")
 
 class SearchPage extends Component {
 
+    // component constructor
     constructor(props) {
         super(props);
         this.state = {
@@ -25,12 +25,17 @@ class SearchPage extends Component {
             address: "",
             rating: "",
         };
+
+        // bind upcoming state changes
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.reverseGeocodeCoordinates = this.reverseGeocodeCoordinates.bind(this);
       }
 
     componentDidMount() {
+        // fetch initial mock data.
+        // results containing locations only.
+        // location has state including lat, lng, address, postal code, parking type, and capacity
         axios.get("http://3.139.109.205/bike4joy/api/location/getAll.php")
         .then(res => this.setState({parkingData: res.data.results}))
     }
@@ -38,6 +43,7 @@ class SearchPage extends Component {
     // Get user location through browser
     getLocation(){
         if (navigator.geolocation) {
+            // gets current location as geo coordinates
             navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);     
         }else {
             alert("Geolocation is not supported")
@@ -50,13 +56,17 @@ class SearchPage extends Component {
             userLat: position.coords.latitude, 
             userLong: position.coords.longitude
         })
+        // converts to address
         this.reverseGeocodeCoordinates();
     }
 
+    //get reverse geocode coordinates
     reverseGeocodeCoordinates(){
+        // fetch google geo coding api
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.userLat},${this.state.userLong}&sensor=false&key=${GOOGLE_MAPS_API_KEY}`)
         .then(response => response.json())
         .then(data => this.setState({
+            // we only take the street address
             address: data.results[0].formatted_address.split(',')[0]
         }))
         .catch(error => alert(error))
@@ -82,30 +92,35 @@ class SearchPage extends Component {
         }
     }
 
+    // handle address changes in the form
     handleAddressChange = event => {
         this.setState({
             address: event.target.value
         })
     };
 
+    // handle rating changes in the form
     handleRatingChange = event => {
         this.setState({
             rating: event.target.value
         })
     };
 
+    // query submission
     handleSubmit = event => {
         event.preventDefault();
         
-        if (this.state.address != null){
+        // check if address is entered or a rating is selected
+        if (this.state.address != "" || this.state.rating != ""){
             this.setState({redirect: true})
         }else{
-            alert("\nNo Address Entered")
+            alert("\nPlease enter a street address or Select a rating")
         };
     }
       
 
   render() {
+    // if there is a query submitted, redirecting to results page with corresponding params
     if (this.state.redirect) return <Redirect to={{pathname:"/results", state: {address: this.state.address, rating: this.state.rating}}} />;
     else return (
         <>
@@ -139,7 +154,7 @@ class SearchPage extends Component {
                                     {/* <option value="Postal Code">Postal Code</option> */}
                                 </Form.Select>
                                 </FloatingLabel>
-                               <Form.Control placeholder="13 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange} className="input-text"/> 
+                               <Form.Control placeholder="213 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange} className="input-text"/> 
                                 {/* <!-- Rating Dropdowns --> */}
                                 <FloatingLabel controlId="floatingSelectGrid" label="Please Select" className="floating-label">
                                 <Form.Select onChange={this.handleRatingChange}>
@@ -162,8 +177,8 @@ class SearchPage extends Component {
                     <div className="row justify-content-center">
                         {/* Button to get current location */}
                         <Button onClick={this.getLocation} className="mt-1 loc-button"variant="outline-info" >Use current location</Button>                      
-                        {/* <span>Latitude: {this.state.userLat}</span>
-                        <span>Longitude: {this.state.userLong}</span> */}
+                        <span>Latitude: {this.state.userLat}</span>
+                        <span>Longitude: {this.state.userLong}</span>
                     </div>
                 </div>
             </div>

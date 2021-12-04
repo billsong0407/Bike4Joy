@@ -21,8 +21,6 @@ class SubmissionPage extends Component {
             description:"",
             imgName: "",
             imgFile: "",
-            videoName: "",
-            videoFile: "",
             addressError: "",
             typeError:"",
             descriptionError:"", 
@@ -58,8 +56,6 @@ class SubmissionPage extends Component {
             description:"",
             imgName: "",
             imgFile: "",
-            videoName: "",
-            videoFile: "",
             addressError: "",
             typeError:"",
             descriptionError:"",
@@ -140,6 +136,7 @@ class SubmissionPage extends Component {
         })
     }
 
+    //sets the state of the image file change
     handleImageFileChange = (event) =>{
         this.setState({
             imgName: event.target.files[0].name,
@@ -147,19 +144,14 @@ class SubmissionPage extends Component {
         })
     }
 
-    handleVideoFileChange = (event) =>{
-        this.setState({
-            videoName: event.target.files[0].name,
-            videoFile: event.target.files[0]
-        })
-    }
-
+    //sets the state of the latitude value
     handleLatChange = (event) => {
         this.setState({
             lat: event.target.value
         })
     }
 
+    //sets the state of the longitude value
     handleLngChange = (event) => {
         this.setState({
             lng: event.target.value
@@ -168,16 +160,16 @@ class SubmissionPage extends Component {
 
       //Validates the input for the forms to see if it matches requirements
       validate = () => {
+        //declare various variables and regular expression for validation checking
         let addressError = "";
         let typeError = "";
         let capacityError = "";
         let descriptionError = "";
         let regExp = /[a-zA-Z]/g;
         let addressRegExp = /^\d+\s[A-z]+\s[A-z]+/;
-        let capacityRegExp = /^[1-9]*$/;
         let emptyRegExp = /^(?!\s*$).+/;
 
-        //Checks and sets error messages for address, type and description
+        //Checks and sets error messages for address, type, capacity and description
         if (!addressRegExp.test(this.state.address)){
           addressError = "Please enter a valid address";
         }
@@ -194,6 +186,7 @@ class SubmissionPage extends Component {
             descriptionError = "Please include a description with characters";
         }
         
+        //sets the error of the address, type, capcity and description if it doesnt match the above requirements
         this.setState({addressError});
         this.setState({typeError});
         this.setState({capacityError});
@@ -213,6 +206,7 @@ class SubmissionPage extends Component {
         event.preventDefault()//To prevent data loss written after submitting
         const isValid = this.validate();
 
+        //declare few objects be to called from the submit.php file
         const obj ={
             address: this.state.address,
             parkType: this.state.parkType,
@@ -224,16 +218,15 @@ class SubmissionPage extends Component {
             userID: this.state.user_id,
         };
 
+        // form data here actually stores any files waiting to be uploaded
         const formData = new FormData();
-
         formData.append('imgFile', this.state.imgFile)
-        formData.append('vidFile', this.state.videoFile)
 
-        // console.log(obj)
+        //connection to the submit.php file 
         if (isValid) {
             axios.post("http://3.139.109.205/bike4joy/api/review/submit.php", formData, {params: obj})
             .then(res=> {
-                // console.log(res.data)
+                // check if user is successfully submitted
                 if (res.data.message === "successful submission"){
                     alert("Review Submitted")
                     this.resetUserInfo()
@@ -247,6 +240,7 @@ class SubmissionPage extends Component {
       //------------------Form handling end------------------------------------------------
     
     render() {
+        //This will be displayed if user has not logged in
         if (!this.state.user_id) return (
             <>
                 <Navigation />
@@ -256,6 +250,7 @@ class SubmissionPage extends Component {
                 <Footer />
             </>
         );
+        //This will be displayed if user has registered and logged in
         else return (
             <>
             {/* Navbar */}
@@ -266,7 +261,7 @@ class SubmissionPage extends Component {
                     <Form.Group className="animate__animated animate__fadeInLeft mb-3">
                         
                         <Form.Label>Location of the Bike Parking Spot</Form.Label>
-                        <Form.Control placeholder="13 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange}/>
+                        <Form.Control placeholder="213 Delaware Ave" value={this.state.address} onChange={this.handleAddressChange}/>
                         <div style={{ fontSize: 13, color: "red" }}>
                                 {this.state.addressError}
                             </div>
@@ -326,13 +321,9 @@ class SubmissionPage extends Component {
                             <Form.Label>Upload Image (Optional)</Form.Label>
                             <Form.Control type="file" accept="image/*" onChange={this.handleImageFileChange}/>
                         </Form.Group>
-                        <Form.Group as={Col} md="6" className="mb-3" >
-                            <Form.Label>Upload Video (Optional)</Form.Label>
-                            <Form.Control type="file" accept="video/*" onChange={this.handleVideoFileChange}/>
-                        </Form.Group>
 
                         {/* <!-- submit button --> */}
-                        <Form.Label>Submit as User ID {this.state.user_id}</Form.Label>
+                        <Form.Label>Submit as User ID: {this.state.user_id}</Form.Label>
                         <Button block size="lg" type="submit" className="animate__animated animate__fadeInRight mt-4">
                             Submit
                         </Button>

@@ -1,4 +1,4 @@
-import React, {cloneElement, Component} from 'react';
+import React, {Component} from 'react';
 import { Table, Container, Row, Col, Button } from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
@@ -11,6 +11,8 @@ const { GOOGLE_MAPS_API_KEY } = require("../config.json");
 
 // Result Card Component
 class ResultCard extends Component {
+
+    // component constructor
     constructor(props){
         super(props);
         this.state = {
@@ -23,12 +25,16 @@ class ResultCard extends Component {
             redirect: false,
         }
     }
+
+    // when the details button is clicked, it can go to the individual object page
     toSinglePage = () => {
         this.setState({
             redirect: true,
         })
     }
+
     render(){
+        // time to go to individual object page with an location id.
         if (this.state.redirect) return (
         <Redirect 
             to={{pathname: `/single/id=${this.state.loc_id}`}} 
@@ -61,6 +67,7 @@ class ResultCard extends Component {
                         <tr>
                             {/* location rating  */}
                             <td className="first-column">Average Rating:</td>
+                            {/* display the average rating in stars */}
                             { this.state.avgRating ? (<td>{"★".repeat(this.state.avgRating)}</td>):((<td>Not Available</td>))}
                         </tr>
                         <tr>
@@ -86,6 +93,8 @@ class ResultsPage extends Component {
             locations: [],
             defaultLat: 43.6532,
             defaultLng: -79.3832,
+
+            // extract the data passed from the search form
             queryAddress: this.props.location.state.address,
             queryRating: this.props.location.state.rating,
         }
@@ -94,13 +103,15 @@ class ResultsPage extends Component {
     componentDidMount(){
         let num_stars;
         if (this.state.queryRating){
-            // count the number of ★
+            // count the number of ★, it represents the rating
             num_stars = (this.state.queryRating.match(/★/g) || []).length;
         }else{
             // it means any rating is fine
             num_stars = 0
         }
-        axios.get("http://127.0.0.1:8000/api/location/get.php", {params: {address: this.state.queryAddress, rating: num_stars}})
+
+        // contact the server and gets the corresponding results
+        axios.get("http://3.139.109.205/bike4joy/api/location/get.php", {params: {address: this.state.queryAddress, rating: num_stars}})
         .then(res => {
             const location = res.data.results
             this.setState({ data: location, defaultLat: location[0].lat, defaultLng: location[0].lng });
@@ -144,6 +155,7 @@ class ResultsPage extends Component {
                     </div>
                     {/* Display results from search form  */}
                     <div className="result-cards">
+                        {/* if locations are found by the server */}
                         {this.state.data.length > 0 ?
                             (this.state.data.map(location =>(
                                 <ResultCard 
@@ -151,6 +163,7 @@ class ResultsPage extends Component {
                                     rating={location.AVG_RATING}
                                 />
                             ))):(
+                                // if no results found by the server, meaning no match with the query sent by the search form
                             <h1>No Results Found at {this.state.queryAddress} or with a Average Rating of {this.state.queryRating ? this.state.queryRating : "Any"}</h1>)
                         }
                     </div>
